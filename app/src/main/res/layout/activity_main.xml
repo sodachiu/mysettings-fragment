@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main">
+
+    <!--header部分-->
+    <LinearLayout
+        style="@style/header_ll_style"
+        android:layout_weight="1"
+        android:id="@+id/main_ll_header">
+        <!--放header的东西-->
+        <TextView
+            style="@style/header_tv_style" />
+
+    </LinearLayout>
+
+
+    <!--body部分-->
+    <LinearLayout
+        style="@style/body_ll_style"
+        android:layout_weight="4.15"
+        android:id="@+id/main_ll_body">
+
+        <LinearLayout
+            style="@style/menu_ll_style"
+            android:layout_weight="1.2"
+            android:id="@+id/main_ll_menu_container">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/main_rv_menu" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/fragment_container_ll_style"
+            android:layout_weight="4"
+            android:id="@+id/main_ll_fragment_container">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

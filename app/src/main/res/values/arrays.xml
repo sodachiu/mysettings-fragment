@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="menu_item">
+        <item>关于本机</item>
+        <item>网络配置</item>
+        <item>网络信息</item>
+        <item>日期和时间</item>
+        <item>显示</item>
+        <item>存储信息</item>
+        <item>高级设置</item>
+        <item>恢复出厂设置</item>
+    </array>
+</resources>

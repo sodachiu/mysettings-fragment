@@ -1,11 +1,68 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    Theme.Black.NoTitleBar.Fullscreen
+    <style name="AppTheme" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!--textview 的基本样式-->
+    <style name="tv_base_style">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--垂直 linearlayout 的基本样式-->
+    <style name="ll_vertical_base_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--水平linearlayout 的基本样式-->
+    <style name="ll_horizontal_base_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="rv_base_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!--header 里textview的样式-->
+    <style name="header_tv_style" parent="tv_base_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">70dp</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:text">@string/main_settings</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="header_ll_style" parent="ll_vertical_base_style">
+        <!--<item name="android:background">#ae3</item>-->
+    </style>
+
+    <style name="body_ll_style" parent="ll_vertical_base_style">
+        <!--<item name="android:background">#12e</item>-->
+    </style>
+
+    <style name="menu_ll_style" parent="ll_horizontal_base_style">
+        <!--<item name="android:background">#a00</item>-->
+    </style>
+
+    <style name="fragment_container_ll_style" parent="ll_horizontal_base_style">
+        <item name="android:background">#ea1</item>
+    </style>
+
+
 
 </resources>
