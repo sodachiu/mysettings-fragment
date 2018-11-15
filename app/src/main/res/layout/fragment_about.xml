@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AboutFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/about_title"
+        style="@style/title_tv_style"
+        android:background="@drawable/background_title"/>
 
-</FrameLayout>
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_device_model"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_model"
+            />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_software_version"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_software_version"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_system_version"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_system_version"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_mac"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_mac"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_stbid"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_stbid"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_auth_addr1"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_auth_addr1"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_auth_addr2"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_auth_addr2"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_terminal_addr1"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_terminal_addr1"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_terminal_addr2"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_terminal_addr2"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/about_ll_style">
+        <TextView
+            style="@style/about_tv_key_style"
+            android:text="@string/about_auth_account"/>
+
+        <TextView
+            style="@style/about_tv_value_style"
+            android:id="@+id/about_tv_auth_account"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+</LinearLayout>

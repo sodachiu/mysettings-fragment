@@ -1,23 +1,30 @@
 package com.example.eileen.mysettings_fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
     private static final String TAG = "qll_mainactivity";
 
     private ListView lvMenu;
+    private int mSelectPos = 0;
+    public static final int ABOUT = 0;
+    public static final int ETH_SETTING = 1;
+    public static final int NET_INFO = 2;
+    public static final int DATE_TIME = 3;
+    public static final int DISPLAY = 4;
+    public static final int STORAGE = 5;
+    public static final int ADVANCED = 6;
+    public static final int RESET = 7;
 
 
     @Override
@@ -38,9 +45,17 @@ public class MainActivity extends Activity {
         lvMenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (view.hasFocus()){
-                    view.setBackgroundResource(R.drawable.menu_item_selector);
+                Log.i(TAG, "onItemSelected: 位置为：" + position);
+                mSelectPos = position;
+                switch (position){
+                    case ABOUT:
+                        Log.i(TAG, "onItemSelected: 关于本机");
+                        inflateFragment(new AboutFragment());
+                        break;
+                    case ETH_SETTING:
+                        Log.i(TAG, "onItemSelected: 网络配置");
                 }
+                
             }
 
             @Override
@@ -49,14 +64,18 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event){
-        return false;
 
     }
 
+
+    private void inflateFragment(Fragment fragment){
+        Log.i(TAG, "inflateFragment: ");
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.main_ll_fragment_container, fragment);
+        transaction.commit();
+    }
 
 
 }

@@ -1,4 +1,5 @@
 <resources>
+    <!--分模块放啊！！-->
 
     <!-- Base application theme. -->
     Theme.Black.NoTitleBar.Fullscreen
@@ -17,14 +18,15 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <!--垂直 linearlayout 的基本样式-->
+    <!--垂直排列的linearlayout 的基本样式-->
     <style name="ll_vertical_base_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:focusable">false</item>
     </style>
 
-    <!--水平linearlayout 的基本样式-->
+    <!--水平排列的linearlayout 的基本样式-->
     <style name="ll_horizontal_base_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -32,12 +34,9 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="rv_base_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
 
-    <!--header 里textview的样式-->
+
+    <!--主页面框架样式以及一些重复样式-->
     <style name="header_tv_style" parent="tv_base_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -47,21 +46,71 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <style name="title_tv_style" parent="tv_base_style">
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">900dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@drawable/background_title</item>
+    </style>
+
     <style name="header_ll_style" parent="ll_vertical_base_style">
-        <!--<item name="android:background">#ae3</item>-->
+        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="body_ll_style" parent="ll_vertical_base_style">
-        <!--<item name="android:background">#12e</item>-->
-    </style>
-
-    <style name="menu_ll_style" parent="ll_horizontal_base_style">
-        <!--<item name="android:background">#a00</item>-->
+        <item name="android:layout_weight">4.15</item>
     </style>
 
     <style name="fragment_container_ll_style" parent="ll_horizontal_base_style">
-        <item name="android:background">#ea1</item>
+        <item name="android:layout_weight">4</item>
     </style>
+
+    <!--listview 的基本样式-->
+    <style name="lv_base_style">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:divider">@null</item>
+
+    </style>
+
+    <!--菜单部分的样式-->
+    <style name="menu_lv_style" parent="lv_base_style">
+        <item name="android:dividerHeight">16dp</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+        <item name="android:listSelector">@drawable/menu_item_selector</item>
+    </style>
+
+    <style name="menu_ll_style" parent="ll_horizontal_base_style">
+        <item name="android:layout_weight">1.2</item>
+    </style>
+
+
+
+    <!--关于本机的样式-->
+    <style name="about_tv_key_style" parent="tv_base_style">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+    <style name="about_tv_value_style" parent="tv_base_style">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="about_ll_style" parent="ll_vertical_base_style">
+        <item name="android:layout_width">900dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+
+
+
 
 
 
