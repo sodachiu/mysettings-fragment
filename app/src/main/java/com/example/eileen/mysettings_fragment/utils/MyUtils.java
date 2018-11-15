@@ -11,7 +11,7 @@ import java.util.List;
 public class MyUtils {
     private static final String TAG = "qll_myutils";
 
-    public static List<MenuItem> getMenuList(Context context){
+    /*public static List<MenuItem> getMenuList(Context context){
         Log.i(TAG, "getMenuList: ");
          String[] menuArray = context.getResources().getStringArray(R.array.menu_item);
          List<MenuItem> menuItemList = new ArrayList<>();
@@ -22,5 +22,5 @@ public class MyUtils {
          }
 
          return menuItemList;
-    }
+    }*/
 }

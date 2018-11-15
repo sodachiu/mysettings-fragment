@@ -25,14 +25,19 @@
         <LinearLayout
             style="@style/menu_ll_style"
             android:layout_weight="1.2"
+            android:layout_gravity="end"
             android:id="@+id/main_ll_menu_container">
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ListView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/main_rv_menu" />
+                android:divider="@null"
+                android:dividerHeight="16dp"
+                android:focusable="false"
+                android:listSelector="@android:color/transparent"
+                android:id="@+id/main_lv_menu"/>
+
 
         </LinearLayout>
 

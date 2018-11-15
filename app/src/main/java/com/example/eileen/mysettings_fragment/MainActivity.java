@@ -7,20 +7,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.eileen.mysettings_fragment.utils.MenuAdapter;
-import com.example.eileen.mysettings_fragment.utils.MenuItem;
-import com.example.eileen.mysettings_fragment.utils.MyUtils;
-
-import java.util.List;
 
 public class MainActivity extends Activity {
     private static final String TAG = "qll_mainactivity";
-    private RecyclerView rvMenu;
-    private List<MenuItem> menuList;
-    private Context mContext;
-    private MenuAdapter mAdapter;
-    private MenuAdapter.ViewHolder mHolder;
+
+    private ListView lvMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,38 +28,33 @@ public class MainActivity extends Activity {
     }
 
     private void initView(){
-        rvMenu = (RecyclerView) findViewById(R.id.main_rv_menu);
-        mContext = getApplicationContext();
-        menuList = MyUtils.getMenuList(mContext);
-        mAdapter = new MenuAdapter(menuList);
-        mHolder = mAdapter.onCreateViewHolder();
-//        menuList.get(0).setIsSelect(true);
-        LinearLayoutManager llManager = new LinearLayoutManager(mContext);
-        rvMenu.setLayoutManager(llManager);
-        rvMenu.setAdapter(mAdapter);
+
+        String[] menuArray = getResources().getStringArray(R.array.menu_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.menu_item, menuArray);
+        lvMenu = (ListView) findViewById(R.id.main_lv_menu);
+        lvMenu.setAdapter(adapter);
+
+        lvMenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (view.hasFocus()){
+                    view.setBackgroundResource(R.drawable.menu_item_selector);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
-        Log.i(TAG, "initView: rv是否有焦点" + rvMenu.hasFocus());
-        if (!rvMenu.hasFocus()){
-//            mAdapter.notifyItemChanged(selectPosition);
-            mAdapter.notifyDataSetChanged();
-        }
-
-        switch (keyCode){
-            case KeyEvent.KEYCODE_BACK:
-                finish();
-                break;
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-//                refreshMenuDown();
-                break;
-            case KeyEvent.KEYCODE_DPAD_UP:
-//                refreshMenuUp();
-                break;
-        }
         return false;
+
     }
 
 
