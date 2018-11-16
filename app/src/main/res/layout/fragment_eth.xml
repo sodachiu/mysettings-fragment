@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/eth_title"
+        style="@style/title_tv_style"
+        android:background="@drawable/background_title"/>
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:nextFocusUp="@id/eth_ll_set_net"
+        android:id="@+id/eth_ll_set_net">
+        <TextView
+            style="@style/tv_base_style"
+            android:layout_marginStart="100dp"
+            android:text="@string/eth_ethernet_sets"/>
+        <TextView
+            android:text="@string/eth_manager_eth"
+            style="@style/tv_base_style"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:nextFocusDown="@id/eth_ll_set_bluetooth"
+        android:id="@+id/eth_ll_set_bluetooth">
+        <TextView
+            style="@style/tv_base_style"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="100dp"
+            android:text="@string/eth_bluetooth_sets"/>
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
+</LinearLayout>

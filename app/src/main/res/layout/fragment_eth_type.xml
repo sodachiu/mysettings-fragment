@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/eth_ethernet_sets" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/eth_ll_pppoe">
+        <ImageView
+            style="@style/eth_img_style"
+            android:id="@+id/eth_img_pppoe"/>
+        <TextView
+            style="@style/eth_tv_netname_style"
+            android:text="@string/eth_pppoe"/>
+        <TextView
+            style="@style/eth_tv_net_state_style"
+            android:text="@string/eth_connected"
+            android:id="@+id/eth_tv_pppoe_connect"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/eth_ll_dhcp">
+        <ImageView
+            style="@style/eth_img_style"
+            android:id="@+id/eth_img_dhcp"/>
+        <TextView
+            style="@style/eth_tv_netname_style"
+            android:text="@string/eth_dhcp"/>
+        <TextView
+            style="@style/eth_tv_net_state_style"
+            android:text="@string/eth_connected"
+            android:id="@+id/eth_tv_dhcp_connect"/>
+
+
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/eth_ll_static">
+        <ImageView
+            style="@style/eth_img_style"
+            android:id="@+id/eth_img_static"/>
+        <TextView
+            style="@style/eth_tv_netname_style"
+            android:text="@string/eth_static"/>
+        <TextView
+            style="@style/eth_tv_net_state_style"
+            android:text="@string/eth_connected"
+            android:id="@+id/eth_tv_static_connect"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+</LinearLayout>

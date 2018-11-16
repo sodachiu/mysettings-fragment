@@ -3,7 +3,7 @@
 
     <string name="main_settings">设置_fragment</string>
 
-    <string name="about_title">关于本机：</string>
+    <string name="about_title">关于本机</string>
     <string name="about_device_model">设备型号：</string>
     <string name="about_software_version">软件版本：</string>
     <string name="about_system_version">安卓版本：</string>
@@ -15,6 +15,20 @@
     <string name="about_terminal_addr2">终端管理备地址：</string>
     <string name="about_auth_account">认证业务账号：</string>
 
+
+    <string name="eth_title">网络设置</string>
+    <string name="eth_ethernet_sets">有线网络设置</string>
+    <string name="eth_manager_eth">设置和管理有线网络</string>
+    <string name="eth_bluetooth_sets">设置蓝牙</string>
+    <string name="eth_connected">已连接</string>
+    <string name="eth_pppoe">PPPoE</string>
+    <string name="eth_dhcp">DHCP</string>
+    <string name="eth_static">静态IP</string>
+    <string name="eth_pppoe2">有线PPPoE</string>
+    <string name="eth_pppoe_username">用户名：</string>
+    <string name="eth_pppoe_password">密码：</string>
+    <string name="eth_pppoe_confirm">确定</string>
+    <string name="eth_pppoe_cancel">取消</string>
 
 
 </resources>

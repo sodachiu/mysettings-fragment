@@ -18,6 +18,21 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <!--EditView 的基本样式-->
+    <style name="et_base_style">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/editview_selector</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="btn_base_style" parent="tv_base_style">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/button_selector</item>
+    </style>
+
     <!--垂直排列的linearlayout 的基本样式-->
     <style name="ll_vertical_base_style">
         <item name="android:layout_width">match_parent</item>
@@ -67,6 +82,12 @@
         <item name="android:layout_weight">4</item>
     </style>
 
+    <style name="focusable_ll_style" parent="about_ll_style">
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/linearlayout_selector</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
     <!--listview 的基本样式-->
     <style name="lv_base_style">
         <item name="android:layout_width">200dp</item>
@@ -79,7 +100,6 @@
     <!--菜单部分的样式-->
     <style name="menu_lv_style" parent="lv_base_style">
         <item name="android:dividerHeight">16dp</item>
-        <item name="android:descendantFocusability">beforeDescendants</item>
         <item name="android:listSelector">@drawable/menu_item_selector</item>
     </style>
 
@@ -98,7 +118,7 @@
     </style>
 
     <style name="about_tv_value_style" parent="tv_base_style">
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">1.5</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:gravity">start</item>
     </style>
@@ -108,6 +128,40 @@
         <item name="android:layout_height">45dp</item>
         <item name="android:gravity">bottom</item>
     </style>
+
+    <!--网络配置的样式-->
+    <style name="eth_img_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:background">@drawable/radio_unchecked_normal</item>
+    </style>
+
+    <style name="eth_tv_net_state_style" parent="tv_base_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1.5</item>
+    </style>
+
+    <style name="eth_tv_netname_style" parent="tv_base_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
+
+    <style name="eth_et_pppoe_style" parent="et_base_style">
+        <item name="android:layout_marginStart">40dp</item>
+    </style>
+
+    <style name="eth_tv_pppoe_key_style" parent="tv_base_style">
+        <item name="android:layout_marginStart">100dp</item>
+    </style>
+
+    <style name="eth_btn_pppoe_style" parent="btn_base_style">
+
+    </style>
+
+
+
 
 
 
