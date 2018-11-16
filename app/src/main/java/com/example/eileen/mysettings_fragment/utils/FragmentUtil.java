@@ -26,6 +26,13 @@ public class FragmentUtil {
     public static final String ETH_FRAGMENT = "eth_fragment";
     public static final String ETH_TYPE_FRAGMENT = "eth_type_fragment";
     public static final String ETH_PPPOE_FRAGMENT = "eth_pppoe_fragment";
+    public static final String ETH_STATIC_FRAGMENT = "eth_static_fragment";
+    public static final String NET_INFO_FRAGMENT = "net_info_fragment";
+    public static final String DATE_TIME_FRAGMENT = "date_time_fragment";
+    public static final String DISPLAY_FRAGMENT = "display_fragment";
+    public static final String STORAGE_FRAGMENT = "storage_fragment";
+    public static final String ADVANCED_FRAGMENT = "advanced_fragment";
+    public static final String RECOVERY_FRAGMENT = "recovery_fragment";
 
     private static AboutFragment aboutFragment = new AboutFragment();
     private static EthFragment ethFragment = new EthFragment();

@@ -74,13 +74,16 @@ public class EthTypeFragment extends Fragment
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_PPPOE_FRAGMENT);
                 break;
             case R.id.eth_ll_dhcp:
+
                 Log.i(TAG, "onClick: 点击dhcp，尝试连接");
                 break;
             case R.id.eth_ll_static:
                 Log.i(TAG, "onClick: 点击静态IP，尝试进入静态IP设置界面");
+                setDhcp();
                 break;
             default:
                 Log.i(TAG, "onClick: 点击了位置的东西");
+                FragmentUtil.showFragment(mContext, FragmentUtil.)
                 break;
         }
     }
@@ -94,5 +97,8 @@ public class EthTypeFragment extends Fragment
         }
     }
 
+    public void setDhcp(){
+
+    }
 
 }
