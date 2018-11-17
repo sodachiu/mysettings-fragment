@@ -8,27 +8,25 @@
         android:text="@string/eth_pppoe2"/>
 
     <LinearLayout
-        style="@style/ll_vertical_base_style"
+        style="@style/unfocusable_ll_style"
         android:layout_marginTop="80dp">
         <TextView
             style="@style/eth_tv_pppoe_key_style"
-            android:layout_width="250dp"
             android:text="@string/eth_pppoe_username"/>
         <EditText
-            style="@style/eth_et_pppoe_style"
+            style="@style/et_base_style"
             android:id="@+id/pppoe_et_username" />
 
     </LinearLayout>
 
     <LinearLayout
-        style="@style/ll_vertical_base_style"
+        style="@style/unfocusable_ll_style"
         android:layout_marginTop="50dp">
         <TextView
             style="@style/eth_tv_pppoe_key_style"
-            android:layout_width="250dp"
             android:text="@string/eth_pppoe_password"/>
         <EditText
-            style="@style/eth_et_pppoe_style"
+            style="@style/et_base_style"
             android:inputType="numberPassword"
             android:id="@+id/pppoe_et_password" />
 
@@ -36,17 +34,16 @@
 
 
     <LinearLayout
-        style="@style/ll_vertical_base_style"
-        android:layout_marginTop="50dp"
-        android:gravity="center_vertical|end">
+        style="@style/unfocusable_ll_style"
+        android:layout_marginTop="50dp" >
 
         <Button
-            style="@style/eth_btn_pppoe_style"
+            style="@style/btn_base_style"
             android:text="@string/eth_pppoe_confirm"
             android:id="@+id/pppoe_btn_confirm" />
         <Button
-            style="@style/eth_btn_pppoe_style"
-            android:layout_marginStart="20dp"
+            style="@style/btn_base_style"
+            android:layout_marginStart="40dp"
             android:text="@string/eth_pppoe_cancel"
             android:id="@+id/pppoe_btn_cancel" />
     </LinearLayout>

@@ -19,7 +19,7 @@
     </style>
 
     <!--EditView 的基本样式-->
-    <style name="et_base_style">
+    <style name="et_base_style" parent="tv_base_style">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/editview_selector</item>
@@ -82,7 +82,7 @@
         <item name="android:layout_weight">4</item>
     </style>
 
-    <style name="focusable_ll_style" parent="about_ll_style">
+    <style name="focusable_ll_style" parent="unfocusable_ll_style">
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/linearlayout_selector</item>
         <item name="android:gravity">center_vertical</item>
@@ -123,10 +123,10 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="about_ll_style" parent="ll_vertical_base_style">
+    <style name="unfocusable_ll_style" parent="ll_vertical_base_style">
         <item name="android:layout_width">900dp</item>
         <item name="android:layout_height">45dp</item>
-        <item name="android:gravity">bottom</item>
+        <item name="android:gravity">bottom|center_horizontal</item>
     </style>
 
     <!--网络配置的样式-->
@@ -149,15 +149,13 @@
     </style>
 
     <style name="eth_et_pppoe_style" parent="et_base_style">
-        <item name="android:layout_marginStart">40dp</item>
+
     </style>
 
     <style name="eth_tv_pppoe_key_style" parent="tv_base_style">
-        <item name="android:layout_marginStart">100dp</item>
-    </style>
-
-    <style name="eth_btn_pppoe_style" parent="btn_base_style">
-
+        <item name="android:gravity">end</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:paddingEnd">10dp</item>
     </style>
 
 

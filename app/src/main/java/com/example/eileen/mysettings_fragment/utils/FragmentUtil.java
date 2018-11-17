@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.eileen.mysettings_fragment.AboutFragment;
 import com.example.eileen.mysettings_fragment.EthFragment;
 import com.example.eileen.mysettings_fragment.EthPppoeFragment;
+import com.example.eileen.mysettings_fragment.EthStaticFragment;
 import com.example.eileen.mysettings_fragment.EthTypeFragment;
 import com.example.eileen.mysettings_fragment.MainActivity;
 import com.example.eileen.mysettings_fragment.R;
@@ -38,7 +39,7 @@ public class FragmentUtil {
     private static EthFragment ethFragment = new EthFragment();
     private static EthTypeFragment ethTypeFragment = new EthTypeFragment();
     private static EthPppoeFragment ethPppoeFragment = new EthPppoeFragment();
-
+    private static EthStaticFragment ethStaticFragment = new EthStaticFragment();
 
 
 
@@ -47,7 +48,7 @@ public class FragmentUtil {
         FragmentActivity activity = (FragmentActivity) context;
         FragmentManager fm = activity.getSupportFragmentManager();
         Fragment fragment;
-        Log.i(TAG, "showFragment: 传入的tag为---->" + tag);
+        Log.i(TAG, "showFragment: 指定显示的fragment---->" + tag);
         switch (tag){
             case ABOUT_FRAGMENT:
                 fragment = aboutFragment;
@@ -61,6 +62,9 @@ public class FragmentUtil {
             case ETH_PPPOE_FRAGMENT:
                 fragment = ethPppoeFragment;
                 break;
+            case ETH_STATIC_FRAGMENT:
+                fragment = ethStaticFragment;
+                break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");
                 return;
@@ -68,7 +72,7 @@ public class FragmentUtil {
 
         FragmentTransaction transaction = fm.beginTransaction();
         List<Fragment> fragments = fm.getFragments();
-        Log.i(TAG, "showFragment: 被加入栈的fragment数量---->" + fragments.size());
+        Log.i(TAG, "showFragment: 当前栈中碎片数量---->" + fragments.size());
 
         for (int i = 0; i < fragments.size(); i++){
             Fragment tmpFragment = fragments.get(i);
@@ -78,7 +82,8 @@ public class FragmentUtil {
         }
 
         if (!fragment.isAdded()){
-            transaction.add(R.id.main_ll_fragment_container,fragment, tag);
+            Log.i(TAG, "showFragment: " + tag + "加入碎片栈");
+            transaction.add(R.id.main_ll_fragment_container, fragment, tag);
         }
         transaction.show(fragment);
 

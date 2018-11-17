@@ -10,7 +10,7 @@
         android:background="@drawable/background_title"/>
 
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_device_model"/>
@@ -23,7 +23,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_software_version"/>
@@ -37,7 +37,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_system_version"/>
@@ -51,7 +51,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_mac"/>
@@ -65,7 +65,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_stbid"/>
@@ -79,7 +79,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_auth_addr1"/>
@@ -93,7 +93,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_auth_addr2"/>
@@ -107,7 +107,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_terminal_addr1"/>
@@ -121,7 +121,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_terminal_addr2"/>
@@ -135,7 +135,7 @@
 
     <include layout="@layout/image_divider" />
 
-    <LinearLayout style="@style/about_ll_style">
+    <LinearLayout style="@style/unfocusable_ll_style">
         <TextView
             style="@style/about_tv_key_style"
             android:text="@string/about_auth_account"/>
