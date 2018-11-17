@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 
@@ -31,7 +32,7 @@ public class MainActivity extends FragmentActivity {
     public static final int DISPLAY = 4;
     public static final int STORAGE = 5;
     public static final int ADVANCED = 6;
-    public static final int RESET = 7;
+    public static final int Recovery = 7;
 
     private Context mContext;
 
@@ -69,6 +70,33 @@ public class MainActivity extends FragmentActivity {
                         Log.i(TAG, "onItemSelected: 网络配置");
                         FragmentUtil.showFragment(mContext, FragmentUtil.ETH_FRAGMENT);
                         break;
+                    case NET_INFO:
+                        Log.i(TAG, "onItemSelected: 网络信息");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.NET_INFO_FRAGMENT);
+                        break;
+                    case DATE_TIME:
+                        Log.i(TAG, "onItemSelected: 日期和时间");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.DATE_TIME_FRAGMENT);
+                        break;
+                    case DISPLAY:
+                        Log.i(TAG, "onItemSelected: 显示");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.DISPLAY_FRAGMENT);
+                        break;
+                    case STORAGE:
+                        Log.i(TAG, "onItemSelected: 存储信息");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.STORAGE_FRAGMENT);
+                        break;
+                    case ADVANCED:
+                        Log.i(TAG, "onItemSelected: 高级设置");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.ADVANCED_FRAGMENT);
+                        break;
+                    case Recovery:
+                        Log.i(TAG, "onItemSelected: 恢复出厂设置");
+                        FragmentUtil.showFragment(mContext, FragmentUtil.RECOVERY_FRAGMENT);
+                        break;
+                    default:
+                        //增加菜单的话，在这上面再添加条件，然后在arrays文件的menuitem中添加菜单项
+                        break;
                 }
                 
             }
@@ -105,6 +133,8 @@ public class MainActivity extends FragmentActivity {
             case FragmentUtil.ETH_PPPOE_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
                 break;
+            case FragmentUtil.ETH_STATIC_FRAGMENT:
+                FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
             default:
                 finish();
                 break;
@@ -112,9 +142,20 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void handleLeftEvent(String tag){
-        /*后续还要加条件*/
-        if (tag.equals(FragmentUtil.ABOUT_FRAGMENT) || tag.equals(FragmentUtil.ETH_FRAGMENT)){
+
+        if (tag.equals(FragmentUtil.ABOUT_FRAGMENT)
+                || tag.equals(FragmentUtil.ETH_FRAGMENT)
+                || tag.equals(FragmentUtil.NET_INFO_FRAGMENT)
+                || tag.equals(FragmentUtil.DATE_TIME_FRAGMENT)
+                || tag.equals(FragmentUtil.DISPLAY_FRAGMENT)
+                || tag.equals(FragmentUtil.STORAGE_FRAGMENT)
+                || tag.equals(FragmentUtil.ADVANCED_FRAGMENT)
+                || tag.equals(FragmentUtil.RECOVERY_FRAGMENT)){
+
             lvMenu.setFocusable(true);
         }
+
+        lvMenu.setSelection(mSelectPos);
+
     }
 }

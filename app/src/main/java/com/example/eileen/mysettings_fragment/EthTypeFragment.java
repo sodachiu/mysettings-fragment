@@ -169,30 +169,45 @@ public class EthTypeFragment extends Fragment
                     tvDhcp.setVisibility(View.VISIBLE);
                     tvPppoe.setVisibility(View.INVISIBLE);
                     tvStatic.setVisibility(View.INVISIBLE);
+                    imgDhcp.setImageResource(R.drawable.radio_checked_normal);
+                    imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
                     llDhcp.requestFocus();
                     break;
                 case EthernetManager.ETHERNET_CONNECT_MODE_PPPOE:
                     tvDhcp.setVisibility(View.INVISIBLE);
                     tvPppoe.setVisibility(View.VISIBLE);
                     tvStatic.setVisibility(View.INVISIBLE);
+                    imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgPppoe.setImageResource(R.drawable.radio_checked_normal);
+                    imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
                     llPppoe.requestFocus();
                     break;
                 case EthernetManager.ETHERNET_CONNECT_MODE_MANUAL:
                     tvDhcp.setVisibility(View.INVISIBLE);
                     tvPppoe.setVisibility(View.INVISIBLE);
                     tvStatic.setVisibility(View.VISIBLE);
+                    imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgStatic.setImageResource(R.drawable.radio_checked_normal);
                     llStatic.requestFocus();
                     break;
                 default:
                     tvDhcp.setVisibility(View.INVISIBLE);
                     tvPppoe.setVisibility(View.INVISIBLE);
                     tvStatic.setVisibility(View.INVISIBLE);
+                    imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
+                    imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
                     break;
             }
         }else {
             tvDhcp.setVisibility(View.INVISIBLE);
             tvPppoe.setVisibility(View.INVISIBLE);
             tvStatic.setVisibility(View.INVISIBLE);
+            imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
+            imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
+            imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
         }
 
     }

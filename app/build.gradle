@@ -12,7 +12,7 @@ android {
         multiDexEnabled true
     }
 
-    signingConfigs {
+    /*signingConfigs {
         release {
             storeFile file("F:/signed/test.jks")
             storePassword '123456'
@@ -26,7 +26,7 @@ android {
             keyAlias 'ch'
             keyPassword '123456'
         }
-    }
+    }*/
 
     buildTypes {
         release {
