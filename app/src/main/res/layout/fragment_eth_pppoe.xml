@@ -5,7 +5,7 @@
 
     <TextView
         style="@style/title_tv_style"
-        android:text="@string/eth_pppoe2"/>
+        android:text="@string/eth_pppoe_title"/>
 
     <LinearLayout
         style="@style/unfocusable_ll_style"

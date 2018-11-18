@@ -26,11 +26,12 @@
     <string name="eth_pppoe">PPPoE</string>
     <string name="eth_dhcp">DHCP</string>
     <string name="eth_static">静态IP</string>
-    <string name="eth_pppoe2">有线PPPoE</string>
+    <string name="eth_pppoe_title">有线PPPoE</string>
     <string name="eth_pppoe_username">用户名：</string>
     <string name="eth_pppoe_password">密码：</string>
     <string name="eth_pppoe_confirm">确定</string>
     <string name="eth_pppoe_cancel">取消</string>
+    <string name="eth_static_title">有线静态</string>
     <string name="eth_ip">IP地址：</string>
     <string name="eth_netmask">子网掩码：</string>
     <string name="eth_gateway">默认网关：</string>
@@ -38,6 +39,7 @@
     <string name="eth_dns2">备用DNS：</string>
     <string name="eth_static_confirm">确定</string>
     <string name="eth_static_cancel">取消</string>
+    <string name="eth_default_value">0.0.0.0</string>
 
     <!--日期与时间 dt: date&time-->
     <string name="dt_title">日期与时间</string>

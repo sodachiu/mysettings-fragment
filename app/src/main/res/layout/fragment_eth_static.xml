@@ -3,6 +3,87 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        style="@style/title_tv_style"
+        android:background="@drawable/background_title"
+        android:text="@string/eth_static_title" />
 
+    <LinearLayout style="@style/eth_static_ll_style">
+
+        <TextView
+            style="@style/eth_tv_static_key_style"
+            android:text="@string/eth_ip" />
+
+        <EditText
+            style="@style/eth_et_static_style"
+            android:id="@+id/eth_static_et_ip" />
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/eth_static_ll_style">
+
+        <TextView
+            style="@style/eth_tv_static_key_style"
+            android:text="@string/eth_netmask" />
+
+        <EditText
+            style="@style/eth_et_static_style"
+            android:id="@+id/eth_static_et_mask" />
+    </LinearLayout>
+
+
+
+    <LinearLayout style="@style/eth_static_ll_style">
+
+        <TextView
+            style="@style/eth_tv_static_key_style"
+            android:text="@string/eth_gateway" />
+
+        <EditText
+            style="@style/eth_et_static_style"
+            android:id="@+id/eth_static_et_gateway" />
+    </LinearLayout>
+
+
+
+    <LinearLayout style="@style/eth_static_ll_style">
+
+        <TextView
+            style="@style/eth_tv_static_key_style"
+            android:text="@string/eth_dns1" />
+
+        <EditText
+            style="@style/eth_et_static_style"
+            android:id="@+id/eth_static_et_dns1" />
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/eth_static_ll_style">
+
+        <TextView
+            style="@style/eth_tv_static_key_style"
+            android:text="@string/eth_dns2" />
+
+        <EditText
+            style="@style/eth_et_static_style"
+            android:id="@+id/eth_static_et_dns2" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/eth_static_ll_style"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="100dp">
+
+        <Button
+            android:id="@+id/static_btn_confirm"
+            style="@style/btn_base_style"
+            android:text="@string/eth_static_confirm" />
+
+        <Button
+            android:id="@+id/static_btn_cancel"
+            style="@style/btn_base_style"
+            android:text="@string/eth_static_cancel" />
+    </LinearLayout>
 
 </LinearLayout>

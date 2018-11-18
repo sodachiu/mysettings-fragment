@@ -36,7 +36,7 @@ public class AdvancedFragment extends Fragment {
 
     public void initView(){
         FragmentActivity activity = getActivity();
-        lvMenu = activity.findViewById(R.id.main_lv_menu);
+        lvMenu = (ListView) activity.findViewById(R.id.main_lv_menu);
         //开始寻找控件吧
 
     }

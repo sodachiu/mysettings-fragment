@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eileen.mysettings_fragment.network.NetworkUtil;
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 
 
@@ -120,7 +121,7 @@ public class EthTypeFragment extends Fragment
         if (!hidden){
             lvMenu.setFocusable(false);
             //xx.requesFocus
-            isNetConnect = checkNetConnect();
+            isNetConnect = NetworkUtil.checkNetConnect(mContext);
             showConnectState();
             mContext.registerReceiver(myNetReceiver, filter);
         }else {
@@ -144,18 +145,7 @@ public class EthTypeFragment extends Fragment
     * 判断网络是否连接
     * */
 
-    public boolean checkNetConnect(){
-        ConnectivityManager connectManager = (ConnectivityManager) mContext.
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = null;
-        try{
-            networkInfo = connectManager.getActiveNetworkInfo();
-        }catch (Exception e){
-            Log.i(TAG, "showConnectState: 获取网络状态异常---->" + e.toString());
-        }
 
-        return networkInfo != null;
-    }
     /*
     *  更新显示的网络状态
     * */
