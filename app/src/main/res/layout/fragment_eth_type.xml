@@ -12,7 +12,7 @@
         style="@style/focusable_ll_style"
         android:id="@+id/eth_ll_pppoe">
         <ImageView
-            style="@style/eth_img_style"
+            style="@style/eth_checkbox_img_style"
             android:id="@+id/eth_img_pppoe"/>
         <TextView
             style="@style/eth_tv_netname_style"
@@ -30,7 +30,7 @@
         style="@style/focusable_ll_style"
         android:id="@+id/eth_ll_dhcp">
         <ImageView
-            style="@style/eth_img_style"
+            style="@style/eth_checkbox_img_style"
             android:id="@+id/eth_img_dhcp"/>
         <TextView
             style="@style/eth_tv_netname_style"
@@ -49,7 +49,7 @@
         style="@style/focusable_ll_style"
         android:id="@+id/eth_ll_static">
         <ImageView
-            style="@style/eth_img_style"
+            style="@style/eth_checkbox_img_style"
             android:id="@+id/eth_img_static"/>
         <TextView
             style="@style/eth_tv_netname_style"

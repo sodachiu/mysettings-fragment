@@ -1,6 +1,7 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -45,6 +47,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         mContext = this;
         initView();
+        Intent testIntent = new Intent(Intent.ACTION_TIME_TICK);
+        sendBroadcast(testIntent);
     }
 
     private void initView(){
@@ -116,10 +120,18 @@ public class MainActivity extends FragmentActivity {
         String fragmentTag = FragmentUtil.getCurrentFragmentTag(mContext);
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
+                Log.i(TAG, "onKeyDown: 按下返回键");
                 handleBackEvent(fragmentTag);
                 break;
             case KeyEvent.KEYCODE_DPAD_LEFT:
+                Log.i(TAG, "onKeyDown: 按下左键");
                 handleLeftEvent(fragmentTag);
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                Log.i(TAG, "onKeyDown: 按下右键");
+                handleRightEvent(fragmentTag);
+            default:
+                break;
             }
         return false;
     }
@@ -135,6 +147,10 @@ public class MainActivity extends FragmentActivity {
                 break;
             case FragmentUtil.ETH_STATIC_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
+                break;
+            case FragmentUtil.ETH_BLUETOOTH_FRAGMENT:
+                FragmentUtil.showFragment(mContext, FragmentUtil.ETH_FRAGMENT);
+                break;
             default:
                 finish();
                 break;
@@ -151,11 +167,25 @@ public class MainActivity extends FragmentActivity {
                 || tag.equals(FragmentUtil.STORAGE_FRAGMENT)
                 || tag.equals(FragmentUtil.ADVANCED_FRAGMENT)
                 || tag.equals(FragmentUtil.RECOVERY_FRAGMENT)){
-
             lvMenu.setFocusable(true);
         }
+
 
         lvMenu.setSelection(mSelectPos);
 
     }
+
+    private void handleRightEvent(String tag){
+        switch (tag){
+            case FragmentUtil.ETH_FRAGMENT:
+                LinearLayout llSetNet = (LinearLayout) findViewById(R.id.eth_ll_set_net);
+                LinearLayout llSetBluetooth = (LinearLayout) findViewById(R.id.eth_ll_set_bluetooth);
+                llSetNet.setFocusable(true);
+                llSetBluetooth.setFocusable(true);
+                break;
+                //继续添加其它的第一层fragment处理事件
+        }
+
+    }
+
 }

@@ -71,6 +71,10 @@
         <item name="android:background">@drawable/background_title</item>
     </style>
 
+    <style name="fragment_tv_key_style" parent="tv_base_style">
+        <item name="android:layout_marginStart">100dp</item>
+    </style>
+
     <style name="header_ll_style" parent="ll_vertical_base_style">
         <item name="android:layout_weight">1</item>
     </style>
@@ -131,11 +135,20 @@
     </style>
 
     <!--网络配置的样式-->
-    <style name="eth_img_style">
+    <style name="img_base_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+    <style name="checkbox_img_style" parent="img_base_style">
         <item name="android:background">@drawable/radio_unchecked_normal</item>
+    </style>
+
+    <style name="eth_checkbox_img_style" parent="checkbox_img_style">
+        <item name="android:layout_marginStart">100dp</item>
     </style>
 
     <style name="eth_tv_net_state_style" parent="tv_base_style">
@@ -161,7 +174,6 @@
 
     <style name="eth_tv_static_key_style" parent="eth_tv_pppoe_key_style">
         <item name="android:layout_width">150dp</item>
-
     </style>
 
     <style name="eth_et_static_style" parent="et_base_style">
@@ -175,6 +187,11 @@
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:paddingStart">200dp</item>
+    </style>
+
+    <style name="bluetooth_switch_img_style" parent="img_base_style">
+        <item name="android:layout_marginStart">200dp</item>
+        <item name="android:src">@drawable/checkbox_off</item>
     </style>
 
 

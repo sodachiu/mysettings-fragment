@@ -76,6 +76,16 @@ public class NetworkUtil {
         return false;
     }
 
+    /*
+    * 检查网线是否脱落
+    *
+    * */
+
+    public static boolean checkIsLinkUp(Context context){
+        EthernetManager em = (EthernetManager) context.getSystemService(Context.ETHERNET_SERVICE);
+        return em.getNetLinkStatus();
+    }
+
     public static class MyDhcpInfo{
         private String ipAddress, netMask, gateway, dns1, dns2;
         private EthernetManager em;
@@ -147,21 +157,6 @@ public class NetworkUtil {
                     "  dns1:" + dns1 + "  dns2:" + dns2;
         }
 
-        /*public EthernetManager getEthernetManager(){
-            Log.i(TAG, "getEthernetManager: ");
-            return this.em;
-        }*/
-
-        /*public PppoeManager getPPPoEManager() {
-            Log.i(TAG, "getPPPoEManager: ");
-            return this.pm;
-        }
-
-
-        public DhcpInfo getDhcpInfo(){
-            Log.i(TAG, "getDhcpInfo: ");
-            return this.dhcpInfo;
-        }*/
 
         public String getDefaultValue(){
             Log.i(TAG, "getDefaultValue: ");

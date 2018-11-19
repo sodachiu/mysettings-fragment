@@ -66,6 +66,7 @@
 
         <EditText
             style="@style/eth_et_static_style"
+            android:inputType=""
             android:id="@+id/eth_static_et_dns2" />
     </LinearLayout>
 

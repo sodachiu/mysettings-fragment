@@ -18,6 +18,8 @@ public class EthFragment extends Fragment implements View.OnClickListener{
     private Context mContext;
     FragmentActivity mActivity;
     private ListView lvMenu;
+    private LinearLayout llSetNet;
+    private LinearLayout llSetBluetooth;
 
 
     public EthFragment(){
@@ -44,8 +46,8 @@ public class EthFragment extends Fragment implements View.OnClickListener{
 
     private void initView(View v){
         Log.i(TAG, "initView: ");
-        LinearLayout llSetNet = (LinearLayout) v.findViewById(R.id.eth_ll_set_net);
-        LinearLayout llSetBluetooth = (LinearLayout) v.findViewById(R.id.eth_ll_set_bluetooth);
+        llSetNet = (LinearLayout) v.findViewById(R.id.eth_ll_set_net);
+        llSetBluetooth = (LinearLayout) v.findViewById(R.id.eth_ll_set_bluetooth);
         lvMenu = (ListView) mActivity.findViewById(R.id.main_lv_menu);
         Log.i(TAG, "initView: 菜单是否可获得焦点---->" + lvMenu.isFocusable());
         llSetNet.setOnClickListener(this);
@@ -57,12 +59,13 @@ public class EthFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.eth_ll_set_net:
                 //调用下一层碎片
-                FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
                 Log.i(TAG, "onClick: 设置有线网络");
+                FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
                 break;
             case R.id.eth_ll_set_bluetooth:
                 //调用设置蓝牙的碎片
                 Log.i(TAG, "onClick: 设置蓝牙");
+                FragmentUtil.showFragment(mContext, FragmentUtil.ETH_BLUETOOTH_FRAGMENT);
                 break;
             default:
                 Log.i(TAG, "onClick: 不知道点击了什么东西");
@@ -73,10 +76,12 @@ public class EthFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onHiddenChanged(boolean hidden){
         Log.i(TAG, "onHiddenChanged: ");
-        if (hidden){
-            lvMenu.setFocusable(true);
+        if (!hidden && lvMenu.hasFocus()){
+            llSetNet.setFocusable(false);
+            llSetBluetooth.setFocusable(false);
         }else {
-            lvMenu.setFocusable(false);
+            llSetBluetooth.setFocusable(true);
+            llSetNet.setFocusable(true);
         }
     }
 }

@@ -26,11 +26,18 @@
     <string name="eth_pppoe">PPPoE</string>
     <string name="eth_dhcp">DHCP</string>
     <string name="eth_static">静态IP</string>
+    <string name="eth_dhcp_connect_success">DHCP连接成功</string>
+    <string name="eth_dhcp_connect_failed">DHCP连接失败</string>
     <string name="eth_pppoe_title">有线PPPoE</string>
     <string name="eth_pppoe_username">用户名：</string>
     <string name="eth_pppoe_password">密码：</string>
     <string name="eth_pppoe_confirm">确定</string>
     <string name="eth_pppoe_cancel">取消</string>
+    <string name="eth_pppoe_username_empty">用户名不能为空</string>
+    <string name="eth_pppoe_userpwd_empty">密码不能为空</string>
+    <string name="eth_pppoe_connect_success">PPPoE连接成功</string>
+    <string name="eth_pppoe_connect_failed_999">999, PPPoE拨号失败</string>
+    <string name="eth_pppoe_connect_failed_other">PPPoE拨号失败</string>
     <string name="eth_static_title">有线静态</string>
     <string name="eth_ip">IP地址：</string>
     <string name="eth_netmask">子网掩码：</string>
@@ -39,7 +46,29 @@
     <string name="eth_dns2">备用DNS：</string>
     <string name="eth_static_confirm">确定</string>
     <string name="eth_static_cancel">取消</string>
+    <string name="eth_static_connect_success">静态IP连接成功</string>
+    <string name="eth_static_connect_failed">静态IP连接失败</string>
+    <string name="eth_static_net_available">网络可用</string>
+    <string name="eth_connecting">正在连接请稍候...</string>
+    <string name="eth_static_ip_null">IP不能为空</string>
+    <string name="eth_static_mask_null">子网掩码不能为空</string>
+    <string name="eth_static_gateway_null">默认网关不能为空</string>
+    <string name="eth_static_dns1_null">主用DNS不能为空</string>
+    <!--备用dns可以为空-->
+    <string name="eth_static_dns2_null">不能为空</string>
+    <string name="eth_static_ip_illegal">IP不合法</string>
+    <string name="eth_static_mask_illegal">子网掩码不合法</string>
+    <string name="eth_static_gateway_illegal">默认网关不合法</string>
+    <string name="eth_static_dns1_illegal">主用DNS不合法</string>
+    <string name="eth_static_dns2_illegal">备用DNS不合法</string>
+    <string name="eth_static_ip_gateway_err">IP和网关不在同一个网段</string>
+    <string name="eth_no_cable">网线脱落</string>
     <string name="eth_default_value">0.0.0.0</string>
+    <string name="eth_bluetooth_title">设置蓝牙</string>
+    <string name="eth_bluetooth_switch">蓝牙开关</string>
+    <string name="eth_bluetooth_bind">已绑定</string>
+    <string name="eth_bluetooth_unbind">未绑定</string>
+    <string name="eth_bluetooth_no_adapter">该设备不支持蓝牙</string>
 
     <!--日期与时间 dt: date&time-->
     <string name="dt_title">日期与时间</string>

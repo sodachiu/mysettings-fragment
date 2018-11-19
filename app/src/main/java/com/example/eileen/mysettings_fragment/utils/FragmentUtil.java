@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.AboutFragment;
+import com.example.eileen.mysettings_fragment.EthBluetoothFragment;
 import com.example.eileen.mysettings_fragment.EthFragment;
 import com.example.eileen.mysettings_fragment.EthPppoeFragment;
 import com.example.eileen.mysettings_fragment.EthStaticFragment;
@@ -34,12 +35,14 @@ public class FragmentUtil {
     public static final String STORAGE_FRAGMENT = "storage_fragment";
     public static final String ADVANCED_FRAGMENT = "advanced_fragment";
     public static final String RECOVERY_FRAGMENT = "recovery_fragment";
+    public static final String ETH_BLUETOOTH_FRAGMENT = "eth_bluetooth_fragment";
 
     private static AboutFragment aboutFragment = new AboutFragment();
     private static EthFragment ethFragment = new EthFragment();
     private static EthTypeFragment ethTypeFragment = new EthTypeFragment();
     private static EthPppoeFragment ethPppoeFragment = new EthPppoeFragment();
     private static EthStaticFragment ethStaticFragment = new EthStaticFragment();
+    private static EthBluetoothFragment ethBluetoothFragment = new EthBluetoothFragment();
 
 
 
@@ -64,6 +67,9 @@ public class FragmentUtil {
                 break;
             case ETH_STATIC_FRAGMENT:
                 fragment = ethStaticFragment;
+                break;
+            case ETH_BLUETOOTH_FRAGMENT:
+                fragment = ethBluetoothFragment;
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");
