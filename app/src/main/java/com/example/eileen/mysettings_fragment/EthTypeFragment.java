@@ -90,8 +90,27 @@ public class EthTypeFragment extends Fragment
 
         isNetConnect = NetworkUtil.checkNetConnect(mContext);
         showConnectState();
-
-
+        String preFragment = FragmentUtil.getPreviousFragment();
+        if (preFragment.equals(FragmentUtil.ETH_PPPOE_FRAGMENT)){
+            llPppoe.requestFocus();
+        }else if (preFragment.equals(FragmentUtil.ETH_STATIC_FRAGMENT)){
+            llStatic.requestFocus();
+        }else {
+            if (isNetConnect){
+                String ethMode = mEthManager.getEthernetMode();
+                switch (ethMode){
+                    case EthernetManager.ETHERNET_CONNECT_MODE_DHCP:
+                        llDhcp.requestFocus();
+                        break;
+                    case EthernetManager.ETHERNET_CONNECT_MODE_MANUAL:
+                        llStatic.requestFocus();
+                        break;
+                    default:
+                        llPppoe.requestFocus();
+                        break;
+                }
+            }
+        }
     }
 
     @Override
@@ -165,7 +184,6 @@ public class EthTypeFragment extends Fragment
                     imgDhcp.setImageResource(R.drawable.radio_checked_normal);
                     imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
                     imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
-                    llDhcp.requestFocus();
                     break;
                 case EthernetManager.ETHERNET_CONNECT_MODE_PPPOE:
                     tvDhcp.setVisibility(View.INVISIBLE);
@@ -174,7 +192,6 @@ public class EthTypeFragment extends Fragment
                     imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
                     imgPppoe.setImageResource(R.drawable.radio_checked_normal);
                     imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
-                    llPppoe.requestFocus();
                     break;
                 case EthernetManager.ETHERNET_CONNECT_MODE_MANUAL:
                     tvDhcp.setVisibility(View.INVISIBLE);
@@ -183,7 +200,6 @@ public class EthTypeFragment extends Fragment
                     imgDhcp.setImageResource(R.drawable.radio_unchecked_normal);
                     imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
                     imgStatic.setImageResource(R.drawable.radio_checked_normal);
-                    llStatic.requestFocus();
                     break;
                 default:
                     tvDhcp.setVisibility(View.INVISIBLE);

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <TextView
         style="@style/title_tv_style"
         android:text="@string/eth_bluetooth_title"/>
@@ -30,7 +34,9 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/bluetooth_rv_paired_list" />
+        android:id="@+id/bluetooth_rv_bond_list"
+        android:visibility="gone"
+        android:focusable="false"/>
 
 
     <TextView
@@ -41,6 +47,18 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bluetooth_rv_unpaired_list" />
+        android:id="@+id/bluetooth_rv_unbond_list"
+        />
 
-</LinearLayout>
+    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:indeterminateBehavior="repeat"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="300dp"
+            android:visibility="gone"
+            android:indeterminateDrawable="@drawable/progress_circle"/>
+
+</FrameLayout>

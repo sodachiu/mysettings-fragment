@@ -33,6 +33,12 @@ public class MyHandler extends Handler {
     public static final int PPPOE_CONNECT_FAILED_999 = 23;
     public static final int PPPOE_CONNECT_FAILED_OTHER = 24;
     public static final int BLUETOOTH_NO_ADAPTER = 25;
+    public static final int BLUETOOTH_TURNING_ON = 26;
+    public static final int BLUETOOTH_ON = 27;
+    public static final int BLUETOOTH_TURNING_OFF = 28;
+    public static final int BLUETOOTH_OFF = 29;
+    public static final int BLUETOOTH_DISCOVERING = 30;
+    public static final int BLUETOOTH_DISCOVERED = 31;
 
     private Context handlerContext;
 
@@ -117,7 +123,18 @@ public class MyHandler extends Handler {
             case BLUETOOTH_NO_ADAPTER:
                 toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_no_adapter);
                 break;
-
+            case BLUETOOTH_TURNING_ON:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_turning_on);
+                break;
+            case BLUETOOTH_TURNING_OFF:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_turning_off);
+                break;
+            case BLUETOOTH_ON:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_on);
+                break;
+            case BLUETOOTH_OFF:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_off);
+                break;
             default:
                 break;
         }

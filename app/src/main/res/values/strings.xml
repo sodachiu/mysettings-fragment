@@ -69,6 +69,10 @@
     <string name="eth_bluetooth_bind">已绑定</string>
     <string name="eth_bluetooth_unbind">未绑定</string>
     <string name="eth_bluetooth_no_adapter">该设备不支持蓝牙</string>
+    <string name="eth_bluetooth_turning_on">正在开启蓝牙</string>
+    <string name="eth_bluetooth_on">蓝牙开启成功</string>
+    <string name="eth_bluetooth_turning_off">正在关闭蓝牙</string>
+    <string name="eth_bluetooth_off">蓝牙关闭成功</string>
 
     <!--日期与时间 dt: date&time-->
     <string name="dt_title">日期与时间</string>

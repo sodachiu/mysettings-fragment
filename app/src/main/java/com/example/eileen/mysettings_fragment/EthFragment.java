@@ -52,6 +52,13 @@ public class EthFragment extends Fragment implements View.OnClickListener{
         Log.i(TAG, "initView: 菜单是否可获得焦点---->" + lvMenu.isFocusable());
         llSetNet.setOnClickListener(this);
         llSetBluetooth.setOnClickListener(this);
+
+        String preFragment = FragmentUtil.getPreviousFragment();
+        if (preFragment.equals(FragmentUtil.ETH_TYPE_FRAGMENT)){
+            llSetNet.requestFocus();
+        }else if (preFragment.equals(FragmentUtil.ETH_BLUETOOTH_FRAGMENT)){
+            llSetBluetooth.requestFocus();
+        }
     }
 
     @Override

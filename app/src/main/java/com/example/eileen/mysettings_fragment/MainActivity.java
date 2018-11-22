@@ -23,7 +23,7 @@ import java.util.List;
 
 
 public class MainActivity extends FragmentActivity {
-    private static final String TAG = "qll_mainactivity";
+    private static final String TAG = "qll_main_activity";
 
     private ListView lvMenu;
     private int mSelectPos = 0;
@@ -47,12 +47,29 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         mContext = this;
         initView();
-        Intent testIntent = new Intent(Intent.ACTION_TIME_TICK);
-        sendBroadcast(testIntent);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    View rootview = MainActivity.this.getWindow().getDecorView();
+                    View aaa = rootview.findFocus();
+                    Log.i(TAG, "当前焦点位置为：" + aaa.toString());
+                }
+
+            }
+
+        }).start();
+
     }
 
     private void initView(){
-
+        Log.i(TAG, "initView: ");
         String[] menuArray = getResources().getStringArray(R.array.menu_item);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 R.layout.menu_item, menuArray);
@@ -117,19 +134,19 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
-        String fragmentTag = FragmentUtil.getCurrentFragmentTag(mContext);
+        String nowFragmentTag = FragmentUtil.getCurrentFragmentTag(mContext);
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 Log.i(TAG, "onKeyDown: 按下返回键");
-                handleBackEvent(fragmentTag);
+                handleBackEvent(nowFragmentTag);
                 break;
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 Log.i(TAG, "onKeyDown: 按下左键");
-                handleLeftEvent(fragmentTag);
+                handleLeftEvent(nowFragmentTag);
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 Log.i(TAG, "onKeyDown: 按下右键");
-                handleRightEvent(fragmentTag);
+                handleRightEvent(nowFragmentTag);
             default:
                 break;
             }
@@ -141,6 +158,7 @@ public class MainActivity extends FragmentActivity {
         switch (tag){
             case FragmentUtil.ETH_TYPE_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_FRAGMENT);
+
                 break;
             case FragmentUtil.ETH_PPPOE_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_TYPE_FRAGMENT);
@@ -171,7 +189,13 @@ public class MainActivity extends FragmentActivity {
         }
 
 
-        lvMenu.setSelection(mSelectPos);
+        Log.i(TAG, "handleLeftEvent: 当前菜单位置应为：" + mSelectPos);
+        lvMenu.post(new Runnable() {
+            @Override
+            public void run() {
+                lvMenu.setSelection(mSelectPos);
+            }
+        });
 
     }
 

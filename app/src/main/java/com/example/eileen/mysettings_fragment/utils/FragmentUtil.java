@@ -37,12 +37,8 @@ public class FragmentUtil {
     public static final String RECOVERY_FRAGMENT = "recovery_fragment";
     public static final String ETH_BLUETOOTH_FRAGMENT = "eth_bluetooth_fragment";
 
-    private static AboutFragment aboutFragment = new AboutFragment();
-    private static EthFragment ethFragment = new EthFragment();
-    private static EthTypeFragment ethTypeFragment = new EthTypeFragment();
-    private static EthPppoeFragment ethPppoeFragment = new EthPppoeFragment();
-    private static EthStaticFragment ethStaticFragment = new EthStaticFragment();
-    private static EthBluetoothFragment ethBluetoothFragment = new EthBluetoothFragment();
+    private static String previousFragmentTag = ABOUT_FRAGMENT;
+
 
 
 
@@ -54,22 +50,22 @@ public class FragmentUtil {
         Log.i(TAG, "showFragment: 指定显示的fragment---->" + tag);
         switch (tag){
             case ABOUT_FRAGMENT:
-                fragment = aboutFragment;
+                fragment = new AboutFragment();
                 break;
             case ETH_FRAGMENT:
-                fragment = ethFragment;
+                fragment = new EthFragment();
                 break;
             case ETH_TYPE_FRAGMENT:
-                fragment = ethTypeFragment;
+                fragment = new EthTypeFragment();
                 break;
             case ETH_PPPOE_FRAGMENT:
-                fragment = ethPppoeFragment;
+                fragment = new EthPppoeFragment();
                 break;
             case ETH_STATIC_FRAGMENT:
-                fragment = ethStaticFragment;
+                fragment = new EthStaticFragment();
                 break;
             case ETH_BLUETOOTH_FRAGMENT:
-                fragment = ethBluetoothFragment;
+                fragment = new EthBluetoothFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");
@@ -80,18 +76,16 @@ public class FragmentUtil {
         List<Fragment> fragments = fm.getFragments();
         Log.i(TAG, "showFragment: 当前栈中碎片数量---->" + fragments.size());
 
-        for (int i = 0; i < fragments.size(); i++){
-            Fragment tmpFragment = fragments.get(i);
-            if (tmpFragment != null){
-                transaction.hide(tmpFragment);
+        try {
+            Fragment previousFragment = fragments.get(0);
+            if (previousFragment != null){
+                previousFragmentTag = previousFragment.getTag();
             }
+        }catch (Exception e){
+            Log.e(TAG, "showFragment: 当前栈中没有碎片" );
+        }finally {
+            transaction.replace(R.id.main_ll_fragment_container, fragment, tag);
         }
-
-        if (!fragment.isAdded()){
-            Log.i(TAG, "showFragment: " + tag + "加入碎片栈");
-            transaction.add(R.id.main_ll_fragment_container, fragment, tag);
-        }
-        transaction.show(fragment);
 
         transaction.commit();
 
@@ -102,15 +96,23 @@ public class FragmentUtil {
         FragmentActivity activity = (FragmentActivity) context;
         FragmentManager fm = activity.getSupportFragmentManager();
         List<Fragment> fragments = fm.getFragments();
-        String tag = "";
-        for (int i = 0; i < fragments.size(); i++){
-            Fragment tmpFragment = fragments.get(i);
-            if (tmpFragment != null && tmpFragment.isAdded() && tmpFragment.isVisible()){
-                tag = tmpFragment.getTag();
-            }
+
+        Fragment nowFragment = fragments.get(0);
+        if (nowFragment != null && nowFragment.isVisible()){
+            return nowFragment.getTag();
         }
 
-        return tag;
+        return "";
     }
+
+    /*
+    * 返回上一个fragment的信息
+    * */
+
+    public static String getPreviousFragment(){
+        return previousFragmentTag;
+    }
+
+
 
 }
