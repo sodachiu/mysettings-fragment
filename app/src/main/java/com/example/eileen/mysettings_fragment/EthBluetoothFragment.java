@@ -36,7 +36,7 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
     private static final String TAG = "qll_bluetooth_fragment";
     private Context mContext;
     private ListView lvMenu;
-    private LinearLayout llBluetoothSwitch;
+    private LinearLayout llBluetoothSwitch, llPgbContainer;
     private ImageView imgBluetoothSwitch;
     private RecyclerView rvBond, rvUnbond;
     private BluetoothAdapter mBluetoothAdapter;
@@ -44,8 +44,7 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
     private IntentFilter mFilter;
     private List<BluetoothDevice> mBondList, mUnbondList;
     private MyBluetoothAdapter mBondAdapter, mUnbondAdapter;
-    private CircularLinesProgress mProgressView;
-    private ProgressBar rlPgb;
+    private static int mUnbondListSize = 0;
     public EthBluetoothFragment(){
 
     }
@@ -62,7 +61,6 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
         }
         mBondList = new ArrayList<>();
         mUnbondList = new ArrayList<>();
-        mProgressView = new CircularLinesProgress(mContext);
         mFilter = new IntentFilter();
         mFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
@@ -118,7 +116,7 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
         imgBluetoothSwitch = (ImageView) activity.findViewById(R.id.eth_img_bluetooth_switch);
         rvBond = (RecyclerView) activity.findViewById(R.id.bluetooth_rv_bond_list);
         rvUnbond = (RecyclerView) activity.findViewById(R.id.bluetooth_rv_unbond_list);
-        rlPgb = (ProgressBar) activity.findViewById(R.id.progress_bar);
+        llPgbContainer = (LinearLayout) activity.findViewById(R.id.bluetooth_ll_pgb_container);
         LinearLayoutManager llManager1 = new LinearLayoutManager(mContext);
         LinearLayoutManager llManager2 = new LinearLayoutManager(mContext);
         rvBond.setLayoutManager(llManager1);
@@ -138,37 +136,63 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
 
     /**
      * 处理 BluetoothAdapter.ACTION_STATE_CHANGED
-     * BluetoothAdapter.STATE_TURNING_ON
+     * BluetoothAdapter.STATE_ON
      */
     void handleOnEvent(){
-        Log.i(TAG, "handleOnEvent: ");
+        Log.i(TAG, "handleOnEvent: 蓝牙打开成功");
+        
+        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_TURNING_ON);
+        llPgbContainer.setVisibility(View.GONE);
+        imgBluetoothSwitch.setImageResource(R.drawable.checkbox_on);
+    }
+
+    /**
+     * 处理 BluetoothAdapter.ACTION_STATE_CHANGED
+     * BluetoothAdapter.STATE_TURNING_ON
+     */
+    void handleTurningOnEvent(){
+
+        Log.i(TAG, "handleTurningOnEvent: 正在打开蓝牙");
+
         Set<BluetoothDevice> bondDevice = mBluetoothAdapter.getBondedDevices();
         mBondList.addAll(bondDevice);
+
         mBondAdapter = new MyBluetoothAdapter(mBondList);
         mUnbondAdapter = new MyBluetoothAdapter(mUnbondList);
+
         rvBond.setAdapter(mBondAdapter);
         rvUnbond.setAdapter(mUnbondAdapter);
-        // 设置菊花
-        rlPgb.setVisibility(View.VISIBLE);
-        rlPgb.bringToFront();
-//        rvBond.setVisibility(View.VISIBLE);
+
+        llPgbContainer.setVisibility(View.VISIBLE);//下面一层应该也不能操作了
         rvUnbond.setVisibility(View.VISIBLE);
-        imgBluetoothSwitch.setImageResource(R.drawable.checkbox_on);
+        if (mBondList.size() > 0){
+            rvBond.setVisibility(View.VISIBLE);
+        }else {
+            rvBond.setVisibility(View.GONE);
+        }
     }
 
     /**
      * 处理 BluetoothAdapter.ACTION_STATE_CHANGED
      * BluetoothAdapter.STATE_TURNING_OFF
      */
-    void handleOffEvent(){
-        Log.i(TAG, "handleOffEvent: ");
+    void handleTurningOffEvent(){
+        Log.i(TAG, "handleOffEvent: 正在关闭蓝牙");
+        llPgbContainer.setVisibility(View.VISIBLE);
         rvBond.setVisibility(View.GONE);
-        rvUnbond.setVisibility(View.INVISIBLE);
+        rvUnbond.setVisibility(View.GONE);
         mBondList.clear();
         mUnbondList.clear();
         mUnbondAdapter = null;
         mBondAdapter = null;
+    }
+
+    void handleOffEvent(){
+        Log.i(TAG, "handleOffEvent: 蓝牙关闭成功");
+        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_OFF);
+        llPgbContainer.setVisibility(View.GONE);
         imgBluetoothSwitch.setImageResource(R.drawable.checkbox_off);
+
     }
 
     /**
@@ -176,13 +200,13 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
      *
      */
     void handleFindEvent(BluetoothDevice newDevice){
-        
+
         if (newDevice.getBondState() != BluetoothDevice.BOND_BONDED
                 && !mUnbondList.contains(newDevice)){
 
             Log.i(TAG, "handleFindEvent: 发现一台新的远程设备" + newDevice.toString());
             mUnbondList.add(newDevice);
-            mUnbondAdapter.notifyItemRangeInserted(mUnbondList.size()-1, 1);
+            mUnbondAdapter.notifyItemRangeInserted(mUnbondListSize++ , 1); //需要测试一下是否是先返回原值，再执行+1操作
         }
     }
 
@@ -197,26 +221,19 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
                 int bluetoothState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1);
                 switch (bluetoothState){
                     case BluetoothAdapter.STATE_TURNING_ON:
-                        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_TURNING_ON);
-                        handleOnEvent();
-                        //显示菊花
                         Log.i(TAG, "onReceive: 正在打开蓝牙");
+                        handleTurningOnEvent();
                         break;
                     case BluetoothAdapter.STATE_ON:
-                        // 菊花关掉 & button改变，填充两个listviw
                         Log.i(TAG, "onReceive: 蓝牙打开成功");
-                        rlPgb.setVisibility(View.GONE);
-                        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_ON);
+                        handleOnEvent();
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
-                        // 显示菊花
                         Log.i(TAG, "onReceive: 正在关闭蓝牙");
-                        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_TURNING_OFF);
+                        handleTurningOffEvent();
                         break;
                     case BluetoothAdapter.STATE_OFF:
-                        //关掉菊花， button改变，两个listview不可见
                         Log.i(TAG, "onReceive: 蓝牙关闭成功");
-                        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_OFF);
                         handleOffEvent();
                         break;
                     default:
@@ -224,10 +241,8 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
                         break;
                 }
             }else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)){
-                //弹框提示搜索设备结束
                 Log.i(TAG, "onReceive: 搜索设备结束，找到" + mUnbondList.size() + "台远程设备");
             }else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)){
-                //弹框提示"正在搜索设备"
                 Log.i(TAG, "onReceive: 开始搜索设备");
             }else if (action.equals(BluetoothDevice.ACTION_FOUND)){
 
@@ -235,6 +250,7 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
                     BluetoothDevice newDevice = (BluetoothDevice) intent.
                             getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
+                    //当我刚进程序时，如果蓝牙是打开状态，那么应该有个圈圈，然后显示
                     handleFindEvent(newDevice);
 
                 }catch (Exception e){
@@ -252,6 +268,7 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
                     case BluetoothDevice.BOND_BONDED:
                         //绑定成功
                         Log.i(TAG, "onReceive: 绑定远程设备成功");
+                        mUnbondListSize--;
                         break;
                     case BluetoothDevice.BOND_BONDING:
                         //正在绑定
@@ -269,17 +286,5 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
             }
         }
     };
-
-    private void changeBluetoothState(){
-        Log.i(TAG, "changeBluetoothState: ");
-        if (mBluetoothAdapter.isEnabled()){
-            imgBluetoothSwitch.setImageResource(R.drawable.checkbox_off);
-            mBluetoothAdapter.disable();
-        }else {
-            imgBluetoothSwitch.setImageResource(R.drawable.checkbox_on);
-            mBluetoothAdapter.enable();
-        }
-    }
-
 
 }

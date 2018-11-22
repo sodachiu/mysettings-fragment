@@ -34,9 +34,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/bluetooth_rv_bond_list"
-        android:visibility="gone"
-        android:focusable="false"/>
+        android:id="@+id/bluetooth_rv_bond_list" />
 
 
     <TextView
@@ -51,14 +49,16 @@
         />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/bluetooth_ll_pgb_container">
+
         <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:indeterminateBehavior="repeat"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginStart="300dp"
-            android:visibility="gone"
-            android:indeterminateDrawable="@drawable/progress_circle"/>
+            style="@style/pgb_base_style" />
+    </LinearLayout>
+
 
 </FrameLayout>

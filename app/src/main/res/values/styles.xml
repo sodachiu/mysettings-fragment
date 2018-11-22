@@ -194,10 +194,14 @@
         <item name="android:src">@drawable/checkbox_off</item>
     </style>
 
-
-
-
-
+    <style name="pgb_base_style">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:layout_gravity">center_vertical|start</item>
+        <item name="android:layout_marginStart">300dp</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_circle</item>
+    </style>
 
 
 
