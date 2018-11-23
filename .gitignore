@@ -2,6 +2,9 @@
 *.apk
 *.ap_
 
+# gradle 文件
+*.gradle
+
 # Files for the ART/Dalvik VM
 *.dex
 
