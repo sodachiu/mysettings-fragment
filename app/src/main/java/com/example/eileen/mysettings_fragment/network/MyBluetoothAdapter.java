@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eileen.mysettings_fragment.R;
@@ -19,11 +20,13 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvDevInfo;
+        LinearLayout llDevice;
 
         public ViewHolder(View view){
             super(view);
             Log.i(TAG, "ViewHolder: ");
             tvDevInfo = (TextView) view.findViewById(R.id.bluetooth_tv_item_info);
+            llDevice = (LinearLayout) view.findViewById(R.id.bluetooth_ll_item);
         }
 
     }
@@ -42,20 +45,21 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
                 .inflate(R.layout.bluetooth_item, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
 
-        holder.tvDevInfo.setOnClickListener(new View.OnClickListener(){
+        holder.llDevice.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 BluetoothDevice clickDevice = mDevicesList.get(position);
                 int bondState = clickDevice.getBondState();
+                Log.i(TAG, "onClick: 被点击设备位置：" + position + "&&绑定状态：" + bondState);
+
                 if (bondState == BluetoothDevice.BOND_BONDED){
                     unbondDevice(clickDevice);
                 }else if (bondState == BluetoothDevice.BOND_NONE){
                     bondingDevice(clickDevice);
-                }else {
-                    Log.i(TAG, "onClick: 蓝牙设备连接状态代码：" + bondState);
                 }
+
             }
         });
         return holder;

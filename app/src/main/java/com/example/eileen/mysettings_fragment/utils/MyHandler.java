@@ -39,6 +39,8 @@ public class MyHandler extends Handler {
     public static final int BLUETOOTH_OFF = 29;
     public static final int BLUETOOTH_DISCOVERING = 30;
     public static final int BLUETOOTH_DISCOVERED = 31;
+    public static final int BLUETOOTH_DEVICE_BONDING = 32;
+    public static final int BLUETOOTH_DEVICE_BOND_NONE = 33;
 
     private Context handlerContext;
 
@@ -134,6 +136,12 @@ public class MyHandler extends Handler {
                 break;
             case BLUETOOTH_OFF:
                 toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_off);
+                break;
+            case BLUETOOTH_DEVICE_BONDING:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_bonding);
+                break;
+            case BLUETOOTH_DEVICE_BOND_NONE:
+                toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_bond_none);
                 break;
             default:
                 break;

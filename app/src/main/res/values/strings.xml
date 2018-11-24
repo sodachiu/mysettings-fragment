@@ -73,6 +73,9 @@
     <string name="eth_bluetooth_on">蓝牙开启成功</string>
     <string name="eth_bluetooth_turning_off">正在关闭蓝牙</string>
     <string name="eth_bluetooth_off">蓝牙关闭成功</string>
+    <string name="eth_bluetooth_bonding">正在绑定设备...</string>
+    <string name="eth_bluetooth_bond_none">正在解绑该设备</string>
+
 
     <!--日期与时间 dt: date&time-->
     <string name="dt_title">日期与时间</string>

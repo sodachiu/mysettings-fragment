@@ -7,46 +7,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <TextView
-        style="@style/title_tv_style"
-        android:text="@string/eth_bluetooth_title"/>
+        <TextView
+            style="@style/title_tv_style"
+            android:text="@string/eth_bluetooth_title"/>
 
 
-    <LinearLayout
-        style="@style/focusable_ll_style"
-        android:id="@+id/eth_ll_bluetooth_switch">
+        <LinearLayout
+            style="@style/focusable_ll_style"
+            android:id="@+id/eth_ll_bluetooth_switch">
+
+            <TextView
+                style="@style/fragment_tv_key_style"
+                android:text="@string/eth_bluetooth_switch" />
+            <ImageView
+                style="@style/bluetooth_switch_img_style"
+                android:id="@+id/eth_img_bluetooth_switch"/>
+
+        </LinearLayout>
 
         <TextView
-            style="@style/fragment_tv_key_style"
-            android:text="@string/eth_bluetooth_switch" />
-        <ImageView
-            style="@style/bluetooth_switch_img_style"
-            android:id="@+id/eth_img_bluetooth_switch"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:text="@string/eth_bluetooth_bind"
-        style="@style/title_tv_style"
-        android:paddingStart="50dp"/>
+            android:text="@string/eth_bluetooth_bind"
+            style="@style/title_tv_style"
+            android:paddingStart="50dp"/>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/bluetooth_rv_bond_list" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            android:id="@+id/bluetooth_rv_bond_list" />
 
+        <include layout="@layout/image_divider" />
+        <TextView
+            android:text="@string/eth_bluetooth_unbind"
+            style="@style/title_tv_style"
+            android:paddingStart="50dp"/>
 
-    <TextView
-        android:text="@string/eth_bluetooth_unbind"
-        style="@style/title_tv_style"
-        android:paddingStart="50dp"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bluetooth_rv_unbond_list"
-        />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bluetooth_rv_unbond_list"
+            />
 
     </LinearLayout>
 
