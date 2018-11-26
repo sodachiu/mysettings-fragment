@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_container_style">
+
+    <TextView
+        style="@style/dialog_title_tv_style" />
+
+    <LinearLayout
+        style="@style/dialog_content_ll_style"
+        android:orientation="vertical"
+        android:id="@+id/dialog_ll_content">
+
+
+        <!--存储需要动态展示的与用户交互的信息-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/dialog_ll_btn_container" >
+
+        <Button
+            style="@style/btn_base_style"
+            android:text="@string/dialog_confirm"
+            android:id="@+id/dialog_btn_confirm"/>
+
+        <Button
+            style="@style/btn_base_style"
+            android:text="@string/dialog_cancel"
+            android:id="@+id/dialog_btn_cancel"/>
+    </LinearLayout>
+
+</LinearLayout>

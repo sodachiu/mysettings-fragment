@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice;
 import android.util.Log;
 import android.view.View;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public class BluetoothUtil {
@@ -71,7 +70,7 @@ public class BluetoothUtil {
                 Log.i(TAG, "onReceive: 未处理的绑定事件代码：" + state);
                 break;
         }
-        
+
     }
 }
 */

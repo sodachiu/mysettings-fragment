@@ -203,7 +203,48 @@
         <item name="android:indeterminateDrawable">@drawable/progress_circle</item>
     </style>
 
+    <style name="dialog_container_style" parent="@android:style/Theme.Dialog">
+        <item name="android:orientation">vertical</item>
+        <item name="android:windowBackground">@drawable/background_dialog</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:paddingStart">35dp</item>
+        <item name="android:paddingEnd">35dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!--透明度40%-->
+        <item name="android:backgroundDimAmount">0.4</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+    </style>
+
+    <style name="dialog_title_tv_style" parent="tv_base_style">
+        <item name="android:text">@string/dialog_title</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:layout_marginTop">45dp</item>
+    </style>
+
+    <style name="dialog_content_ll_style" parent="ll_horizontal_base_style">
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|start</item>
+    </style>
 
 
+
+    <style name="dialog_ll_btn_container" parent="unfocusable_ll_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+    </style>
 
 </resources>

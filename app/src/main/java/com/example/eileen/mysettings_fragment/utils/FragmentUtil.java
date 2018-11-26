@@ -105,6 +105,21 @@ public class FragmentUtil {
         return "";
     }
 
+
+    /*返回当前fragment*/
+    public static Fragment getCurrentFragment(Context context){
+        FragmentActivity activity = (FragmentActivity) context;
+        FragmentManager fm = activity.getSupportFragmentManager();
+        List<Fragment> fragments = fm.getFragments();
+
+        Fragment nowFragment = fragments.get(0);
+        if (nowFragment != null && nowFragment.isVisible()){
+            return nowFragment;
+        }
+
+        return null;
+    }
+
     /*
     * 返回上一个fragment的信息
     * */

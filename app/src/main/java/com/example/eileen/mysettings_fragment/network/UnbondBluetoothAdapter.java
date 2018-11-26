@@ -1,7 +1,10 @@
 package com.example.eileen.mysettings_fragment.network;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eileen.mysettings_fragment.R;
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
+import com.example.eileen.mysettings_fragment.utils.MyDialogFragment;
+import com.example.eileen.mysettings_fragment.utils.UniqueMark;
 
 import java.util.List;
 
-public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.ViewHolder> {
+public class UnbondBluetoothAdapter extends RecyclerView.Adapter<UnbondBluetoothAdapter.ViewHolder> {
     private static final String TAG = "qll_blue_adapter";
     private List<BluetoothDevice> mDevicesList;
+    private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvDevInfo;
@@ -31,8 +38,8 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
 
     }
 
-    public MyBluetoothAdapter(List<BluetoothDevice> devicesList){
-        Log.i(TAG, "MyBluetoothAdapter: ");
+    public UnbondBluetoothAdapter(List<BluetoothDevice> devicesList){
+        Log.i(TAG, "UnbondBluetoothAdapter: ");
         mDevicesList = devicesList;
     }
 
@@ -41,8 +48,9 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         Log.i(TAG, "onCreateViewHolder: ");
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.bluetooth_item, viewGroup, false);
+        mContext = viewGroup.getContext();
+        View view = LayoutInflater.from(mContext).inflate(R.layout.bluetooth_unbond_item,
+                viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
 
         holder.llDevice.setOnClickListener(new View.OnClickListener(){
@@ -53,12 +61,7 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
                 BluetoothDevice clickDevice = mDevicesList.get(position);
                 int bondState = clickDevice.getBondState();
                 Log.i(TAG, "onClick: 被点击设备位置：" + position + "&&绑定状态：" + bondState);
-
-                if (bondState == BluetoothDevice.BOND_BONDED){
-                    unbondDevice(clickDevice);
-                }else if (bondState == BluetoothDevice.BOND_NONE){
-                    bondingDevice(clickDevice);
-                }
+                bondingDevice(clickDevice);
 
             }
         });
@@ -82,10 +85,6 @@ public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.
     public int getItemCount() {
         Log.i(TAG, "getItemCount: ");
         return mDevicesList.size();
-    }
-
-    void unbondDevice(BluetoothDevice device){
-        device.removeBond();
     }
 
     void bondingDevice(BluetoothDevice device){

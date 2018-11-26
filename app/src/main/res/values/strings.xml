@@ -75,6 +75,7 @@
     <string name="eth_bluetooth_off">蓝牙关闭成功</string>
     <string name="eth_bluetooth_bonding">正在绑定设备...</string>
     <string name="eth_bluetooth_bond_none">正在解绑该设备</string>
+    <string name="eth_bluetooth_paired">已配对</string>
 
 
     <!--日期与时间 dt: date&time-->
@@ -101,5 +102,10 @@
     <string name="recovery_title">恢复出厂设置</string>
 
 
+    <!--dialog-->
+    <string name="dialog_title">信息：</string>
+    <string name="dialog_content_unbond">确定与设备【%1$s】解绑吗？</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="dialog_cancel">取消</string>
 
 </resources>

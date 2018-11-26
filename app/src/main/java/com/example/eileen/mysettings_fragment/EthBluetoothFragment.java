@@ -19,12 +19,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.example.eileen.mysettings_fragment.network.MyBluetoothAdapter;
+//import com.example.eileen.mysettings_fragment.network.BluetoothUtil;
+import com.example.eileen.mysettings_fragment.network.BondedBluetoothAdapter;
+import com.example.eileen.mysettings_fragment.network.UnbondBluetoothAdapter;
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
+import com.example.eileen.mysettings_fragment.utils.UniqueMark;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static android.app.Activity.RESULT_OK;
 
 public class EthBluetoothFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "qll_bluetooth_fragment";
@@ -37,7 +42,8 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
     private MyHandler mHandler;
     private IntentFilter mFilter;
     private List<BluetoothDevice> mBondList, mUnbondList;
-    private MyBluetoothAdapter mBondAdapter, mUnbondAdapter;
+    private UnbondBluetoothAdapter mUnbondAdapter;
+    private BondedBluetoothAdapter mBondAdapter;
     private static int mUnbondListSize = 0;
     public EthBluetoothFragment(){
 
@@ -86,6 +92,23 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
         Log.i(TAG, "onDestroy: ");
         mHandler.clear();
         mContext.unregisterReceiver(bluetoothReceiver);
+    }
+
+    /*
+    * 用于处理dialogfragment返回的数据
+    * */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UniqueMark.BLUETOOTH_BOND && resultCode == RESULT_OK){
+            Log.i(TAG, "onActivityResult: 解绑设备");
+            BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("bonded_device");
+            device.removeBond();
+        }else if (requestCode == UniqueMark.BLUETOOTH_UNBOND && resultCode == RESULT_OK){
+            Log.i(TAG, "onActivityResult: 绑定设备");
+            BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("unbond_device");
+            device.createBond();
+        }
     }
 
 
@@ -208,8 +231,8 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
         Set<BluetoothDevice> bondDevice = mBluetoothAdapter.getBondedDevices();
         mBondList.addAll(bondDevice);
 
-        mBondAdapter = new MyBluetoothAdapter(mBondList);
-        mUnbondAdapter = new MyBluetoothAdapter(mUnbondList);
+        mBondAdapter = new BondedBluetoothAdapter(mBondList);
+        mUnbondAdapter = new UnbondBluetoothAdapter(mUnbondList);
 
         rvBond.setAdapter(mBondAdapter);
         rvUnbond.setAdapter(mUnbondAdapter);
@@ -232,6 +255,8 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
      */
     void handleBondStateChangedEvent(int state, BluetoothDevice tmpDevice){
 
+//        BluetoothUtil.handleStateChangedEvent(mUnbondList, mBondList, tmpDevice, state);
+
         if (tmpDevice == null || tmpDevice.getAddress().equals("")){
             Log.i(TAG, "handleBondStateChangedEvent: 获取到的设备为空, 无法进行处理");
             return;
@@ -241,51 +266,12 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
 
         switch (state){
             case BluetoothDevice.BOND_NONE:
-                Log.i(TAG, "handleBondStateChangedEvent: 设备解绑");
-                mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_DEVICE_BOND_NONE);
-                int position = -1;
-                for (int i = 0; i < mBondList.size(); i++){
-                    if (devAddress.equals(mBondList.get(i).getAddress())){
-                        position = i;
-                    }
-                }
-
-                if (position != -1){
-
-                    mBondList.remove(position);
-                    mUnbondList.add(tmpDevice);
-                    mUnbondAdapter.notifyItemInserted(mUnbondListSize);
-                    mBondAdapter.notifyItemRangeRemoved(position, 1);
-                    Log.i(TAG, "handleBondStateChangedEvent: 成功移除绑定设备");
-
-                }else {
-                    Log.i(TAG, "handleBondStateChangedEvent: 没有找到匹配项");
-                }
-
-                if (mBondList.size() <= 0){
-                    rvBond.setVisibility(View.GONE);
-                }
+                Log.i(TAG, "handleBondStateChangedEvent: 远程设备已解绑");
+                handleBondNoneEvent(devAddress, tmpDevice);
                 break;
             case BluetoothDevice.BOND_BONDED:
-                mUnbondListSize--;
-
-                int position1 = -1;
-                for (int j = 0; j < mUnbondList.size(); j++){
-                    if (devAddress.equals(mUnbondList.get(j).getAddress())){
-                        position1 = j;
-                    }
-                }
-
-                if (position1 != -1){
-                    mUnbondList.remove(position1);
-                    mUnbondAdapter.notifyItemRangeRemoved(position1, 1);
-                    mBondList.add(tmpDevice);
-                    rvBond.setVisibility(View.VISIBLE);
-                    mBondAdapter.notifyItemInserted(mBondList.size() - 1);
-                    Log.i(TAG, "handleBondStateChangedEvent: 成功显示绑定设备");
-                }else {
-                    Log.i(TAG, "handleBondStateChangedEvent: 没有找到匹配项");
-                }
+                Log.i(TAG, "handleBondStateChangedEvent: 远程设备已绑定");
+                handleBondedEvent(devAddress, tmpDevice);
                 break;
             case BluetoothDevice.BOND_BONDING:
                 Log.i(TAG, "onReceive: 正在绑定远程设备");
@@ -296,6 +282,60 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
                 break;
         }
 
+    }
+
+
+    /**
+    * 处理设备解绑事件
+    * */
+    void handleBondNoneEvent(String devAddress, BluetoothDevice tmpDevice){
+        mHandler.sendEmptyMessage(MyHandler.BLUETOOTH_DEVICE_BOND_NONE);
+        int position = -1;
+        for (int i = 0; i < mBondList.size(); i++){
+            if (devAddress.equals(mBondList.get(i).getAddress())){
+                position = i;
+            }
+        }
+
+        if (position != -1){
+            mBondList.remove(position);
+            mUnbondList.add(tmpDevice);
+            mUnbondAdapter.notifyItemInserted(mUnbondListSize);
+            mBondAdapter.notifyItemRangeRemoved(position, 1);
+            Log.i(TAG, "handleBondStateChangedEvent: 成功移除绑定设备");
+        }else {
+            Log.i(TAG, "handleBondStateChangedEvent: 没有找到匹配项");
+        }
+
+        if (mBondList.size() <= 0){
+            rvBond.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 处理设备绑定成功事件
+     * */
+
+    void handleBondedEvent(String devAddress, BluetoothDevice tmpDevice){
+        Log.i(TAG, "handleBondedEvent: ");
+        mUnbondListSize--;
+        int position = -1;
+        for (int j = 0; j < mUnbondList.size(); j++){
+            if (devAddress.equals(mUnbondList.get(j).getAddress())){
+                position = j;
+            }
+        }
+
+        if (position != -1){
+            mUnbondList.remove(position);
+            mUnbondAdapter.notifyItemRangeRemoved(position, 1);
+            mBondList.add(tmpDevice);
+            rvBond.setVisibility(View.VISIBLE);
+            mBondAdapter.notifyItemInserted(mBondList.size() - 1);
+            Log.i(TAG, "handleBondStateChangedEvent: 成功显示绑定设备");
+        }else {
+            Log.i(TAG, "handleBondStateChangedEvent: 没有找到匹配项");
+        }
     }
 
     private BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
