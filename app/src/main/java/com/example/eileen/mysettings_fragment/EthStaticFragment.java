@@ -1,6 +1,7 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,6 +12,7 @@ import android.net.pppoe.PppoeManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -35,7 +37,6 @@ import java.net.InetAddress;
 public class EthStaticFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "qll_eth_static_fragment";
     private Context mContext;
-    private FragmentActivity mActivity;
     private boolean isNetConnected = false;
     private EthernetManager mEthManager;
     private IntentFilter mFilter;
@@ -45,6 +46,7 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
     private EditText etIP, etMask, etGateway, etDns1, etDns2;
     private Button btnConfirm, btnCancel;
     private ListView lvMenu;
+    private ContentResolver resolver;
 
     public EthStaticFragment(){
 
@@ -55,7 +57,7 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
         Log.i(TAG, "onAttach: ");
         super.onAttach(context);
         mContext = context;
-        mActivity = getActivity();
+        resolver = mContext.getContentResolver();
         isNetConnected = NetworkUtil.checkNetConnect(mContext);
         mHandler = new MyHandler(mContext);
         mEthManager = (EthernetManager) mContext.getSystemService(Context.ETHERNET_SERVICE);
@@ -79,17 +81,26 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
         initView();
     }
+    @Override
+    public void onDestroy(){
+        Log.i(TAG, "onDestroy: ");
+        super.onDestroy();
+        resolver = null;
+        mHandler.clear();
+        mContext.unregisterReceiver(myNetReceiver);
+    }
 
     private void initView(){
         Log.i(TAG, "initView: ");
-        etIP = (EditText) mActivity.findViewById(R.id.eth_static_et_ip);
-        etMask = (EditText) mActivity.findViewById(R.id.eth_static_et_mask);
-        etGateway = (EditText) mActivity.findViewById(R.id.eth_static_et_gateway);
-        etDns1 = (EditText) mActivity.findViewById(R.id.eth_static_et_dns1);
-        etDns2 = (EditText) mActivity.findViewById(R.id.eth_static_et_dns2);
-        btnConfirm = (Button) mActivity.findViewById(R.id.static_btn_confirm);
-        btnCancel = (Button) mActivity.findViewById(R.id.static_btn_cancel);
-        lvMenu = (ListView) mActivity.findViewById(R.id.main_lv_menu);
+        FragmentActivity activity = getActivity();
+        etIP = (EditText) activity.findViewById(R.id.eth_static_et_ip);
+        etMask = (EditText) activity.findViewById(R.id.eth_static_et_mask);
+        etGateway = (EditText) activity.findViewById(R.id.eth_static_et_gateway);
+        etDns1 = (EditText) activity.findViewById(R.id.eth_static_et_dns1);
+        etDns2 = (EditText) activity.findViewById(R.id.eth_static_et_dns2);
+        btnConfirm = (Button) activity.findViewById(R.id.static_btn_confirm);
+        btnCancel = (Button) activity.findViewById(R.id.static_btn_cancel);
+        lvMenu = (ListView) activity.findViewById(R.id.main_lv_menu);
 
         btnConfirm.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -98,20 +109,6 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden){
-        Log.i(TAG, "onHiddenChanged: 控件是否隐藏：" + hidden);
-        if (!hidden){
-            mHandler = new MyHandler(mContext);
-            lvMenu.setFocusable(false);
-            btnConfirm.requestFocus();
-            mContext.registerReceiver(myNetReceiver, mFilter);
-            showDhcpInfo();
-        }else {
-            mHandler.clear();
-            mContext.unregisterReceiver(myNetReceiver);
-        }
-    }
 
     @Override
     public void onClick(View view){
@@ -214,6 +211,8 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
         userDhcp.dns2 = NetworkUtils.inetAddressToInt((Inet4Address) iUserDns2);
 
         mEthManager.setEthernetEnabled(false);
+        Settings.Secure.putInt(resolver, "default_eth_mod"
+                , NetworkUtil.ETHERNET_MODE_STATIC);
         mEthManager.setEthernetMode(EthernetManager.ETHERNET_CONNECT_MODE_MANUAL, userDhcp);
         Log.i(TAG, "setStatic: 手动配置的dhcp信息" + userDhcp.toString());
         mEthManager.setEthernetEnabled(true);

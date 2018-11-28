@@ -76,11 +76,17 @@
     <string name="eth_bluetooth_bonding">正在绑定设备...</string>
     <string name="eth_bluetooth_bond_none">正在解绑该设备</string>
     <string name="eth_bluetooth_paired">已配对</string>
-
+    <string name="netinfo_eth_connected">有线网络已连接：%1$s</string>
+    <string name="netinfo_eth_no_connect">有线网络</string>
 
     <!--日期与时间 dt: date&time-->
     <string name="dt_title">日期与时间</string>
-
+    <string name="dt_setting">设置日期和时间</string>
+    <string name="dt_use_24_format">使用24小时格式</string>
+    <string name="dt_select_date_format">选择日期格式</string>
+    <string name="dt_time_server">时间服务器设置</string>
+    <string name="dt_time_server1">主时间同步服务器地址</string>
+    <string name="dt_time_server2">备时间同步服务器地址</string>
 
 
     <!--显示-->

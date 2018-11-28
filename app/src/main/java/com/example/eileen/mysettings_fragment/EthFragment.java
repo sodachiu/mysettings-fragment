@@ -91,4 +91,9 @@ public class EthFragment extends Fragment implements View.OnClickListener{
             llSetNet.setFocusable(true);
         }
     }
+    @Override
+    public void onDestroy(){
+        Log.i(TAG, "onDestroy: ");
+        super.onDestroy();
+    }
 }

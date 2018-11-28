@@ -2,5 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        style="@style/title_tv_style"
+        android:id="@+id/netinfo_tv_title"/>
+
+    <LinearLayout style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/netinfo_tv_key_style"
+            android:text="@string/eth_ip" />
+
+        <TextView
+            style="@style/netinfo_tv_value_style"
+            android:id="@+id/netinfo_tv_ip" />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/netinfo_tv_key_style"
+            android:text="@string/eth_netmask" />
+
+        <TextView
+            style="@style/netinfo_tv_value_style"
+            android:id="@+id/netinfo_tv_mask" />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/netinfo_tv_key_style"
+            android:text="@string/eth_gateway" />
+
+        <TextView
+            style="@style/netinfo_tv_value_style"
+            android:id="@+id/netinfo_tv_gateway"
+            android:text="@string/eth_default_value" />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/netinfo_tv_key_style"
+            android:text="@string/eth_dns1" />
+
+        <TextView
+            style="@style/netinfo_tv_value_style"
+            android:id="@+id/netinfo_tv_dns1"
+            android:text="@string/eth_default_value" />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/netinfo_tv_key_style"
+            android:text="@string/eth_dns2" />
+
+        <TextView
+            style="@style/netinfo_tv_value_style"
+            android:id="@+id/netinfo_tv_dns2" />
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
 
 </LinearLayout>

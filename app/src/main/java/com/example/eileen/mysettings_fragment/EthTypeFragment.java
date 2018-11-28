@@ -1,11 +1,13 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ethernet.EthernetManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -36,6 +38,7 @@ public class EthTypeFragment extends Fragment
     private EthernetManager mEthManager;
     private IntentFilter filter;
     private boolean isNetConnect = false;
+    private ContentResolver resolver;
 
 
     public EthTypeFragment(){
@@ -49,6 +52,7 @@ public class EthTypeFragment extends Fragment
         mContext = context;
         mEthManager = (EthernetManager) mContext.getSystemService(Context.ETHERNET_SERVICE);
         mHandler = new MyHandler(mContext);
+        resolver = mContext.getContentResolver();
         filter = new IntentFilter();
         filter.addAction(EthernetManager.ETHERNET_STATE_CHANGED_ACTION);
         mContext.registerReceiver(myNetReceiver, filter);
@@ -97,12 +101,13 @@ public class EthTypeFragment extends Fragment
             llStatic.requestFocus();
         }else {
             if (isNetConnect){
-                String ethMode = mEthManager.getEthernetMode();
+                int ethMode = Settings.Secure.getInt(resolver,
+                        "default_eth_mod", -1);
                 switch (ethMode){
-                    case EthernetManager.ETHERNET_CONNECT_MODE_DHCP:
+                    case NetworkUtil.ETHERNET_MODE_DHCP:
                         llDhcp.requestFocus();
                         break;
-                    case EthernetManager.ETHERNET_CONNECT_MODE_MANUAL:
+                    case NetworkUtil.ETHERNET_MODE_STATIC:
                         llStatic.requestFocus();
                         break;
                     default:
@@ -135,6 +140,14 @@ public class EthTypeFragment extends Fragment
         }
     }
 
+    @Override
+    public void onDestroy(){
+        Log.i(TAG, "onDestroy: ");
+        super.onDestroy();
+        mHandler.clear();
+        mContext.unregisterReceiver(myNetReceiver);
+        resolver = null;
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden){
@@ -146,8 +159,7 @@ public class EthTypeFragment extends Fragment
             showConnectState();
             mContext.registerReceiver(myNetReceiver, filter);
         }else {
-            mHandler.clear();
-            mContext.unregisterReceiver(myNetReceiver);
+
         }
     }
 
@@ -163,6 +175,9 @@ public class EthTypeFragment extends Fragment
         }
         mHandler.sendEmptyMessage(MyHandler.CONNECTING);
         mEthManager.setEthernetEnabled(false);
+        Settings.Secure.putInt(mContext.getContentResolver()
+                , "default_eth_mod"
+                , NetworkUtil.ETHERNET_MODE_DHCP);
         mEthManager.setEthernetMode(EthernetManager.ETHERNET_CONNECT_MODE_DHCP, null);
         mEthManager.setEthernetEnabled(true);
     }
@@ -175,9 +190,9 @@ public class EthTypeFragment extends Fragment
         Log.i(TAG, "showConnectState: ");
 
         if (isNetConnect) {
-            String ethMode = mEthManager.getEthernetMode();
+            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", -1);
             switch (ethMode){
-                case EthernetManager.ETHERNET_CONNECT_MODE_DHCP:
+                case NetworkUtil.ETHERNET_MODE_DHCP:
                     tvDhcp.setVisibility(View.VISIBLE);
                     tvPppoe.setVisibility(View.INVISIBLE);
                     tvStatic.setVisibility(View.INVISIBLE);
@@ -185,7 +200,7 @@ public class EthTypeFragment extends Fragment
                     imgPppoe.setImageResource(R.drawable.radio_unchecked_normal);
                     imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
                     break;
-                case EthernetManager.ETHERNET_CONNECT_MODE_PPPOE:
+                case NetworkUtil.ETHERNET_MODE_PPPOE:
                     tvDhcp.setVisibility(View.INVISIBLE);
                     tvPppoe.setVisibility(View.VISIBLE);
                     tvStatic.setVisibility(View.INVISIBLE);
@@ -193,7 +208,7 @@ public class EthTypeFragment extends Fragment
                     imgPppoe.setImageResource(R.drawable.radio_checked_normal);
                     imgStatic.setImageResource(R.drawable.radio_unchecked_normal);
                     break;
-                case EthernetManager.ETHERNET_CONNECT_MODE_MANUAL:
+                case NetworkUtil.ETHERNET_MODE_STATIC:
                     tvDhcp.setVisibility(View.INVISIBLE);
                     tvPppoe.setVisibility(View.INVISIBLE);
                     tvStatic.setVisibility(View.VISIBLE);
@@ -227,11 +242,11 @@ public class EthTypeFragment extends Fragment
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.i(TAG, "onReceive: 接收广播---->" + action);
-            String ethMode = mEthManager.getEthernetMode();
+            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", -1);
             if (action.equals(EthernetManager.ETHERNET_STATE_CHANGED_ACTION)){
                 int ethEvent = intent.getIntExtra(EthernetManager.EXTRA_ETHERNET_STATE, -1);
 
-                if (ethMode.equals(EthernetManager.ETHERNET_CONNECT_MODE_DHCP)
+                if (ethMode == NetworkUtil.ETHERNET_MODE_DHCP
                         && ethEvent != EthernetManager.EVENT_PHY_LINK_DOWN){
                     switch (ethEvent){
                         case EthernetManager.EVENT_DHCP_CONNECT_SUCCESSED:

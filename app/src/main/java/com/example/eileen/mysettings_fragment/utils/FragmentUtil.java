@@ -9,12 +9,14 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.AboutFragment;
+import com.example.eileen.mysettings_fragment.DateTimeFragment;
 import com.example.eileen.mysettings_fragment.EthBluetoothFragment;
 import com.example.eileen.mysettings_fragment.EthFragment;
 import com.example.eileen.mysettings_fragment.EthPppoeFragment;
 import com.example.eileen.mysettings_fragment.EthStaticFragment;
 import com.example.eileen.mysettings_fragment.EthTypeFragment;
 import com.example.eileen.mysettings_fragment.MainActivity;
+import com.example.eileen.mysettings_fragment.NetInfoFragment;
 import com.example.eileen.mysettings_fragment.R;
 
 import java.util.ArrayList;
@@ -66,6 +68,12 @@ public class FragmentUtil {
                 break;
             case ETH_BLUETOOTH_FRAGMENT:
                 fragment = new EthBluetoothFragment();
+                break;
+            case NET_INFO_FRAGMENT:
+                fragment = new NetInfoFragment();
+                break;
+            case DATE_TIME_FRAGMENT:
+                fragment = new DateTimeFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");

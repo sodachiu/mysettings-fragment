@@ -15,6 +15,9 @@ import java.util.regex.Pattern;
 
 public class NetworkUtil {
     private static final String TAG = "qll_network_util";
+    public static final int ETHERNET_MODE_PPPOE = 2;
+    public static final int ETHERNET_MODE_DHCP = 0;
+    public static final int ETHERNET_MODE_STATIC = 1;
 
     /*
      * 检查ip，网关，dns的格式是否合法

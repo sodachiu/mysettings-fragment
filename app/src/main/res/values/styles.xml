@@ -131,7 +131,7 @@
     <style name="unfocusable_ll_style" parent="ll_vertical_base_style">
         <item name="android:layout_width">900dp</item>
         <item name="android:layout_height">45dp</item>
-        <item name="android:gravity">bottom|center_horizontal</item>
+        <item name="android:gravity">bottom|start</item>
     </style>
 
     <!--网络配置的样式-->
@@ -245,6 +245,35 @@
     <style name="dialog_ll_btn_container" parent="unfocusable_ll_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_horizontal|bottom</item>
+    </style>
+
+    <!--网络信息-->
+    <style name="netinfo_tv_key_style" parent="tv_base_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end|bottom</item>
+        <item name="android:paddingEnd">15dp</item>
+    </style>
+
+    <style name="netinfo_tv_value_style" parent="netinfo_tv_key_style">
+        <item name="android:gravity">start|bottom</item>
+        <item name="android:layout_weight">1.3</item>
+    </style>
+
+    <style name="dt_tv_key_style" parent="tv_base_style">
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:gravity">center_vertical|start</item>
+    </style>
+
+    <style name="dt_tv_value_style" parent="dt_tv_key_style">
+        <item name="android:layout_marginStart">0dp</item>
+    </style>
+
+    <style name="dt_img_style" parent="img_base_style">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/checkbox_off</item>
     </style>
 
 </resources>

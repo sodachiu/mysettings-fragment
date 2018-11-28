@@ -3,4 +3,74 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/dt_setting" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/dt_ll_use_24">
+        <TextView
+            style="@style/dt_tv_key_style"
+            android:text="@string/dt_use_24_format"/>
+        <TextView
+            style="@style/dt_tv_value_style"
+            android:id="@+id/dt_tv_use_24"/>
+        <ImageView
+            style="@style/dt_img_style"
+            android:id="@+id/dt_img_use_24"/>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:nextFocusDown="@id/dt_ll_select_format"
+        android:id="@+id/dt_ll_select_format">
+        <TextView
+            style="@style/dt_tv_key_style"
+            android:text="@string/dt_select_date_format"/>
+        <TextView
+            style="@style/dt_tv_value_style"
+            android:id="@+id/dt_tv_select_date_format"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/dt_time_server" />
+
+    <LinearLayout
+        style="@style/unfocusable_ll_style" >
+        <TextView
+            style="@style/dt_tv_key_style"
+            android:text="@string/dt_time_server1"/>
+
+        <TextView
+            style="@style/dt_tv_value_style"
+            android:id="@+id/dt_tv_server1"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout
+        style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/dt_tv_key_style"
+            android:text="@string/dt_time_server2"/>
+
+        <TextView
+            style="@style/dt_tv_value_style"
+            android:id="@+id/dt_tv_server2"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

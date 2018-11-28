@@ -1,10 +1,12 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.eileen.mysettings_fragment.network.NetworkUtil;
 import com.example.eileen.mysettings_fragment.utils.EditUtil;
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
@@ -24,7 +27,6 @@ import android.net.pppoe.PppoeManager;
 public class EthPppoeFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "qll_eth_pppoe_fragment";
     private Context mContext;
-    private FragmentActivity mActivity;
     private EditText etUsername, etPassword;
     private Button btnConfirm, btnCancel;
     private ListView lvMenu;
@@ -33,6 +35,7 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
     private String errMsg = "";
     private IntentFilter filter;
     private MyHandler mHandler;
+    private ContentResolver resolver;
 
 
     public EthPppoeFragment(){
@@ -42,7 +45,7 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
     public void onAttach(Context context){
         super.onAttach(context);
         mContext = context;
-        mActivity = getActivity();
+        resolver = mContext.getContentResolver();
         mHandler = new MyHandler(mContext);
         mEthManager = (EthernetManager) mContext.getSystemService(Context.ETHERNET_SERVICE);
         mPppoeManager = (PppoeManager) mContext.getSystemService(Context.PPPOE_SERVICE);
@@ -62,7 +65,7 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
         etPassword = (EditText) view.findViewById(R.id.pppoe_et_password);
         btnConfirm = (Button) view.findViewById(R.id.pppoe_btn_confirm);
         btnCancel = (Button) view.findViewById(R.id.pppoe_btn_cancel);
-        lvMenu = (ListView) mActivity.findViewById(R.id.main_lv_menu);
+        lvMenu = (ListView) getActivity().findViewById(R.id.main_lv_menu);
 
 
         String username = mPppoeManager.getPppoeUsername();
@@ -83,21 +86,14 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden){
-        Log.i(TAG, "onHiddenChanged: ");
-        if (!hidden){
-            Log.i(TAG, "onHiddenChanged: pppoe碎片可与用户交互");
-            mHandler = new MyHandler(mContext);
-            lvMenu.setFocusable(false);
-            btnConfirm.requestFocus();
-            mContext.registerReceiver(myPppoeReceiver, filter);
-
-        }else {
-            Log.i(TAG, "onHiddenChanged: pppoe碎片不可见");
-            mHandler.clear();
-            mContext.unregisterReceiver(myPppoeReceiver);
-        }
+    public void onDestroy(){
+        Log.i(TAG, "onDestroy: ");
+        super.onDestroy();
+        resolver = null;
+        mHandler.clear();
+        mContext.unregisterReceiver(myPppoeReceiver);
     }
+
     
     @Override
     public void onClick(View view){
@@ -137,7 +133,7 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
         mEthManager.setEthernetEnabled(false);
         mPppoeManager.setPppoeUsername(username);
         mPppoeManager.setPppoePassword(userpwd);
-        mEthManager.setEthernetMode(EthernetManager.ETHERNET_CONNECT_MODE_PPPOE, null);
+        Settings.Secure.putInt(resolver, "default_eth_mod", NetworkUtil.ETHERNET_MODE_PPPOE);
         String ifName = mEthManager.getInterfaceName();
         if (ifName != null){
             mPppoeManager.connect(username, userpwd, ifName);
@@ -157,9 +153,9 @@ public class EthPppoeFragment extends Fragment implements View.OnClickListener{
             String action = intent.getAction();
             Log.i(TAG, "onReceive: 广播为---->" + action);
             int pppoeEvent = intent.getIntExtra(PppoeManager.EXTRA_PPPOE_STATE, -1);
-            String ethMode = mEthManager.getEthernetMode();
+            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", -1);
             if (action.equals(PppoeManager.PPPOE_STATE_CHANGED_ACTION)
-                    && ethMode.equals(EthernetManager.ETHERNET_CONNECT_MODE_PPPOE)){
+                    && ethMode == NetworkUtil.ETHERNET_MODE_PPPOE){
                 switch (pppoeEvent){
                     case PppoeManager.EVENT_CONNECT_SUCCESSED:
                         Log.i(TAG, "onReceive: pppoe连接成功");

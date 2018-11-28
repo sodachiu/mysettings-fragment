@@ -175,7 +175,10 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    private void handleLeftEvent(String tag){
+    /**
+     * 处理按“左键”时，菜单定位问题
+     * */
+    void handleLeftEvent(String tag){
 
         if (tag.equals(FragmentUtil.ABOUT_FRAGMENT)
                 || tag.equals(FragmentUtil.ETH_FRAGMENT)
@@ -185,6 +188,7 @@ public class MainActivity extends FragmentActivity {
                 || tag.equals(FragmentUtil.STORAGE_FRAGMENT)
                 || tag.equals(FragmentUtil.ADVANCED_FRAGMENT)
                 || tag.equals(FragmentUtil.RECOVERY_FRAGMENT)){
+
             lvMenu.setFocusable(true);
         }
 
@@ -201,13 +205,13 @@ public class MainActivity extends FragmentActivity {
 
     private void handleRightEvent(String tag){
         switch (tag){
-            case FragmentUtil.ETH_FRAGMENT:
+            /*case FragmentUtil.ETH_FRAGMENT:
                 LinearLayout llSetNet = (LinearLayout) findViewById(R.id.eth_ll_set_net);
                 LinearLayout llSetBluetooth = (LinearLayout) findViewById(R.id.eth_ll_set_bluetooth);
                 llSetNet.setFocusable(true);
                 llSetBluetooth.setFocusable(true);
                 break;
-                //继续添加其它的第一层fragment处理事件
+                //继续添加其它的第一层fragment处理事件*/
         }
 
     }
