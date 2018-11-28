@@ -13,9 +13,11 @@
         <TextView
             style="@style/dt_tv_key_style"
             android:text="@string/dt_use_24_format"/>
-        <TextView
+        <TextClock
             style="@style/dt_tv_value_style"
-            android:id="@+id/dt_tv_use_24"/>
+            android:format12Hour="a h:mm"
+            android:format24Hour="H:mm"
+            android:id="@+id/dt_tc_use_24"/>
         <ImageView
             style="@style/dt_img_style"
             android:id="@+id/dt_img_use_24"/>
@@ -32,9 +34,9 @@
         <TextView
             style="@style/dt_tv_key_style"
             android:text="@string/dt_select_date_format"/>
-        <TextView
+        <TextClock
             style="@style/dt_tv_value_style"
-            android:id="@+id/dt_tv_select_date_format"/>
+            android:id="@+id/dt_tc_select_date_format"/>
 
     </LinearLayout>
 

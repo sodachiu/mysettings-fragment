@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.AboutFragment;
+import com.example.eileen.mysettings_fragment.DateFormatFragment;
 import com.example.eileen.mysettings_fragment.DateTimeFragment;
 import com.example.eileen.mysettings_fragment.EthBluetoothFragment;
 import com.example.eileen.mysettings_fragment.EthFragment;
@@ -33,6 +34,7 @@ public class FragmentUtil {
     public static final String ETH_STATIC_FRAGMENT = "eth_static_fragment";
     public static final String NET_INFO_FRAGMENT = "net_info_fragment";
     public static final String DATE_TIME_FRAGMENT = "date_time_fragment";
+    public static final String DATE_FORMAT_FRAGMENT = "date_format_fragment";
     public static final String DISPLAY_FRAGMENT = "display_fragment";
     public static final String STORAGE_FRAGMENT = "storage_fragment";
     public static final String ADVANCED_FRAGMENT = "advanced_fragment";
@@ -74,6 +76,9 @@ public class FragmentUtil {
                 break;
             case DATE_TIME_FRAGMENT:
                 fragment = new DateTimeFragment();
+                break;
+            case DATE_FORMAT_FRAGMENT:
+                fragment = new DateFormatFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");

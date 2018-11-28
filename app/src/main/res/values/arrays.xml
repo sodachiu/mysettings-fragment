@@ -10,4 +10,11 @@
         <item>高级设置</item>
         <item>恢复出厂设置</item>
     </array>
+
+    <array name="date_formats">
+        <item>yyyy-M-d</item>
+        <item>MM-dd-yyyy</item>
+        <item>dd-MM-yyyy</item>
+        <item>yyyy-MM-dd</item>
+    </array>
 </resources>

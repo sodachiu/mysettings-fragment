@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import java.net.ConnectException;
@@ -21,11 +22,14 @@ import java.util.Date;
 public class DateTimeFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "qll_dt_fragment";
     private Context mContext;
-    private TextView tvUse24Format, tvSelectFormat, tvTimeServer1, tvTimeServer2;
+    private TextView  tvTimeServer1, tvTimeServer2;
+    private TextClock tcDateFormat;
     private ImageView imgUse24Switch;
     private LinearLayout llUse24Format, llSelectFormat;
     private ContentResolver mResolver;
     private boolean is24Format = false;
+    public static final String TIME_12 = "12";
+    public static final String TIME_24 = "24";
 
     public DateTimeFragment(){
         Log.i(TAG, "DateTimeFragment: ");
@@ -64,8 +68,7 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
     void initView(){
         Log.i(TAG, "initView: ");
         FragmentActivity activity = getActivity();
-        tvUse24Format = (TextView) activity.findViewById(R.id.dt_tv_use_24);
-        tvSelectFormat = (TextView) activity.findViewById(R.id.dt_tv_select_date_format);
+        tcDateFormat = (TextClock) activity.findViewById(R.id.dt_tc_select_date_format);
         tvTimeServer1 = (TextView) activity.findViewById(R.id.dt_tv_server1);
         tvTimeServer2 = (TextView) activity.findViewById(R.id.dt_tv_server2);
         imgUse24Switch = (ImageView) activity.findViewById(R.id.dt_img_use_24);
@@ -73,7 +76,10 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         llSelectFormat = (LinearLayout) activity.findViewById(R.id.dt_ll_select_format);
 
         timeFormat();
-
+        dateFormat();
+        //获取
+        tcDateFormat.setFormat24Hour("yyyy-MM-dd");
+        tcDateFormat.setFormat12Hour("yyyy-MM-dd");
         String server1 = Settings.Secure.getString(mResolver, "ntp_server");
         String server2 = Settings.Secure.getString(mResolver, "ntp_server2");
         Log.i(TAG, "initView: 主时间地址——" + server1);
@@ -98,14 +104,18 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
     
     @Override
     public void onClick(View view){
+        Log.i(TAG, "onClick: ");
         switch (view.getId()){
-            case R.id.dt_ll_select_format:
-                // 进入选择日期格式的fragment
-                Log.i(TAG, "onClick: 点击选择日期格式，尝试进入该fragment");
-                break;
             case R.id.dt_ll_use_24:
-                // 进行时间格式的切换
                 Log.i(TAG, "onClick: 点击切换时间格式");
+                Settings.System.putString(mResolver,
+                        android.provider.Settings.System.TIME_12_24,
+                        is24Format ? TIME_12 : TIME_24);
+                timeFormat();
+                break;
+            case R.id.dt_ll_select_format:
+                Log.i(TAG, "onClick: 点击选择日期格式，尝试进入该fragment");
+                // 打开 DateformatFragment
                 break;
             default:
                 Log.i(TAG, "onClick: 点击了" + view.getId());
@@ -117,6 +127,7 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
      * */
     void timeFormat(){
         is24Format = DateFormat.is24HourFormat(mContext);
+        Log.i(TAG, "timeFormat: 当前系统时间显示格式为24小时制吗？——" + is24Format);
         if (is24Format){
             // 时间显示为 24 小时制
             imgUse24Switch.setImageResource(R.drawable.checkbox_on);
@@ -125,4 +136,36 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
             imgUse24Switch.setImageResource(R.drawable.checkbox_off);
         }
     }
+
+    /**
+     * 格式化日期的显示格式
+     * */
+    void dateFormat(){
+        Log.i(TAG, "dateFormat: ");
+        String nowFormat = Settings.System.getString(mResolver
+                , Settings.System.DATE_FORMAT);
+        String[] dateFormats = getResources().getStringArray(R.array.date_formats);
+        if (nowFormat == null || nowFormat.equals("")){
+            Log.i(TAG, "dateFormat: 当前获取");
+            tcDateFormat.setFormat24Hour(dateFormats[0]);
+            tcDateFormat.setFormat24Hour(dateFormats[0]);
+        }else{
+            for (String dateformat : dateFormats){
+
+                if (dateformat.equals(nowFormat)){
+                    Log.i(TAG, "dateFormat: 当前日期格式为" + dateformat);
+                    tcDateFormat.setFormat24Hour(dateformat);
+                    tcDateFormat.setFormat12Hour(dateformat);
+                }else {
+                    // 防止有非法的日期格式，如果日期格式无法匹配，则设置默认值
+                    Log.i(TAG, "dateFormat: 无法匹配当前预设的日期格式");
+                    tcDateFormat.setFormat24Hour(dateFormats[0]);
+                    tcDateFormat.setFormat24Hour(dateFormats[0]);
+                }
+            }
+        }
+        
+        
+    }
+
 }
