@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/focusable_ll_style"
+    android:id="@+id/dt_ll_format">
+
+    <TextClock
+        style="@style/dt_tc_date_format_style"
+        android:id="@+id/dt_tc_format"/>
+    <ImageView
+        style="@style/dt_img_date_format_style"
+        android:id="@+id/dt_img_format" />
+
+</LinearLayout>

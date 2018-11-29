@@ -59,7 +59,11 @@ public class MainActivity extends FragmentActivity {
                     }
                     View rootview = MainActivity.this.getWindow().getDecorView();
                     View aaa = rootview.findFocus();
-                    Log.i(TAG, "当前焦点位置为：" + aaa.toString());
+                    if (aaa == null){
+                        Log.i(TAG, "run: 没有找到焦点");
+                    }else {
+                        Log.i(TAG, "当前焦点位置为：" + aaa.toString());
+                    }
                 }
 
             }
@@ -204,6 +208,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void handleRightEvent(String tag){
+
+        lvMenu.setFocusable(false);
         switch (tag){
             /*case FragmentUtil.ETH_FRAGMENT:
                 LinearLayout llSetNet = (LinearLayout) findViewById(R.id.eth_ll_set_net);

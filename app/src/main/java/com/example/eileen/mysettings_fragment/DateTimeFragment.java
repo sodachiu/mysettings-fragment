@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
+
 import java.net.ConnectException;
 import java.util.Date;
 
@@ -115,7 +117,7 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.dt_ll_select_format:
                 Log.i(TAG, "onClick: 点击选择日期格式，尝试进入该fragment");
-                // 打开 DateformatFragment
+                FragmentUtil.showFragment(mContext, FragmentUtil.DATE_FORMAT_FRAGMENT);
                 break;
             default:
                 Log.i(TAG, "onClick: 点击了" + view.getId());

@@ -276,4 +276,17 @@
         <item name="android:src">@drawable/checkbox_off</item>
     </style>
 
+    <style name="dt_tc_date_format_style" parent="tv_base_style">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="dt_img_date_format_style" parent="img_base_style">
+        <item name="android:layout_marginEnd">100dp</item>
+        <item name="android:src">@drawable/checkbox_off</item>
+    </style>
+
 </resources>
