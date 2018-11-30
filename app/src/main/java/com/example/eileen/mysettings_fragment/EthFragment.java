@@ -81,17 +81,6 @@ public class EthFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden){
-        Log.i(TAG, "onHiddenChanged: ");
-        if (!hidden && lvMenu.hasFocus()){
-            llSetNet.setFocusable(false);
-            llSetBluetooth.setFocusable(false);
-        }else {
-            llSetBluetooth.setFocusable(true);
-            llSetNet.setFocusable(true);
-        }
-    }
-    @Override
     public void onDestroy(){
         Log.i(TAG, "onDestroy: ");
         super.onDestroy();

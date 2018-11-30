@@ -12,7 +12,7 @@
     </array>
 
     <array name="date_formats">
-        <item>yyyy-M-d</item>
+        <item>区域(yyyy-M-d)</item>
         <item>MM-dd-yyyy</item>
         <item>dd-MM-yyyy</item>
         <item>yyyy-MM-dd</item>

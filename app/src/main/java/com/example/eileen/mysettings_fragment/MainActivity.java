@@ -173,6 +173,9 @@ public class MainActivity extends FragmentActivity {
             case FragmentUtil.ETH_BLUETOOTH_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ETH_FRAGMENT);
                 break;
+            case FragmentUtil.DATE_FORMAT_FRAGMENT:
+                FragmentUtil.showFragment(mContext, FragmentUtil.DATE_TIME_FRAGMENT);
+                break;
             default:
                 finish();
                 break;

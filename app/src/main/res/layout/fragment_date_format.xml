@@ -8,11 +8,12 @@
         android:text="@string/dt_select_date_format" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:layout_width="900dp"
         android:layout_height="match_parent"
         android:divider="@drawable/background_divider"
-        android:id="@+id/dt_rv_date_formats"/>
+        android:listSelector="@drawable/setitem_focus"
+        android:id="@+id/dt_lv_date_formats"/>
 
 
 </LinearLayout>

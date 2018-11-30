@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/focusable_ll_style"
-    android:id="@+id/dt_ll_format">
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="horizontal" >
 
     <TextClock
         style="@style/dt_tc_date_format_style"

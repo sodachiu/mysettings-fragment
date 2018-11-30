@@ -13,21 +13,36 @@ public class DateFormat {
         this.imgSrc = imgSrc;
     }
 
+
     public int getImgSrc() {
         Log.i(TAG, "getImgSrc: ");
         return imgSrc;
     }
 
-    public String getDateFormat() {
+    /*
+    * 获取默认日期格式 yyyy-M-dd
+    * */
+    public String getRegionFormat() {
         Log.i(TAG, "getDateFormat: ");
+        int beginIndex = dateFormat.indexOf("y");
+        int lastIndex = dateFormat.indexOf(")");
+        String format = dateFormat.substring(beginIndex, lastIndex);
+        Log.i(TAG, "getDateFormat: 需要的日期格式为----" + format);
+        return format;
+    }
+
+    /*
+    * 获取提供的其它日期格式
+    * */
+    public String getOriginFormat() {
+        Log.i(TAG, "getOriginFormat: ");
         return dateFormat;
     }
 
-    public void setDateFormat(String dateFormat){
-        Log.i(TAG, "setDateFormat: ");
-        this.dateFormat = dateFormat;
-    }
 
+    /*
+    * 用于当用户更改日期格式时，动态更新对应的IMG为打开状态
+    * */
     public void setImgSrc(int imgSrc){
         this.imgSrc = imgSrc;
     }

@@ -87,7 +87,7 @@
     <string name="dt_time_server">时间服务器设置</string>
     <string name="dt_time_server1">主时间同步服务器地址</string>
     <string name="dt_time_server2">备时间同步服务器地址</string>
-
+    <string name="dt_format_used">当前格式已生效</string>
     <!--显示-->
     <string name="display_title">显示</string>
 

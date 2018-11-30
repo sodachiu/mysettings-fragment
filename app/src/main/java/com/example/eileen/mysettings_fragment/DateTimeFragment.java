@@ -64,6 +64,7 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         Log.i(TAG, "onDestroy: ");
         super.onDestroy();
         mResolver = null;
+        mContext = null;
     }
 
     
@@ -79,9 +80,7 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
 
         timeFormat();
         dateFormat();
-        //获取
-        tcDateFormat.setFormat24Hour("yyyy-MM-dd");
-        tcDateFormat.setFormat12Hour("yyyy-MM-dd");
+
         String server1 = Settings.Secure.getString(mResolver, "ntp_server");
         String server2 = Settings.Secure.getString(mResolver, "ntp_server2");
         Log.i(TAG, "initView: 主时间地址——" + server1);
@@ -101,6 +100,11 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
 
         llSelectFormat.setOnClickListener(this);
         llUse24Format.setOnClickListener(this);
+
+        String preFragment = FragmentUtil.getPreviousFragment();
+        if (preFragment.equals(FragmentUtil.DATE_FORMAT_FRAGMENT)){
+            llSelectFormat.requestFocus();
+        }
 
     }
     
@@ -149,24 +153,12 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         String[] dateFormats = getResources().getStringArray(R.array.date_formats);
         if (nowFormat == null || nowFormat.equals("")){
             Log.i(TAG, "dateFormat: 当前获取");
-            tcDateFormat.setFormat24Hour(dateFormats[0]);
-            tcDateFormat.setFormat24Hour(dateFormats[0]);
+            tcDateFormat.setFormat24Hour(dateFormats[DateFormatFragment.DEFAULT_FORMAT_POSITION]);
+            tcDateFormat.setFormat24Hour(dateFormats[DateFormatFragment.DEFAULT_FORMAT_POSITION]);
         }else{
-            for (String dateformat : dateFormats){
-
-                if (dateformat.equals(nowFormat)){
-                    Log.i(TAG, "dateFormat: 当前日期格式为" + dateformat);
-                    tcDateFormat.setFormat24Hour(dateformat);
-                    tcDateFormat.setFormat12Hour(dateformat);
-                }else {
-                    // 防止有非法的日期格式，如果日期格式无法匹配，则设置默认值
-                    Log.i(TAG, "dateFormat: 无法匹配当前预设的日期格式");
-                    tcDateFormat.setFormat24Hour(dateFormats[0]);
-                    tcDateFormat.setFormat24Hour(dateFormats[0]);
-                }
-            }
+            tcDateFormat.setFormat12Hour(nowFormat);
+            tcDateFormat.setFormat24Hour(nowFormat);
         }
-        
         
     }
 

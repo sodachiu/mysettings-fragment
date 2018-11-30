@@ -41,6 +41,8 @@ public class MyHandler extends Handler {
     public static final int BLUETOOTH_DISCOVERED = 31;
     public static final int BLUETOOTH_DEVICE_BONDING = 32;
     public static final int BLUETOOTH_DEVICE_BOND_NONE = 33;
+    public static final int DT_FORMAT_ALREADY_USE = 34;
+
 
     private Context handlerContext;
 
@@ -142,6 +144,9 @@ public class MyHandler extends Handler {
                 break;
             case BLUETOOTH_DEVICE_BOND_NONE:
                 toastInfo = handlerContext.getResources().getString(R.string.eth_bluetooth_bond_none);
+                break;
+            case DT_FORMAT_ALREADY_USE:
+                toastInfo = handlerContext.getResources().getString(R.string.dt_format_used);
                 break;
             default:
                 break;
