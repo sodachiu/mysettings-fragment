@@ -4,6 +4,28 @@
     android:layout_height="match_parent">
     <TextView
         style="@style/title_tv_style"
-        android:text="@string/display_title" />
+        android:text="@string/display_title1" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/display_ll_resolution">
+        <TextView
+            style="@style/display_tv_style"
+            android:text="@string/display_resolution" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/display_title2" />
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/display_ll_scale">
+        <TextView
+            style="@style/display_tv_style"
+            android:text="@string/display_scale"/>
+
+    </LinearLayout>
 
 </LinearLayout>

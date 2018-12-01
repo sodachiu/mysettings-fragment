@@ -12,6 +12,7 @@ import com.example.eileen.mysettings_fragment.AboutFragment;
 import com.example.eileen.mysettings_fragment.DateFormatFragment;
 import com.example.eileen.mysettings_fragment.DateTimeFragment;
 import com.example.eileen.mysettings_fragment.DisplayFragment;
+import com.example.eileen.mysettings_fragment.DisplayResolutionFragment;
 import com.example.eileen.mysettings_fragment.EthBluetoothFragment;
 import com.example.eileen.mysettings_fragment.EthFragment;
 import com.example.eileen.mysettings_fragment.EthPppoeFragment;
@@ -41,7 +42,7 @@ public class FragmentUtil {
     public static final String ADVANCED_FRAGMENT = "advanced_fragment";
     public static final String RECOVERY_FRAGMENT = "recovery_fragment";
     public static final String ETH_BLUETOOTH_FRAGMENT = "eth_bluetooth_fragment";
-
+    public static final String DISPLAY_RESOLUTION_FRAGMENT = "display_resolution_fragment";
     private static String previousFragmentTag = ABOUT_FRAGMENT;
 
 
@@ -83,6 +84,9 @@ public class FragmentUtil {
                 break;
             case DISPLAY_FRAGMENT:
                 fragment = new DisplayFragment();
+                break;
+            case DISPLAY_RESOLUTION_FRAGMENT:
+                fragment = new DisplayResolutionFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");

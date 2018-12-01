@@ -291,4 +291,19 @@
         <item name="android:layout_gravity">center_vertical|end</item>
     </style>
 
+    <style name="display_tv_style" parent="tv_base_style">
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="display_resolution_img_style" parent="img_base_style">
+        <item name="android:layout_marginEnd">100dp</item>
+    </style>
+    <style name="display_resolution_tv_style" parent="tv_base_style">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+    </style>
+
+
 </resources>

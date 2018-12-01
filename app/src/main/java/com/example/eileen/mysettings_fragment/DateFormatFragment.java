@@ -121,6 +121,7 @@ public class DateFormatFragment extends Fragment implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+
         Log.i(TAG, "onItemClick: parent----" + parent
                 + " \n&& view----" + view
                 + " \n&& id----" + id);

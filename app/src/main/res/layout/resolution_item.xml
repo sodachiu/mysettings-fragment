@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/focusable_ll_style"
+    android:paddingStart="100dp"
+    android:paddingEnd="100dp"
+    android:id="@+id/resolution_ll_item">
+
+    <ImageView
+        style="@style/display_resolution_img_style"
+        android:id="@+id/resolution_img"/>
+
+    <TextView
+        style="@style/display_resolution_tv_style"
+        android:id="@+id/resolution_tv"/>
+
+
+</LinearLayout>

@@ -17,4 +17,63 @@
         <item>dd-MM-yyyy</item>
         <item>yyyy-MM-dd</item>
     </array>
+
+    <array name="resolutions">
+        <item>@array/resolutions_index</item>
+        <item>@array/resolutions_text</item>
+    </array>
+
+    <array name="resolutions_text">
+        <item>自适应</item>
+        <item>1080p 60</item>
+        <item>1080p 50</item>
+        <item>1080p 30</item>
+        <item>1080p 25</item>
+        <item>1080p 24</item>
+        <item>1080i 60</item>
+        <item>1080i 50</item>
+        <item>720p 60</item>
+        <item>720p 50</item>
+        <item>576p 50</item>
+        <item>480p 60</item>
+        <item>PAL</item>
+        <item>NTSC</item>
+        <item>3840X2160P 24</item>
+        <item>3840X2160P 25</item>
+        <item>3840X2160P 30</item>
+        <item>3840X2160P 60</item>
+        <item>3840X2160P 50</item>
+        <item>4096X2160P 24</item>
+        <item>4096X2160P 25</item>
+        <item>4096X2160P 30</item>
+        <item>4096X2160P 60</item>
+        <item>4096X2160P 50</item>
+    </array>
+
+    <array name="resolutions_index">
+        <item>0x205</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>0x100</item>
+        <item>0x101</item>
+        <item>0x102</item>
+        <item>0x103</item>
+        <item>0x104</item>
+        <item>0x200</item>
+        <item>0x201</item>
+        <item>0x202</item>
+        <item>0x203</item>
+        <item>0x204</item>
+    </array>
 </resources>

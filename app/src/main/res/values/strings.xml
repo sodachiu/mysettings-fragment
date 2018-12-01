@@ -88,9 +88,12 @@
     <string name="dt_time_server1">主时间同步服务器地址</string>
     <string name="dt_time_server2">备时间同步服务器地址</string>
     <string name="dt_format_used">当前格式已生效</string>
-    <!--显示-->
-    <string name="display_title">显示</string>
 
+    <!--显示-->
+    <string name="display_title1">设置分辨率</string>
+    <string name="display_title2">改变图像位置</string>
+    <string name="display_resolution">分辨率</string>
+    <string name="display_scale">调整画面输出区域</string>
 
 
     <!--存储信息-->

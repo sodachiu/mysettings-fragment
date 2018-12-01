@@ -81,8 +81,10 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         timeFormat();
         dateFormat();
 
+        Settings.Secure.putString(mResolver, "ntp_server", "111.111.111.1");
         String server1 = Settings.Secure.getString(mResolver, "ntp_server");
         String server2 = Settings.Secure.getString(mResolver, "ntp_server2");
+
         Log.i(TAG, "initView: 主时间地址——" + server1);
         Log.i(TAG, "initView: 备时间地址——" + server2);
 
