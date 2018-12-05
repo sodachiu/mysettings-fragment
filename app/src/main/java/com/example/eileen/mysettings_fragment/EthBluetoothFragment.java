@@ -100,11 +100,11 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == UniqueMark.BLUETOOTH_BOND && resultCode == RESULT_OK){
+        if (requestCode == UniqueMark.BLUETOOTH_ATTEMPT_TO_UNBOND && resultCode == RESULT_OK){
             Log.i(TAG, "onActivityResult: 解绑设备");
             BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("bonded_device");
             device.removeBond();
-        }else if (requestCode == UniqueMark.BLUETOOTH_UNBOND && resultCode == RESULT_OK){
+        }else if (requestCode == UniqueMark.BLUETOOTH_ATTEMPT_TO_UNBOND && resultCode == RESULT_OK){
             Log.i(TAG, "onActivityResult: 绑定设备");
             BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("unbond_device");
             device.createBond();

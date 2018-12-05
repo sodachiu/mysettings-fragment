@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_window_style">
+
+    <TextView
+        style="@style/dialog_tv_title_style"
+        android:id="@+id/dialog_tv_title"/>
+
+    <LinearLayout
+        style="@style/dialog_ll_body_style" >
+
+        <LinearLayout
+            style="@style/dialog_ll_main_style"
+            android:orientation="vertical"
+            android:id="@+id/dialog_ll_main_info" >
+
+            <!--这里拿来动态放东西-->
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/dialog_ll_main_style"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:id="@+id/dialog_ll_time_info" >
+
+            <TextView
+                style="@style/tv_base_style"
+                android:textColor="#f00"
+                android:id="@+id/dialog_tv_time_num"/>
+
+            <TextView
+                style="@style/tv_base_style"
+                android:layout_marginStart="10dp"
+                android:id="@+id/dialog_tv_time_text"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        style="@style/dialog_ll_footer_style" >
+
+        <Button
+            style="@style/btn_base_style"
+            android:text="@string/dialog_confirm"
+            android:id="@+id/dialog_btn_confirm"/>
+
+        <Button
+            style="@style/btn_base_style"
+            android:layout_marginStart="100dp"
+            android:text="@string/dialog_cancel"
+            android:id="@+id/dialog_btn_cancel"/>
+    </LinearLayout>
+
+</LinearLayout>

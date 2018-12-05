@@ -45,7 +45,6 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
 
     private EditText etIP, etMask, etGateway, etDns1, etDns2;
     private Button btnConfirm, btnCancel;
-    private ListView lvMenu;
     private ContentResolver resolver;
 
     public EthStaticFragment(){
@@ -100,7 +99,6 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
         etDns2 = (EditText) activity.findViewById(R.id.eth_static_et_dns2);
         btnConfirm = (Button) activity.findViewById(R.id.static_btn_confirm);
         btnCancel = (Button) activity.findViewById(R.id.static_btn_cancel);
-        lvMenu = (ListView) activity.findViewById(R.id.main_lv_menu);
 
         btnConfirm.setOnClickListener(this);
         btnCancel.setOnClickListener(this);

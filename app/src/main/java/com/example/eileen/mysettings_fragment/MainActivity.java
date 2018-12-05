@@ -3,6 +3,7 @@ package com.example.eileen.mysettings_fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.eileen.mysettings_fragment.display.ResolutionObject;
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -80,7 +84,6 @@ public class MainActivity extends FragmentActivity {
         lvMenu = (ListView) findViewById(R.id.main_lv_menu);
         llFragment = (LinearLayout) findViewById(R.id.main_ll_fragment_container);
         lvMenu.setAdapter(adapter);
-
         lvMenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -176,6 +179,9 @@ public class MainActivity extends FragmentActivity {
             case FragmentUtil.DATE_FORMAT_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.DATE_TIME_FRAGMENT);
                 break;
+            case FragmentUtil.DISPLAY_RESOLUTION_FRAGMENT:
+                FragmentUtil.showFragment(mContext, FragmentUtil.DISPLAY_FRAGMENT);
+                break;
             default:
                 finish();
                 break;
@@ -199,6 +205,7 @@ public class MainActivity extends FragmentActivity {
             lvMenu.setFocusable(true);
         }
 
+        //lvMenu.setFocusable(true);
 
         Log.i(TAG, "handleLeftEvent: 当前菜单位置应为：" + mSelectPos);
         lvMenu.post(new Runnable() {

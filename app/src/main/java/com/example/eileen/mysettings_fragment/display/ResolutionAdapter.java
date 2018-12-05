@@ -1,5 +1,10 @@
 package com.example.eileen.mysettings_fragment.display;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.os.display.DisplayManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,14 +14,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.eileen.mysettings_fragment.DisplayResolutionFragment;
 import com.example.eileen.mysettings_fragment.R;
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
+import com.example.eileen.mysettings_fragment.utils.MyDialog;
+import com.example.eileen.mysettings_fragment.utils.MyParcelable;
+import com.example.eileen.mysettings_fragment.utils.ShowDialog;
+import com.example.eileen.mysettings_fragment.utils.UniqueMark;
 
 import java.util.List;
 
-public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.ViewHolder>
-            implements View.OnClickListener{
+public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.ViewHolder> {
+
     private static final String TAG = "qll_resolution_adapter";
     private List<Resolution> mResolutionsList;
+    private DisplayManager mDisPlayManager;
+    private Context mContext;
+    private static final int ADAPTIVE_POSITION = 0;
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imgResolution;
         TextView tvResolution;
@@ -41,28 +56,52 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.resolution_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        mContext = parent.getContext();
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position){
+    public void onBindViewHolder(ViewHolder holder, final int position){
         Log.i(TAG, "onBindViewHolder: holder----" + holder
                 + " && position----" + position);
         Resolution resolution = mResolutionsList.get(position);
         holder.imgResolution.setImageResource(resolution.getImgSrc());
         holder.tvResolution.setText(resolution.getResolutionText());
-        holder.llResolution.setOnClickListener(this);
+        holder.llResolution.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                handleClick(position);
+            }
+        });
 
     }
 
-    @Override
-    public void onClick(View view){
-        Log.i(TAG, "onClick: ");
-    }
 
     @Override
     public int getItemCount(){
         return mResolutionsList.size();
     }
+
+    void handleClick(int position){
+        Log.i(TAG, "handleClick: position----" + position);
+        DisplayManager dm = (DisplayManager) mContext
+                .getSystemService(Context.DISPLAY_MANAGER_SERVICE);
+
+        boolean isAdaptChecked = (position == 0); // 是否点击了自适应分辨率
+        DisplayResolutionFragment.isAdaptiveResolution = isAdaptChecked;
+
+        Log.i(TAG, "handleClick: 将要设置的制式----" + mResolutionsList.get(position).getStandard());
+        int standard = mResolutionsList.get(position).getStandard();
+        dm.setDisplayStandard(standard);
+
+        // 调用 DialogFragment 提示用户已做更改， 这里重新写个方法吧
+        Fragment targetFragment = FragmentUtil.getCurrentFragment(mContext);
+        int oldStandard = mResolutionsList.get(DisplayResolutionFragment.nowResolutionPosition).getStandard();
+        MyParcelable resolutionParcelable = new MyParcelable(oldStandard);
+        ShowDialog.showDialog(resolutionParcelable, targetFragment, UniqueMark.RESOLUTION_FRAGMENT);
+
+    }
+
 
 }

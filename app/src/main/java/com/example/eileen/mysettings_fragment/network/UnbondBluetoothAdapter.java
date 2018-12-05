@@ -14,9 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eileen.mysettings_fragment.R;
-import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
-import com.example.eileen.mysettings_fragment.utils.MyDialogFragment;
-import com.example.eileen.mysettings_fragment.utils.UniqueMark;
+
 
 import java.util.List;
 
@@ -83,7 +81,6 @@ public class UnbondBluetoothAdapter extends RecyclerView.Adapter<UnbondBluetooth
 
     @Override
     public int getItemCount() {
-        Log.i(TAG, "getItemCount: ");
         return mDevicesList.size();
     }
 

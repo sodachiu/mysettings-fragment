@@ -46,8 +46,6 @@ public class FragmentUtil {
     private static String previousFragmentTag = ABOUT_FRAGMENT;
 
 
-
-
     /*显示指定的fragment*/
     public static void showFragment(Context context, String tag){
         FragmentActivity activity = (FragmentActivity) context;

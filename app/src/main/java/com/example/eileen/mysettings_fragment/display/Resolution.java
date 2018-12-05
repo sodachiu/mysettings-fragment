@@ -2,22 +2,28 @@ package com.example.eileen.mysettings_fragment.display;
 
 import android.util.Log;
 
+import com.example.eileen.mysettings_fragment.R;
+
 public class Resolution {
     private static final String TAG = "Resolution";
-    private int imgSrc;
+    private boolean isChecked;
     private String resolutionText;
-    private int index;
+    private int standard;
 
-    public Resolution(int imgSrc, String resolutionText, int index){
+    public Resolution(boolean isChecked, String resolutionText, int standard){
         Log.i(TAG, "Resolution: ");
-        this.imgSrc = imgSrc;
+        this.isChecked = isChecked;
         this.resolutionText = resolutionText;
-        this.index = index;
+        this.standard = standard;
     }
 
     public int getImgSrc() {
         Log.i(TAG, "getImgSrc: ");
-        return imgSrc;
+        if (isChecked){
+            return R.drawable.radio_checked_normal;
+        }else {
+            return R.drawable.radio_unchecked_normal;
+        }
     }
 
     public String getResolutionText(){
@@ -25,14 +31,9 @@ public class Resolution {
         return resolutionText;
     }
 
-    public void setImgSrc(int imgSrc) {
-        Log.i(TAG, "setImgSrc: ");
-        this.imgSrc = imgSrc;
-    }
-
-    public int getIndex() {
+    public int getStandard() {
         Log.i(TAG, "getIndex: ");
-        return index;
+        return standard;
         
     }
 }

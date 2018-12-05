@@ -94,6 +94,33 @@
     <string name="display_title2">改变图像位置</string>
     <string name="display_resolution">分辨率</string>
     <string name="display_scale">调整画面输出区域</string>
+    <string name="display_adapt">自适应</string>
+    <string name="display_1080p_60">1080P 60</string>
+    <string name="display_1080p_50">1080P 50</string>
+    <string name="display_1080p_30">1080P 30</string>
+    <string name="display_1080p_25">1080P 25</string>
+    <string name="display_1080p_24">1080P 24</string>
+    <string name="display_1080i_60">1080I 60</string>
+    <string name="display_1080i_50">1080I 50</string>
+    <string name="display_720p_60">720P 60</string>
+    <string name="display_720p_50">720P 50</string>
+    <string name="display_576p_50">576P 50</string>
+    <string name="display_480p_60">480P 60</string>
+    <string name="display_pal">PAL</string>
+    <string name="display_ntsc">NTSC</string>
+    <string name="display_3840x2160p_24">3840X2160P 24</string>
+    <string name="display_3840x2160p_25">3840X2160P 25</string>
+    <string name="display_3840x2160p_30">3840X2160P 30</string>
+    <string name="display_3840x2160p_60">3840X2160P 60</string>
+    <string name="display_3840x2160p_50">3840X2160P 50</string>
+    <string name="display_4096x2160p_24">4096X2160P 24</string>
+    <string name="display_4096x2160p_25">4096X2160P 25</string>
+    <string name="display_4096x2160p_30">4096X2160P 30</string>
+    <string name="display_4096x2160p_60">4096X2160P 60</string>
+    <string name="display_4096x2160p_50">4096X2160P 50</string>
+    <string name="display_first_confirm_title">第一次确认</string>
+    <string name="display_first_confirm_text1">你的分辨率已经重新配置这些设置，是否继续？</string>
+    <string name="display_timer_text"> 秒后恢复设置</string>
 
 
     <!--存储信息-->

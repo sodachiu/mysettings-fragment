@@ -52,6 +52,11 @@ public class DisplayFragment extends Fragment implements View.OnClickListener{
         llResolution.setOnClickListener(this);
         llScale.setOnClickListener(this);
 
+        String preFragment = FragmentUtil.getPreviousFragment();
+        if (preFragment.equals(FragmentUtil.DISPLAY_RESOLUTION_FRAGMENT)){
+            llResolution.requestFocus();
+        }
+
     }
 
     @Override

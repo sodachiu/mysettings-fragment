@@ -2,7 +2,11 @@ package com.example.eileen.mysettings_fragment.utils;
 
 public class UniqueMark {
 
-    public static final int BLUETOOTH_BOND = 0;
-    public static final int BLUETOOTH_UNBOND = 1;
+    public static final int BLUETOOTH_ATTEMPT_TO_BOND = 0;
+    public static final int BLUETOOTH_ATTEMPT_TO_UNBOND = 1;
+    public static final int RESOLUTION_FRAGMENT = 2;
+    public static final int ETH_BLUETOOTH_FRAGMENT = 3;
+
+
 
 }
