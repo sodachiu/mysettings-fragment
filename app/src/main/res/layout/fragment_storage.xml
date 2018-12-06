@@ -7,4 +7,51 @@
         style="@style/title_tv_style"
         android:text="@string/storage_title" />
 
+    <LinearLayout
+        style="@style/unfocusable_ll_style">
+
+        <TextView
+            style="@style/storage_key_style"
+            android:text="@string/storage_total" />
+        <TextView
+            style="@style/storage_value_style"
+            android:id="@+id/storage_tv_total"/>
+        <TextView
+            style="@style/storage_number_style"
+            android:id="@+id/storage_tv_device_num1"/>
+
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
+    <LinearLayout
+        style="@style/unfocusable_ll_style">
+        <TextView
+            style="@style/storage_key_style"
+            android:text="@string/storage_available" />
+
+        <TextView
+            style="@style/storage_value_style"
+            android:id="@+id/storage_tv_available"/>
+
+        <TextView
+            style="@style/storage_number_style"
+            android:id="@+id/storage_tv_device_num2"/>
+
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
+
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/storage_ll_uninstall">
+
+        <TextView
+            style="@style/tv_base_style"
+            android:gravity="start|center_vertical"
+            android:layout_marginStart="100dp"
+            android:text="@string/storage_uninstall" />
+
+    </LinearLayout>
+    <include layout="@layout/image_divider" />
+
 </LinearLayout>

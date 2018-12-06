@@ -297,10 +297,25 @@
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:layout_gravity">start|center_vertical</item>
     </style>
+    <!--存储信息部分的特有样式-->
+    <style name="storage_key_style" parent="tv_base_style">
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:layout_weight">1.5</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical|start</item>
+    </style>
 
-   <style name="dialog_ll_content_style">
+    <style name="storage_value_style" parent="storage_key_style">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">0dp</item>
+    </style>
 
-   </style>
+    <style name="storage_number_style" parent="storage_key_style">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:text">@string/storage_number</item>
+        <item name="android:layout_weight">3</item>
+    </style>
 
 
 </resources>

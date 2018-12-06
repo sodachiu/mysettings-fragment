@@ -21,16 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.eileen.mysettings_fragment.network.NetworkUtil;
 import com.example.eileen.mysettings_fragment.utils.EditUtil;
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
-import com.example.eileen.mysettings_fragment.utils.MyToast;
 
-import java.lang.ref.WeakReference;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 

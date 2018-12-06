@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.eileen.mysettings_fragment.R;
 
@@ -42,6 +43,9 @@ public class MyHandler extends Handler {
     public static final int BLUETOOTH_DEVICE_BONDING = 32;
     public static final int BLUETOOTH_DEVICE_BOND_NONE = 33;
     public static final int DT_FORMAT_ALREADY_USE = 34;
+    public static final int STORAGE_MOUNTED = 35;
+    public static final int STORAGE_UNMOUNTED = 36;
+    public static final int STORAGE_NO_UNMOUNT = 37;
 
 
     private Context handlerContext;
@@ -148,10 +152,19 @@ public class MyHandler extends Handler {
             case DT_FORMAT_ALREADY_USE:
                 toastInfo = handlerContext.getResources().getString(R.string.dt_format_used);
                 break;
+            case STORAGE_MOUNTED:
+                toastInfo = handlerContext.getString(R.string.storage_mounted);
+                break;
+            case STORAGE_UNMOUNTED:
+                toastInfo = handlerContext.getString(R.string.storage_unmounted);
+                break;
+            case STORAGE_NO_UNMOUNT:
+                toastInfo = handlerContext.getString(R.string.storage_no_device_unmount);
+                break;
             default:
                 break;
         }
-        MyToast.showToast(handlerContext, toastInfo);
+        Toast.makeText(handlerContext, toastInfo, Toast.LENGTH_SHORT).show();
     }
 
     public void clear(){

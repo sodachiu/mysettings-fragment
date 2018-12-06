@@ -54,6 +54,9 @@ public class ShowDialog {
             case UniqueMark.RESOLUTION_FRAGMENT:
                 initResolutionDialogInfo(context);
                 break;
+            case UniqueMark.STORAGE_FRAGMENT:
+                initStorageDialogInfo(context);
+                break;
             default:
                 Log.i(TAG, "showDialog: requestCode 不在列表中");
                 return;
@@ -143,5 +146,18 @@ public class ShowDialog {
         mTimeSecond = -1;
         mTimeText = "";
 
+    }
+
+    /**
+     * 初始化卸载设备的dialog信息
+     * */
+    private static void initStorageDialogInfo(Context context) {
+        mTitle = context.getString(R.string.storage_dialog_title);
+        String info0 = context.getString(R.string.storage_dialog_propmt);
+        mainPromptTexts = new String[1];
+        mainPromptTexts[0] = info0;
+        mDialogTag = "storage_dialog";
+        mTimeText = "";
+        mTimeSecond = -1;
     }
 }

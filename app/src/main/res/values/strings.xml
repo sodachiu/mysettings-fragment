@@ -129,8 +129,15 @@
 
     <!--存储信息-->
     <string name="storage_title">存储信息</string>
-
-
+    <string name="storage_total">总容量</string>
+    <string name="storage_available">可用空间</string>
+    <string name="storage_number">存储设备个数：%1$d</string>
+    <string name="storage_uninstall">卸载外部存储设备</string>
+    <string name="storage_mounted">qll_设备挂载成功</string>
+    <string name="storage_unmounted">qll_设备卸载成功</string>
+    <string name="storage_dialog_title">信息</string>
+    <string name="storage_dialog_propmt">存储设备将要被卸载</string>
+    <string name="storage_no_device_unmount">没有设备可被卸载</string>
 
     <!--高级设置-->
     <string name="advanced_title">高级设置</string>

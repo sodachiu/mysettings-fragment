@@ -6,6 +6,7 @@ public class UniqueMark {
     public static final int BLUETOOTH_ATTEMPT_TO_UNBOND = 1;
     public static final int RESOLUTION_FRAGMENT = 2;
     public static final int ETH_BLUETOOTH_FRAGMENT = 3;
+    public static final int STORAGE_FRAGMENT = 4;
 
 
 

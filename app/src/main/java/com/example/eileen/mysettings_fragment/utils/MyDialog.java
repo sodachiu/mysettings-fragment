@@ -193,16 +193,20 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 mTargetFragment.onActivityResult(UniqueMark.RESOLUTION_FRAGMENT
                         , Activity.RESULT_OK
                         , resultIntent);
-                mDialog.dismiss();
                 break;
             case FragmentUtil.ETH_BLUETOOTH_FRAGMENT:
                 // 传一个bluetoothdevice回去
                 mTargetFragment.onActivityResult(UniqueMark.ETH_BLUETOOTH_FRAGMENT
                         , Activity.RESULT_OK
                         , resultIntent);
-                mDialog.dismiss();
                 break;
+            case FragmentUtil.STORAGE_FRAGMENT:
+                mTargetFragment.onActivityResult(UniqueMark.STORAGE_FRAGMENT
+                        , Activity.RESULT_OK
+                        , resultIntent);
         }
+        mDialog.dismiss();
+
     }
 
     /**
@@ -226,6 +230,11 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 break;
             case FragmentUtil.ETH_BLUETOOTH_FRAGMENT:
                 mTargetFragment.onActivityResult(UniqueMark.ETH_BLUETOOTH_FRAGMENT
+                        , Activity.RESULT_CANCELED
+                        , resultIntent);
+                break;
+            case FragmentUtil.STORAGE_FRAGMENT:
+                mTargetFragment.onActivityResult(UniqueMark.STORAGE_FRAGMENT
                         , Activity.RESULT_CANCELED
                         , resultIntent);
                 break;

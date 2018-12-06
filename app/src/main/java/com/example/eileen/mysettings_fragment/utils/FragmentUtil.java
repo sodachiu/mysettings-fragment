@@ -21,6 +21,7 @@ import com.example.eileen.mysettings_fragment.EthTypeFragment;
 import com.example.eileen.mysettings_fragment.MainActivity;
 import com.example.eileen.mysettings_fragment.NetInfoFragment;
 import com.example.eileen.mysettings_fragment.R;
+import com.example.eileen.mysettings_fragment.StorageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,9 @@ public class FragmentUtil {
                 break;
             case DISPLAY_RESOLUTION_FRAGMENT:
                 fragment = new DisplayResolutionFragment();
+                break;
+            case STORAGE_FRAGMENT:
+                fragment = new StorageFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");
