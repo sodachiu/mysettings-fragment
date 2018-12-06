@@ -119,8 +119,12 @@
     <string name="display_4096x2160p_60">4096X2160P 60</string>
     <string name="display_4096x2160p_50">4096X2160P 50</string>
     <string name="display_first_confirm_title">第一次确认</string>
+    <string name="display_second_confirm_title">第二次确认</string>
     <string name="display_first_confirm_text1">你的分辨率已经重新配置这些设置，是否继续？</string>
     <string name="display_timer_text"> 秒后恢复设置</string>
+    <string name="display_scale_prompt_text">
+        请按上/下/左/右键调整画面输出区域，按返回键退出（注：请确保边框在可见区域内）
+    </string>
 
 
     <!--存储信息-->

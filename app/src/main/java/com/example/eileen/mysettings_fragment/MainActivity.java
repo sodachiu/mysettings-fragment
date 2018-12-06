@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.eileen.mysettings_fragment.display.ResolutionObject;
 import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 
 import org.json.JSONObject;
@@ -52,7 +51,7 @@ public class MainActivity extends FragmentActivity {
         mContext = this;
         initView();
 
-        new Thread(new Runnable() {
+       /* new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -72,7 +71,7 @@ public class MainActivity extends FragmentActivity {
 
             }
 
-        }).start();
+        }).start();*/
 
     }
 

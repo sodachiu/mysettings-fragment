@@ -9,8 +9,6 @@ import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.DisplayResolutionFragment;
 import com.example.eileen.mysettings_fragment.R;
-import com.example.eileen.mysettings_fragment.display.ResolutionObject;
-
 public class ShowDialog {
 
     private static final String TAG = "qll_show_dialog";
@@ -88,14 +86,28 @@ public class ShowDialog {
      * 用于ResolutionDialog的显示信息初始化
      * */
     private static void initResolutionDialogInfo(Context context) {
+        if (mParcelable == null || !(mParcelable instanceof MyParcelable)) {
+            Log.i(TAG, "initResolutionDialogInfo: 对象有误");
+            return;
+        }
 
+        int countTime = ((MyParcelable) mParcelable).getConfirmTimes();
         String info0 = context.getString(R.string.display_first_confirm_text1);
         mainPromptTexts = new String[1];
         mainPromptTexts[0] = info0;
         mTimeText = context.getString(R.string.display_timer_text);
-        mTitle = context.getString(R.string.display_first_confirm_title);
         mTimeSecond = DisplayResolutionFragment.COUNT_TIMER_TOTAL_SECOND;
-        mDialogTag = "resolution_dialog";
+
+        switch (countTime) {
+            case 1:
+                mTitle = context.getString(R.string.display_first_confirm_title);
+                mDialogTag = "resolution_dialog1";
+                break;
+            case 2:
+                mTitle = context.getString(R.string.display_second_confirm_title);
+                mDialogTag = "resolution_dialog2";
+                break;
+        }
 
     }
 

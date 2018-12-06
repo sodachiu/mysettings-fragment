@@ -1,6 +1,7 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -70,6 +71,8 @@ public class DisplayFragment extends Fragment implements View.OnClickListener{
             case R.id.display_ll_scale:
                 // 进入新的activity
                 Log.i(TAG, "onClick: 尝试进入调整画面输出区域的 activity");
+                Intent intent = new Intent(getActivity(), ScaleActivity.class);
+                startActivity(intent);
                 break;
             default:
                 Log.i(TAG, "onClick: 点击了----" + view.getId());

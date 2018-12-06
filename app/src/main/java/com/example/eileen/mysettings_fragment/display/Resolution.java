@@ -36,4 +36,9 @@ public class Resolution {
         return standard;
         
     }
+
+    public boolean getIschecked() {
+        Log.i(TAG, "getIschecked: ");
+        return isChecked;
+    }
 }

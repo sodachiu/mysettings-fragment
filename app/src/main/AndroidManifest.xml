@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ScaleActivity">
+
+        </activity>
+
         <receiver android:name=".MyReceiver"
             android:exported="true"
             android:enabled="true">

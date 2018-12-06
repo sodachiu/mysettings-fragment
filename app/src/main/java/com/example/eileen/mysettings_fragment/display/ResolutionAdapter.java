@@ -31,6 +31,7 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
     private DisplayManager mDisPlayManager;
     private Context mContext;
     private static final int ADAPTIVE_POSITION = 0;
+    public static int old_standard_position = 0;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imgResolution;
@@ -67,6 +68,10 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
         Resolution resolution = mResolutionsList.get(position);
         holder.imgResolution.setImageResource(resolution.getImgSrc());
         holder.tvResolution.setText(resolution.getResolutionText());
+        boolean isChecked = resolution.getIschecked();
+        if (isChecked) {
+            holder.llResolution.requestFocus();
+        }
         holder.llResolution.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -89,7 +94,7 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
                 .getSystemService(Context.DISPLAY_MANAGER_SERVICE);
 
         boolean isAdaptChecked = (position == 0); // 是否点击了自适应分辨率
-        DisplayResolutionFragment.isAdaptiveResolution = isAdaptChecked;
+        DisplayResolutionFragment.nowIsAdaptive = isAdaptChecked;
 
         Log.i(TAG, "handleClick: 将要设置的制式----" + mResolutionsList.get(position).getStandard());
         int standard = mResolutionsList.get(position).getStandard();
@@ -97,8 +102,9 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
 
         // 调用 DialogFragment 提示用户已做更改， 这里重新写个方法吧
         Fragment targetFragment = FragmentUtil.getCurrentFragment(mContext);
-        int oldStandard = mResolutionsList.get(DisplayResolutionFragment.nowResolutionPosition).getStandard();
-        MyParcelable resolutionParcelable = new MyParcelable(oldStandard);
+        Log.i(TAG, "handleClick: 传递的坐标为----" + old_standard_position);
+        int oldStandard = mResolutionsList.get(old_standard_position).getStandard();
+        MyParcelable resolutionParcelable = new MyParcelable(oldStandard, 1);
         ShowDialog.showDialog(resolutionParcelable, targetFragment, UniqueMark.RESOLUTION_FRAGMENT);
 
     }

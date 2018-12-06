@@ -5,10 +5,14 @@ import android.os.Parcelable;
 
 public class MyParcelable implements Parcelable {
     private int oldStandard;
+    private int confirmTimes;
 
 
     public int getOldStandard() {
         return oldStandard;
+    }
+    public int getConfirmTimes() {
+        return confirmTimes;
     }
 
     @Override
@@ -25,8 +29,9 @@ public class MyParcelable implements Parcelable {
     /**
      * 给Resolution留的接口
      * */
-    public MyParcelable(int oldStandard) {
+    public MyParcelable(int oldStandard, int confirmTimes) {
         this.oldStandard = oldStandard;
+        this.confirmTimes = confirmTimes;
     }
 
 

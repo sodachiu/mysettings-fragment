@@ -18,13 +18,11 @@ import android.view.ViewGroup;
 
 import com.example.eileen.mysettings_fragment.display.Resolution;
 import com.example.eileen.mysettings_fragment.display.ResolutionAdapter;
-import com.example.eileen.mysettings_fragment.display.ResolutionObject;
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 import com.example.eileen.mysettings_fragment.utils.MyDialog;
 import com.example.eileen.mysettings_fragment.utils.MyParcelable;
+import com.example.eileen.mysettings_fragment.utils.ShowDialog;
 import com.example.eileen.mysettings_fragment.utils.UniqueMark;
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +35,9 @@ public class DisplayResolutionFragment extends Fragment {
     private DisplayManager mDisplayManager;
     private SharedPreferences mSharedPreferences;
     private int[] mSupportStandards;
-    // true为自适应，false为用户选择分辨率，恢复出厂时需要将其置为true，用户设置时需要将其置为false
-    public static boolean isAdaptiveResolution = true;
-    public static final String ADAPT_RESOLUTION = "adapt_resolution";
+    public static boolean nowIsAdaptive = true;
+    public static final String IS_ADAPTIVE = "resolution_is_adaptive";
     public static final int COUNT_TIMER_TOTAL_SECOND = 20;
-    public static int nowResolutionPosition = 0;
 
     public DisplayResolutionFragment(){
         Log.i(TAG, "DisplayResolutionFragment: ");
@@ -57,7 +53,6 @@ public class DisplayResolutionFragment extends Fragment {
                 Context.DISPLAY_MANAGER_SERVICE);
         mSupportStandards = mDisplayManager.getAllSupportStandards();
         mSharedPreferences = mContext.getSharedPreferences("qll_data", Context.MODE_PRIVATE);
-        isAdaptiveResolution = mSharedPreferences.getBoolean(ADAPT_RESOLUTION, true);
     }
 
     @Override
@@ -79,9 +74,7 @@ public class DisplayResolutionFragment extends Fragment {
     public void onPause(){
         Log.i(TAG, "onPause: ");
         super.onPause();
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(ADAPT_RESOLUTION, isAdaptiveResolution);
-        editor.apply();
+
     }
 
     @Override
@@ -103,18 +96,40 @@ public class DisplayResolutionFragment extends Fragment {
         }
         Log.i(TAG, "onActivityResult: ");
 
-        MyParcelable myParcelable = null;
+        MyParcelable myParcelable = (MyParcelable) data.getParcelableExtra(MyDialog.PARCELABLE);
+
+        if (myParcelable == null) {
+            Log.i(TAG, "onActivityResult: 需要的对象为空");
+            return;
+        }
+
         if (resultCode == Activity.RESULT_CANCELED) {
+
             Log.i(TAG, "onActivityResult: 用户取消操作");
-            myParcelable = (MyParcelable) data.getParcelableExtra(MyDialog.PARCELABLE);
-        }
+            int oldStandard = myParcelable.getOldStandard();
+            mDisplayManager.setDisplayStandard(oldStandard);
+            mDisplayManager.setDisplayStandard(oldStandard);
+            initView();
 
-        if (myParcelable != null) {
-            int standard = myParcelable.getOldStandard();
-            mDisplayManager.setDisplayStandard(standard);
-        }
+        }else if (resultCode == Activity.RESULT_OK) {
 
-        initView();
+            int confirmTime = myParcelable.getConfirmTimes(); // 第 n 次确认
+            switch (confirmTime) {
+                case 2:
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putBoolean(IS_ADAPTIVE, nowIsAdaptive);
+                    editor.apply();
+                    initView();
+                    break;
+                case 1:
+                    int oldStandard = myParcelable.getOldStandard();
+                    MyParcelable newParcelable = new MyParcelable(oldStandard, 2);
+                    Fragment targetFragment = FragmentUtil.getCurrentFragment(mContext);
+                    ShowDialog.showDialog(newParcelable, targetFragment, requestCode);
+                    break;
+            }
+
+        }
 
     }
 
@@ -130,8 +145,7 @@ public class DisplayResolutionFragment extends Fragment {
         rvResolution.post(new Runnable() {
             @Override
             public void run() {
-                rvResolution.setSelected(true);
-                rvResolution.smoothScrollToPosition(nowResolutionPosition);
+                rvResolution.smoothScrollToPosition(ResolutionAdapter.old_standard_position);
             }
         });
 
@@ -142,7 +156,7 @@ public class DisplayResolutionFragment extends Fragment {
      * */
     void initResolution(){
         Log.i(TAG, "initResolution: ");
-
+        nowIsAdaptive = mSharedPreferences.getBoolean(IS_ADAPTIVE, true);
         // 设置自适应的数据，如果有 1080P 50，则自适应到 1080P 50， 如果没有，自适应最高分辨率
         int adaptStandard = -1;
         mResolutionsList.clear();
@@ -158,7 +172,7 @@ public class DisplayResolutionFragment extends Fragment {
             adaptStandard = mSupportStandards[0];
         }
 
-        Resolution adaptResolution = new Resolution(isAdaptiveResolution, adaptText, adaptStandard);
+        Resolution adaptResolution = new Resolution(nowIsAdaptive, adaptText, adaptStandard);
         mResolutionsList.add(adaptResolution);
 
         initSupportStandards();
@@ -179,8 +193,10 @@ public class DisplayResolutionFragment extends Fragment {
             String standardText = "";
             Resolution resolution;
             boolean isChecked = false;
-            if (!isAdaptiveResolution && currentStandard == standard){
+            if (!nowIsAdaptive && currentStandard == standard){
+
                 isChecked = true;
+                ResolutionAdapter.old_standard_position = mResolutionsList.size();
             }
 
             switch (standard){
