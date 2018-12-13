@@ -6,4 +6,5 @@
     <color name="deepBlue">#005</color>
     <color name="white">#fff</color>
     <color name="lightGray">#bbb</color>
+    <color name="red">#f00</color>
 </resources>

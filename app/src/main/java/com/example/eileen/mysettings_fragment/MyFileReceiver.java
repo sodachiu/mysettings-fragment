@@ -1,11 +1,18 @@
 package com.example.eileen.mysettings_fragment;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
+import com.google.android.collect.Sets;
+
+import java.util.Arrays;
+import java.util.Set;
 
 public class MyFileReceiver extends BroadcastReceiver {
 
@@ -14,7 +21,10 @@ public class MyFileReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         MyHandler handler = new MyHandler(context);
+
         String action = intent.getAction();
+
+
         if (action == null || action.equals("")) {
             Log.i(TAG, "onReceive: 没有接收到任何广播");
             return;

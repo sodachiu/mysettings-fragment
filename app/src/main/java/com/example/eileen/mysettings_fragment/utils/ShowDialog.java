@@ -12,6 +12,7 @@ import com.example.eileen.mysettings_fragment.R;
 public class ShowDialog {
 
     private static final String TAG = "qll_show_dialog";
+    private static final int STANDBY_COUNT_DOWN_TIME = 60;
     private static Parcelable mParcelable;
     private static Fragment mTargetFragment;
     private static int mRequestCode;
@@ -113,6 +114,7 @@ public class ShowDialog {
         }
 
     }
+
 
     /**
      * 显示尝试连接蓝牙设备的DialogFragment

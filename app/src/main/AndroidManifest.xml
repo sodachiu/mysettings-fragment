@@ -25,6 +25,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ScaleActivity"></activity>
+        <activity android:name=".DialogActivity"
+            android:theme="@style/DefaultFullScreenDialogStyle">
+
+        </activity>
 
         <receiver
             android:name=".MyFileReceiver"
@@ -35,6 +39,17 @@
                 <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
                 <data android:scheme="file"/>
             </intent-filter>
+        </receiver>
+
+        <receiver android:name=".MyStandbyReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="com.cbox.action.autosleep" />
+            </intent-filter>
+
         </receiver>
     </application>
 

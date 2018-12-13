@@ -9,6 +9,8 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.AboutFragment;
+import com.example.eileen.mysettings_fragment.AdvancedFragment;
+import com.example.eileen.mysettings_fragment.AdvancedFragment2;
 import com.example.eileen.mysettings_fragment.DateFormatFragment;
 import com.example.eileen.mysettings_fragment.DateTimeFragment;
 import com.example.eileen.mysettings_fragment.DisplayFragment;
@@ -44,6 +46,7 @@ public class FragmentUtil {
     public static final String RECOVERY_FRAGMENT = "recovery_fragment";
     public static final String ETH_BLUETOOTH_FRAGMENT = "eth_bluetooth_fragment";
     public static final String DISPLAY_RESOLUTION_FRAGMENT = "display_resolution_fragment";
+    public static final String ADVANCED_FRAGMENT_2 = "advanced_fragment_2";
     private static String previousFragmentTag = ABOUT_FRAGMENT;
 
 
@@ -89,6 +92,12 @@ public class FragmentUtil {
                 break;
             case STORAGE_FRAGMENT:
                 fragment = new StorageFragment();
+                break;
+            case ADVANCED_FRAGMENT:
+                fragment = new AdvancedFragment();
+                break;
+            case ADVANCED_FRAGMENT_2:
+                fragment = new AdvancedFragment2();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");

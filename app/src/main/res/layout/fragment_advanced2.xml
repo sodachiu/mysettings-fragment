@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/advanced_title" />
+    <LinearLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/advanced_ll_clear_all">
+
+        <TextView
+            style="@style/advanced_tv_key_style"
+            android:text="@string/advanced_clear_all"/>
+    </LinearLayout>
+
+    <TextView
+        style="@style/title_tv_style"
+        android:text="@string/advanced_title_2" />
+
+    <RelativeLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/advanced_rv_sleep1">
+
+        <TextView
+            style="@style/advanced_tv_key_style"
+            android:text="@string/advanced_auto_sleep_1"/>
+
+
+        <ImageView
+            style="@style/advanced_img_value_style"
+            android:id="@+id/advanced_img_sleep1"/>
+
+    </RelativeLayout>
+    <include layout="@layout/image_divider" />
+
+    <RelativeLayout
+        style="@style/focusable_ll_style"
+        android:id="@+id/advanced_rv_sleep2">
+
+        <TextView
+            style="@style/advanced_tv_key_style"
+            android:text="@string/advanced_auto_sleep_2"/>
+
+        <ImageView
+            style="@style/advanced_img_value_style"
+            android:id="@+id/advanced_img_sleep2"/>
+    </RelativeLayout>
+</LinearLayout>

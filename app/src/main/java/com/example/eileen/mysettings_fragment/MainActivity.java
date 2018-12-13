@@ -3,6 +3,7 @@ package com.example.eileen.mysettings_fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,7 +23,10 @@ import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
+
+import static android.os.Environment.DIRECTORY_ALARMS;
 
 
 public class MainActivity extends FragmentActivity {
@@ -51,7 +55,7 @@ public class MainActivity extends FragmentActivity {
         mContext = this;
         initView();
 
-       /* new Thread(new Runnable() {
+        /* new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -180,6 +184,9 @@ public class MainActivity extends FragmentActivity {
                 break;
             case FragmentUtil.DISPLAY_RESOLUTION_FRAGMENT:
                 FragmentUtil.showFragment(mContext, FragmentUtil.DISPLAY_FRAGMENT);
+                break;
+            case FragmentUtil.ADVANCED_FRAGMENT_2:
+                FragmentUtil.showFragment(mContext, FragmentUtil.ADVANCED_FRAGMENT);
                 break;
             default:
                 finish();

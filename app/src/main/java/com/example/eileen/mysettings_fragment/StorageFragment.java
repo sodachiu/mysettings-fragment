@@ -2,10 +2,14 @@ package com.example.eileen.mysettings_fragment;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.os.storage.StorageManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +27,9 @@ import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
 import com.example.eileen.mysettings_fragment.utils.ShowDialog;
 import com.example.eileen.mysettings_fragment.utils.UniqueMark;
+
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class StorageFragment extends Fragment implements View.OnClickListener {
 
@@ -67,7 +74,10 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         Log.i(TAG, "onDestroy: ");
         super.onDestroy();
         mContext.unregisterReceiver(myStorageReceiver);
-        myHandler.clear();
+
+        if (myHandler != null) {
+            myHandler.clear();
+        }
     }
 
     @Override
@@ -79,7 +89,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         }
 
         if (resultCode == Activity.RESULT_OK) {
-            // 卸载设备
             Log.i(TAG, "onActivityResult: 确定卸载");
             uninstallStorage();
         }
@@ -154,6 +163,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         }
     };
 
+
     String getTotal() {
         long size = 0;
         for (String path : storagePaths) {
@@ -164,7 +174,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
 
     String getAvailable() {
         long size = 0;
-        for (String path: storagePaths) {
+        for (String path : storagePaths) {
             size += StorageUtil.getAvailableSize(path);
         }
         return Formatter.formatFileSize(mContext, size);
@@ -174,11 +184,8 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
 
         for (String path : storagePaths) {
             int match = path.indexOf(EXTERNAL_MATCH);
-           /* String cmd = "rm -rf ";*/
 
             if (match >= 0) {
-                /*cmd = cmd + path;
-                DoCmd.doCmd(cmd);*/
                 StorageUtil.unmountVolume(path);
             }
         }

@@ -8,42 +8,77 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class AdvancedFragment extends Fragment {
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
+
+public class AdvancedFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "qll_advanced_fragment";
-    private Context mContext;
 
-    private ListView lvMenu;
+
+    private EditText etPassword;
+    private Button btnConfirm;
+    private TextView tvAlarm;
 
     public AdvancedFragment(){
 
     }
 
     @Override
-    public void onAttach(Context context){
-        Log.i(TAG, "onAttach: 这里是高级设置的碎片啊");
-        super.onAttach(context);
-        mContext = context;
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_advanced, container, false);
-        initView();
         return view;
     }
 
-    public void initView(){
-        FragmentActivity activity = getActivity();
-        lvMenu = (ListView) activity.findViewById(R.id.main_lv_menu);
-        //开始寻找控件吧
-
+    @Override
+    public void onActivityCreated(Bundle args) {
+        Log.i(TAG, "onActivityCreated: ");
+        super.onActivityCreated(args);
+        initView();
     }
 
-    public void onHiddenChanged(boolean hidden){
-        if (!hidden){
-            lvMenu.setFocusable(false);
+    void initView(){
+        FragmentActivity activity = getActivity();
+
+        etPassword = (EditText) activity.findViewById(R.id.advanced_et_pwd);
+        btnConfirm = (Button) activity.findViewById(R.id.advanced_btn_confirm);
+        tvAlarm = (TextView) activity.findViewById(R.id.advanced_tv_alarm);
+
+        btnConfirm.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.i(TAG, "onClick: ");
+        switch (view.getId()) {
+            case R.id.advanced_btn_confirm:
+                Log.i(TAG, "onClick: 用户点击了确定");
+                checkPassword();
+                break;
+            default:
+                Log.i(TAG, "onClick: 点击了其它控件----" + view.getId());
         }
     }
+
+    void checkPassword() {
+
+
+        Context context = getContext();
+        String defPassword = context.getString(R.string.default_password);
+        String inputPassword = etPassword.getText().toString();
+
+        boolean isCorrect = defPassword.endsWith(inputPassword);
+
+        if (isCorrect) {
+            tvAlarm.setVisibility(View.INVISIBLE);
+            FragmentUtil.showFragment(context, FragmentUtil.ADVANCED_FRAGMENT_2);
+        } else {
+            tvAlarm.setVisibility(View.VISIBLE);
+        }
+
+    }
+
 }

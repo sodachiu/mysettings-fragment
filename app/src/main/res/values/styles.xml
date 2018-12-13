@@ -20,7 +20,7 @@
 
     <!--EditView 的基本样式-->
     <style name="et_base_style" parent="tv_base_style">
-        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/editview_selector</item>
         <item name="android:paddingLeft">10dp</item>
@@ -315,6 +315,31 @@
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:text">@string/storage_number</item>
         <item name="android:layout_weight">3</item>
+    </style>
+
+    <style name="advanced_tv_key_style" parent="tv_base_style">
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="advanced_img_value_style" parent="img_base_style">
+        <item name="android:layout_marginEnd">100dp</item>
+        <item name="android:src">@drawable/checkbox_on</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+
+    <style name="DefaultFullScreenDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:windowBackground">@drawable/background_dialog</item>//将背景设置成透明的
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>//设置窗体外面允不允许点击
     </style>
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical">
+    <TextView
+        style="@style/tv_base_style"
+        android:textColor="@color/red"
+        android:layout_marginBottom="20dp"
+        android:text="@string/advanced_dialog_time_text"
+        android:id="@+id/advanced_tv_timer"/>
+
+    <TextView
+        style="@style/tv_base_style"
+        android:layout_marginBottom="20dp"
+        android:text="@string/advanced_dialog_prompt"/>
+
+    <Button
+        style="@style/btn_base_style"
+        android:text="@string/advanced_continue_watch"
+        android:id="@+id/advanced_btn_watch"/>
+
+</LinearLayout>
