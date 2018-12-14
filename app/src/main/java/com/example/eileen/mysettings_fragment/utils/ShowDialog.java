@@ -58,6 +58,9 @@ public class ShowDialog {
             case UniqueMark.STORAGE_FRAGMENT:
                 initStorageDialogInfo(context);
                 break;
+            case UniqueMark.RESET_FRAGMENT:
+                initResetDialogInfo(context);
+                break;
             default:
                 Log.i(TAG, "showDialog: requestCode 不在列表中");
                 return;
@@ -70,6 +73,23 @@ public class ShowDialog {
 
         destroyData();
 
+
+    }
+
+    private static void initResetDialogInfo(Context context) {
+        mTitle = context.getString(R.string.reset_dialog_title);
+        mainPromptTexts = new String[4];
+        String info0 = context.getString(R.string.reset_info0);
+        String info1 = context.getString(R.string.reset_info1);
+        String info2 = context.getString(R.string.reset_info2);
+        String info3 = context.getString(R.string.reset_info3);
+        mainPromptTexts[0] = info0;
+        mainPromptTexts[1] = info1;
+        mainPromptTexts[2] = info2;
+        mainPromptTexts[3] = info3;
+        mTimeSecond = -1;
+        mTimeText = "";
+        mDialogTag = "reset_dialog";
 
     }
 

@@ -207,6 +207,12 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 mTargetFragment.onActivityResult(UniqueMark.STORAGE_FRAGMENT
                         , Activity.RESULT_OK
                         , resultIntent);
+                break;
+            case FragmentUtil.RESET_FRAGMENT:
+                mTargetFragment.onActivityResult(UniqueMark.RESET_FRAGMENT
+                        , Activity.RESULT_OK
+                        , resultIntent);
+                break;
         }
         mDialog.dismiss();
 
@@ -238,6 +244,11 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 break;
             case FragmentUtil.STORAGE_FRAGMENT:
                 mTargetFragment.onActivityResult(UniqueMark.STORAGE_FRAGMENT
+                        , Activity.RESULT_CANCELED
+                        , resultIntent);
+                break;
+            case FragmentUtil.RESET_FRAGMENT:
+                mTargetFragment.onActivityResult(UniqueMark.RESET_FRAGMENT
                         , Activity.RESULT_CANCELED
                         , resultIntent);
                 break;

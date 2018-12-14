@@ -156,6 +156,13 @@
     <!--恢复出厂设置-->
     <string name="reset_title">恢复出厂设置</string>
     <string name="reset_box">重置机顶盒</string>
+    <string name="reset_info0">这将清除内存所有数据，包括：</string>
+    <string name="reset_info1">- 你的账户</string>
+    <string name="reset_info2">- 系统和应用程序的数据设置</string>
+    <string name="reset_info3">- 下载的应用</string>
+    <string name="reset_confirm">确定</string>
+    <string name="reset_cancel">取消</string>
+    <string name="reset_dialog_title">信息</string>
 
 
     <!--dialog-->

@@ -229,7 +229,14 @@ public class MainActivity extends FragmentActivity {
 
     private void handleRightEvent(String tag){
 
-        lvMenu.setFocusable(false);
+        if (tag.equals(FragmentUtil.ABOUT_FRAGMENT)
+                || tag.equals(FragmentUtil.NET_INFO_FRAGMENT)) {
+
+        } else {
+            lvMenu.setFocusable(false);
+
+        }
+
         /*switch (tag){
             *//*case FragmentUtil.ETH_FRAGMENT:
                 LinearLayout llSetNet = (LinearLayout) findViewById(R.id.eth_ll_set_net);

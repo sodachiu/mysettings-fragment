@@ -81,7 +81,6 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         timeFormat();
         dateFormat();
 
-        Settings.Secure.putString(mResolver, "ntp_server", "111.111.111.1");
         String server1 = Settings.Secure.getString(mResolver, "ntp_server");
         String server2 = Settings.Secure.getString(mResolver, "ntp_server2");
 
@@ -154,13 +153,11 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
                 , Settings.System.DATE_FORMAT);
         String[] dateFormats = getResources().getStringArray(R.array.date_formats);
         if (nowFormat == null || nowFormat.equals("")){
-            Log.i(TAG, "dateFormat: 当前获取");
-            tcDateFormat.setFormat24Hour(dateFormats[DateFormatFragment.DEFAULT_FORMAT_POSITION]);
-            tcDateFormat.setFormat24Hour(dateFormats[DateFormatFragment.DEFAULT_FORMAT_POSITION]);
-        }else{
-            tcDateFormat.setFormat12Hour(nowFormat);
-            tcDateFormat.setFormat24Hour(nowFormat);
+            nowFormat = dateFormats[DateFormatFragment.DEFAULT_FORMAT_POSITION];
         }
+        tcDateFormat.setFormat12Hour(nowFormat);
+        tcDateFormat.setFormat24Hour(nowFormat);
+
 
     }
 

@@ -14,18 +14,18 @@
             android:text="@string/password"/>
         <EditText
             style="@style/ad_reset_et_pwd_style"
-            android:id="@+id/advanced_et_pwd"/>
+            android:id="@+id/reset_et_pwd"/>
     </LinearLayout>
 
 
 
     <TextView
         style="@style/ad_reset_tv_error_style"
-        android:id="@+id/advanced_tv_alarm"/>
+        android:id="@+id/reset_tv_alarm"/>
 
     <Button
         style="@style/btn_base_style"
-        android:id="@+id/advanced_btn_confirm"
+        android:id="@+id/reset_btn_confirm"
         android:text="@string/reset_box"/>
 
 
