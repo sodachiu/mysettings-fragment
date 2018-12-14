@@ -7,7 +7,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="100dp"
         android:background="@drawable/chosen"
         android:focusable="false"
         android:gravity="bottom"

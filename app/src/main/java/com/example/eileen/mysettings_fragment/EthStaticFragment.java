@@ -96,6 +96,7 @@ public class EthStaticFragment extends Fragment implements View.OnClickListener{
         btnConfirm = (Button) activity.findViewById(R.id.static_btn_confirm);
         btnCancel = (Button) activity.findViewById(R.id.static_btn_cancel);
 
+
         btnConfirm.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnConfirm.requestFocus();

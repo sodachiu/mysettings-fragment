@@ -149,20 +149,6 @@ public class EthTypeFragment extends Fragment
         resolver = null;
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden){
-        Log.i(TAG, "onHiddenChanged: ");
-        if (!hidden){
-            mHandler = new MyHandler(mContext);
-            lvMenu.setFocusable(false);
-            isNetConnect = NetworkUtil.checkNetConnect(mContext);
-            showConnectState();
-            mContext.registerReceiver(myNetReceiver, filter);
-        }else {
-
-        }
-    }
-
     /*
      * 进行dhcp连接
      * */
@@ -242,7 +228,7 @@ public class EthTypeFragment extends Fragment
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.i(TAG, "onReceive: 接收广播---->" + action);
-            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", -1);
+            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", 0);
             if (action.equals(EthernetManager.ETHERNET_STATE_CHANGED_ACTION)){
                 int ethEvent = intent.getIntExtra(EthernetManager.EXTRA_ETHERNET_STATE, -1);
 

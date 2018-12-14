@@ -179,8 +179,9 @@
     <style name="eth_et_static_style" parent="et_base_style">
         <item name="android:gravity">center</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_width">280dp</item>
         <item name="android:background">@drawable/eth_static_et_selector</item>
+        <item name="android:selectAllOnFocus">true</item>
     </style>
 
     <style name="eth_static_ll_style" parent="unfocusable_ll_style">

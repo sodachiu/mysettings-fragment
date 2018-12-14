@@ -158,7 +158,8 @@ public class DateTimeFragment extends Fragment implements View.OnClickListener{
         tcDateFormat.setFormat12Hour(nowFormat);
         tcDateFormat.setFormat24Hour(nowFormat);
 
-
+        Settings.System.putString(mContext.getContentResolver()
+                , Settings.System.DATE_FORMAT, nowFormat);
     }
 
 }

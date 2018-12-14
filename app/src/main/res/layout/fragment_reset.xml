@@ -5,7 +5,7 @@
 
     <TextView
         style="@style/title_tv_style"
-        android:text="@string/reset_title" />
+        android:text="@string/advanced_title" />
 
     <LinearLayout
         style="@style/ad_reset_ll_style">

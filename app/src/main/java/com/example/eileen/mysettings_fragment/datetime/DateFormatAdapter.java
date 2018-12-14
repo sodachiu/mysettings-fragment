@@ -41,8 +41,8 @@ public class DateFormatAdapter extends ArrayAdapter<DateFormat> {
         TextClock tcFormat = (TextClock) view.findViewById(R.id.dt_tc_format);
 
         imgFormat.setImageResource(format.getImgSrc());
-        tcFormat.setFormat12Hour(format.getOriginFormat());
-        tcFormat.setFormat24Hour(format.getOriginFormat());
+        tcFormat.setFormat12Hour(format.getVisibleText());
+        tcFormat.setFormat24Hour(format.getVisibleText());
         return view;
     }
 }

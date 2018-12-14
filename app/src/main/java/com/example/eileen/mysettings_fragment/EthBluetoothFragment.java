@@ -22,6 +22,7 @@ import android.widget.ListView;
 //import com.example.eileen.mysettings_fragment.network.BluetoothUtil;
 import com.example.eileen.mysettings_fragment.network.BondedBluetoothAdapter;
 import com.example.eileen.mysettings_fragment.network.UnbondBluetoothAdapter;
+import com.example.eileen.mysettings_fragment.utils.MyDialog;
 import com.example.eileen.mysettings_fragment.utils.MyHandler;
 import com.example.eileen.mysettings_fragment.utils.UniqueMark;
 
@@ -99,14 +100,14 @@ public class EthBluetoothFragment extends Fragment implements View.OnClickListen
     * */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
+        BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra(MyDialog.PARCELABLE);
+
         if (requestCode == UniqueMark.BLUETOOTH_ATTEMPT_TO_UNBOND && resultCode == RESULT_OK){
             Log.i(TAG, "onActivityResult: 解绑设备");
-            BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("bonded_device");
             device.removeBond();
         }else if (requestCode == UniqueMark.BLUETOOTH_ATTEMPT_TO_UNBOND && resultCode == RESULT_OK){
             Log.i(TAG, "onActivityResult: 绑定设备");
-            BluetoothDevice device = (BluetoothDevice) data.getParcelableExtra("unbond_device");
             device.createBond();
         }
     }

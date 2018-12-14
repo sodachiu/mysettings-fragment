@@ -89,7 +89,7 @@ public class NetInfoFragment extends Fragment {
         String netInfoTitle = getString(R.string.netinfo_eth_connected);
         if (isNetAvailable){
             Log.i(TAG, "setValues: 网络已连接");
-            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", -1);
+            int ethMode = Settings.Secure.getInt(resolver, "default_eth_mod", 0);
             switch (ethMode){
                 case NetworkUtil.ETHERNET_MODE_DHCP:
                     Log.i(TAG, "setValues: 当前网络连接模式——DHCP");

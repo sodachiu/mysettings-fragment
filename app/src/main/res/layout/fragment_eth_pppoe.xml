@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="900dp"
     android:layout_height="match_parent">
 
     <TextView
@@ -8,34 +8,35 @@
         android:text="@string/eth_pppoe_title"/>
 
     <LinearLayout
-        style="@style/unfocusable_ll_style"
-        android:layout_marginTop="80dp">
+        style="@style/ad_reset_ll_style"
+        android:layout_marginTop="50dp">
         <TextView
             style="@style/eth_tv_pppoe_key_style"
             android:text="@string/eth_pppoe_username"/>
         <EditText
             style="@style/et_base_style"
+            android:layout_height="50dp"
             android:id="@+id/pppoe_et_username" />
-
     </LinearLayout>
 
     <LinearLayout
-        style="@style/unfocusable_ll_style"
-        android:layout_marginTop="50dp">
+        style="@style/ad_reset_ll_style"
+        android:layout_marginTop="30dp">
         <TextView
             style="@style/eth_tv_pppoe_key_style"
             android:text="@string/eth_pppoe_password"/>
         <EditText
             style="@style/et_base_style"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
+            android:layout_height="50dp"
             android:id="@+id/pppoe_et_password" />
 
     </LinearLayout>
 
 
     <LinearLayout
-        style="@style/unfocusable_ll_style"
-        android:layout_marginTop="50dp" >
+        style="@style/ad_reset_ll_style"
+        android:layout_marginTop="30dp" >
 
         <Button
             style="@style/btn_base_style"

@@ -84,6 +84,7 @@
         <Button
             android:id="@+id/static_btn_cancel"
             style="@style/btn_base_style"
+            android:layout_marginStart="30dp"
             android:text="@string/eth_static_cancel" />
     </LinearLayout>
 

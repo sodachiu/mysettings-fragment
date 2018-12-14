@@ -4,13 +4,15 @@ import android.util.Log;
 
 public class DateFormat {
     private static final String TAG = "qll_date_format";
-    private String dateFormat;
+    private String text;
     private int imgSrc;
+    private String dateFormat;
 
-    public DateFormat(String dateFormat, int imgSrc){
+    public DateFormat(String dateFormat, int imgSrc, String text){
         Log.i(TAG, "DateFormat: ");
         this.dateFormat = dateFormat;
         this.imgSrc = imgSrc;
+        this.text = text;
     }
 
 
@@ -19,26 +21,19 @@ public class DateFormat {
         return imgSrc;
     }
 
-    /*
-    * 获取默认日期格式 yyyy-M-dd
-    * */
-    public String getRegionFormat() {
-        Log.i(TAG, "getDateFormat: ");
-        int beginIndex = dateFormat.indexOf("y");
-        int lastIndex = dateFormat.indexOf(")");
-        String format = dateFormat.substring(beginIndex, lastIndex);
-        Log.i(TAG, "getDateFormat: 需要的日期格式为----" + format);
-        return format;
+    /**
+     * 获取显示的日期格式
+     * */
+    public String getVisibleText() {
+        return text;
     }
 
-    /*
-    * 获取提供的其它日期格式
-    * */
-    public String getOriginFormat() {
-        Log.i(TAG, "getOriginFormat: ");
+    /**
+     * 获取需要设置的日期格式
+     * */
+    public String getDateFormat() {
         return dateFormat;
     }
-
 
     /*
     * 用于当用户更改日期格式时，动态更新对应的IMG为打开状态

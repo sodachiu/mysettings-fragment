@@ -43,7 +43,9 @@ public class DateFormatFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState){
         Log.i(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_date_format, container, false);
-        initFormats();
+
+
+
         return view;
     }
 
@@ -51,7 +53,13 @@ public class DateFormatFragment extends Fragment implements
     public void onActivityCreated(Bundle savedState){
         Log.i(TAG, "onActivityCreated: ");
         super.onActivityCreated(savedState);
-        initView();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initFormats();
+                initView();
+            }
+        }).start();
     }
 
     @Override
@@ -61,7 +69,7 @@ public class DateFormatFragment extends Fragment implements
         mFormatsList = null;
         mAdapter = null;
         lvDateFormats = null;
-        mHandler = null;
+        mHandler.clear();
         mContext = null;
     }
 
@@ -78,39 +86,31 @@ public class DateFormatFragment extends Fragment implements
      * */
     void initFormats(){
         Log.i(TAG, "initFormats: ");
+
         String[] formats = getResources().getStringArray(R.array.date_formats);
 
         String nowFormat = Settings.System.getString(mContext.getContentResolver()
                 , Settings.System.DATE_FORMAT);
-
-        String defaultFormat = formats[DEFAULT_FORMAT_POSITION];
-        int beginIndex = defaultFormat.indexOf("y");
-        int lastIndex = defaultFormat.indexOf(")");
-        defaultFormat = defaultFormat.substring(beginIndex, lastIndex);
-
-        Log.i(TAG, "initFormats: beginIndex----" + beginIndex
-                + " && lastIndex----" + lastIndex
-                + " && defaultFormat----" + defaultFormat);
-
-        if (nowFormat == null){
-            nowFormat = defaultFormat;
-        }
-
-        Log.i(TAG, "initFormats: 当前的日期格式为----" + nowFormat);
+        Log.i(TAG, "initFormats: 当前日期格式----" + nowFormat);
 
         for (int i = 0; i < formats.length; i++){
             Log.i(TAG, "initFormats: 当前处理第 " + i + " 个日期格式");
             DateFormat dateFormat;
             int imgSrc = R.drawable.checkbox_off;
+            String visibleText;
 
-            if(i == DEFAULT_FORMAT_POSITION && nowFormat.equals(defaultFormat)){
-                imgSrc = R.drawable.checkbox_on;
-            }else if (nowFormat.equals(formats[i])){
+            if (nowFormat.equals(formats[i])){
                 imgSrc = R.drawable.checkbox_on;
                 mNowFormatPos = i;
             }
 
-            dateFormat = new DateFormat(formats[i], imgSrc);
+            if (i == DEFAULT_FORMAT_POSITION) {
+                visibleText = getString(R.string.dt_default_format);
+            } else {
+                visibleText = formats[i];
+            }
+
+            dateFormat = new DateFormat(formats[i], imgSrc, visibleText);
             mFormatsList.add(dateFormat);
             
 
@@ -122,29 +122,21 @@ public class DateFormatFragment extends Fragment implements
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 
-        Log.i(TAG, "onItemClick: parent----" + parent
-                + " \n&& view----" + view
-                + " \n&& id----" + id);
         DateFormat selectFormat = mFormatsList.get(position);
-
-        int imgOff = R.drawable.checkbox_off;
-        int imgOn = R.drawable.checkbox_on;
-        if (selectFormat.getImgSrc() == imgOn){
-            Log.i(TAG, "onItemClick: 已使用当前日期格式");
+        String nowFormat = Settings.System.getString(mContext.getContentResolver()
+                , Settings.System.DATE_FORMAT);
+        if (nowFormat.equals(selectFormat.getDateFormat())) {
             mHandler.sendEmptyMessage(MyHandler.DT_FORMAT_ALREADY_USE);
             return;
         }else {
             for (DateFormat item : mFormatsList){
-                item.setImgSrc(imgOff);
+                item.setImgSrc(R.drawable.checkbox_off);
             }
         }
 
-        selectFormat.setImgSrc(imgOn);
-        String sFormat = selectFormat.getOriginFormat();
+        selectFormat.setImgSrc(R.drawable.checkbox_on);
+        String sFormat = selectFormat.getDateFormat();
 
-        if (position == DEFAULT_FORMAT_POSITION){
-            sFormat = selectFormat.getRegionFormat();
-        }
         Settings.System.putString(mContext.getContentResolver(),
                 Settings.System.DATE_FORMAT,
                 sFormat);

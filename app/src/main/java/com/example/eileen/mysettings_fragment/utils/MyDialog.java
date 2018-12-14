@@ -199,7 +199,7 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 break;
             case FragmentUtil.ETH_BLUETOOTH_FRAGMENT:
                 // 传一个bluetoothdevice回去
-                mTargetFragment.onActivityResult(UniqueMark.ETH_BLUETOOTH_FRAGMENT
+                mTargetFragment.onActivityResult(UniqueMark.BLUETOOTH_ATTEMPT_TO_UNBOND
                         , Activity.RESULT_OK
                         , resultIntent);
                 break;
