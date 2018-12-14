@@ -48,6 +48,11 @@ public class AdvancedFragment extends Fragment implements View.OnClickListener {
         tvAlarm = (TextView) activity.findViewById(R.id.advanced_tv_alarm);
 
         btnConfirm.setOnClickListener(this);
+
+        String preFragment = FragmentUtil.getPreviousFragment();
+        if (preFragment.equals(FragmentUtil.ADVANCED_FRAGMENT_2)) {
+            btnConfirm.requestFocus();
+        }
     }
 
     @Override
@@ -70,7 +75,7 @@ public class AdvancedFragment extends Fragment implements View.OnClickListener {
         String defPassword = context.getString(R.string.default_password);
         String inputPassword = etPassword.getText().toString();
 
-        boolean isCorrect = defPassword.endsWith(inputPassword);
+        boolean isCorrect = defPassword.equals(inputPassword);
 
         if (isCorrect) {
             tvAlarm.setVisibility(View.INVISIBLE);

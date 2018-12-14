@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -123,7 +124,7 @@ public class MainActivity extends FragmentActivity {
                         break;
                     case Recovery:
                         Log.i(TAG, "onItemSelected: 恢复出厂设置");
-                        FragmentUtil.showFragment(mContext, FragmentUtil.RECOVERY_FRAGMENT);
+                        FragmentUtil.showFragment(mContext, FragmentUtil.RESET_FRAGMENT);
                         break;
                     default:
                         //增加菜单的话，在这上面再添加条件，然后在arrays文件的menuitem中添加菜单项
@@ -188,6 +189,9 @@ public class MainActivity extends FragmentActivity {
             case FragmentUtil.ADVANCED_FRAGMENT_2:
                 FragmentUtil.showFragment(mContext, FragmentUtil.ADVANCED_FRAGMENT);
                 break;
+            case FragmentUtil.ADVANCED_CLEAT_ALL:
+                FragmentUtil.showFragment(mContext, FragmentUtil.ADVANCED_FRAGMENT_2);
+                break;
             default:
                 finish();
                 break;
@@ -206,7 +210,7 @@ public class MainActivity extends FragmentActivity {
                 || tag.equals(FragmentUtil.DISPLAY_FRAGMENT)
                 || tag.equals(FragmentUtil.STORAGE_FRAGMENT)
                 || tag.equals(FragmentUtil.ADVANCED_FRAGMENT)
-                || tag.equals(FragmentUtil.RECOVERY_FRAGMENT)){
+                || tag.equals(FragmentUtil.RESET_FRAGMENT)){
 
             lvMenu.setFocusable(true);
         }
@@ -226,15 +230,19 @@ public class MainActivity extends FragmentActivity {
     private void handleRightEvent(String tag){
 
         lvMenu.setFocusable(false);
-        switch (tag){
-            /*case FragmentUtil.ETH_FRAGMENT:
+        /*switch (tag){
+            *//*case FragmentUtil.ETH_FRAGMENT:
                 LinearLayout llSetNet = (LinearLayout) findViewById(R.id.eth_ll_set_net);
                 LinearLayout llSetBluetooth = (LinearLayout) findViewById(R.id.eth_ll_set_bluetooth);
                 llSetNet.setFocusable(true);
                 llSetBluetooth.setFocusable(true);
                 break;
-                //继续添加其它的第一层fragment处理事件*/
-        }
+                //继续添加其它的第一层fragment处理事件*//*
+            case FragmentUtil.ADVANCED_FRAGMENT:
+                EditText etPassword = (EditText) findViewById(R.id.advanced_et_pwd);
+                etPassword.requestFocus();
+                break;
+        }*/
 
     }
 

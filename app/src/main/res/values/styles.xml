@@ -342,5 +342,24 @@
         <item name="android:windowCloseOnTouchOutside">true</item>//设置窗体外面允不允许点击
     </style>
 
+    <style name="ad_reset_et_pwd_style" parent="et_base_style">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+    <style name="ad_reset_ll_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginTop">100dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="ad_reset_tv_error_style" parent="tv_base_style">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:text">@string/advanced_wrong_pwd</item>
+    </style>
+
 
 </resources>

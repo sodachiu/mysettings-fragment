@@ -5,7 +5,7 @@
 
     <TextView
         style="@style/title_tv_style"
-        android:text="@string/advanced_title" />
+        android:text="@string/reset_title" />
 
     <LinearLayout
         style="@style/ad_reset_ll_style">
@@ -26,7 +26,7 @@
     <Button
         style="@style/btn_base_style"
         android:id="@+id/advanced_btn_confirm"
-        android:text="@string/advanced_confirm"/>
+        android:text="@string/reset_box"/>
 
 
 </LinearLayout>

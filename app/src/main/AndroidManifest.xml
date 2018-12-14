@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -48,9 +49,16 @@
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
                 <action android:name="com.cbox.action.autosleep" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
 
         </receiver>
+
+        <service android:name=".MonitorTvStateService"
+            android:exported="true"
+            android:enabled="true">
+
+        </service>
     </application>
 
 </manifest>

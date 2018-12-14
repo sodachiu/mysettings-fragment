@@ -150,10 +150,12 @@
     <string name="advanced_dialog_prompt">因长时间无操作，系统即将自动待机</string>
     <string name="advanced_dialog_time_text">倒计时 %1$d 秒</string>
     <string name="advanced_continue_watch">继续观看</string>
+    <string name="advanced_cache_size">可清理垃圾：%1$s</string>
 
 
     <!--恢复出厂设置-->
-    <string name="recovery_title">恢复出厂设置</string>
+    <string name="reset_title">恢复出厂设置</string>
+    <string name="reset_box">重置机顶盒</string>
 
 
     <!--dialog-->
@@ -163,4 +165,5 @@
     <string name="dialog_cancel">取消</string>
 
     <string name="default_password">10086</string>
+    <string name="password">密码：</string>
 </resources>

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.eileen.mysettings_fragment.utils.FragmentUtil;
 import com.hisilicon.android.hidisplaymanager.HiDisplayManager;
 
 public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
@@ -31,8 +32,9 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
     private HiDisplayManager mHdDisplayManager;
     public static final String PROP_NOOP = "persist.sys.suspend.noop";
     private boolean mIsSleep1Open, mIsSleep2Open;
-    private static final int HDMI_SUSPEND_TRUE = 1;
-    private static final int HDMI_SUSPEND_FALSE = 0;
+    public static final int HDMI_SUSPEND_TRUE = 1;
+    public static final int HDMI_SUSPEND_FALSE = 0;
+    private static final int HDMI_SUSPEND_TIME = 300;
     private static final String PROP_NOOP_TRUE = "true";
     private static final String PROP_NOOP_FALSE = "false";
 
@@ -47,10 +49,6 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
         super.onAttach(context);
         mContext = context;
         mHdDisplayManager = new HiDisplayManager();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SHUTDOWN);
-        filter.addAction("com.cbox.action.autosleep");
-        mContext.registerReceiver(mySleepReceiver, filter);
     }
 
     @Override
@@ -81,9 +79,9 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
         llClearAll.setOnClickListener(this);
         rvSleep1.setOnClickListener(this);
         rvSleep2.setOnClickListener(this);
-        // 修正btn的开关样式
+
         int isSleep1Open = mHdDisplayManager.getHDMISuspendEnable();
-        if (isSleep1Open == 1) {
+        if (isSleep1Open == HDMI_SUSPEND_TRUE) {
             mIsSleep1Open = true;
             imgSleep1.setImageResource(R.drawable.checkbox_on);
         } else {
@@ -99,6 +97,7 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
             mIsSleep2Open = false;
             imgSleep2.setImageResource(R.drawable.checkbox_off);
         }
+        mHdDisplayManager.setHDMISuspendTime(HDMI_SUSPEND_TIME);
 
 
 
@@ -109,14 +108,12 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
         Log.i(TAG, "onClick: ");
         switch (view.getId()) {
             case R.id.advanced_ll_clear_all:
-                //
+                FragmentUtil.showFragment(mContext, FragmentUtil.ADVANCED_CLEAT_ALL);
                 break;
             case R.id.advanced_rv_sleep1:
-                //
                 switchSleep1State();
                 break;
             case R.id.advanced_rv_sleep2:
-                //
                 switchSleep2State();
                 break;
             default:
@@ -127,12 +124,16 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
     void switchSleep1State() {
 
         Log.i(TAG, "switchSleep1State: ");
+        Intent intent = new Intent(mContext, MonitorTvStateService.class);
+
         if (mIsSleep1Open) {
             mHdDisplayManager.setHDMISuspendEnable(HDMI_SUSPEND_FALSE);
             imgSleep1.setImageResource(R.drawable.checkbox_off);
+            mContext.stopService(intent);
         } else {
             mHdDisplayManager.setHDMISuspendEnable(HDMI_SUSPEND_TRUE);
             imgSleep1.setImageResource(R.drawable.checkbox_on);
+            mContext.startService(intent);
         }
 
         mIsSleep1Open = !mIsSleep1Open;
@@ -152,20 +153,5 @@ public class AdvancedFragment2 extends Fragment implements View.OnClickListener{
         mIsSleep2Open = !mIsSleep2Open;
     }
 
-    private BroadcastReceiver mySleepReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            ComponentName name = intent.getComponent();
-            Uri data = intent.getData();
-            String dataType = intent.getType();
-
-            Log.i(TAG, "onReceive: action----" + action);
-            Log.i(TAG, "onReceive: name----" + name);
-            Log.i(TAG, "onReceive: data----" + data);
-            Log.i(TAG, "onReceive: type----" + dataType);
-
-        }
-    };
 
 }

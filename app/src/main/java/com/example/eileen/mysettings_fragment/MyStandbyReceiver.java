@@ -14,6 +14,7 @@ import com.example.eileen.mysettings_fragment.utils.MyHandler;
 import com.example.eileen.mysettings_fragment.utils.ShowDialog;
 import com.example.eileen.mysettings_fragment.utils.UniqueMark;
 import com.google.android.collect.Sets;
+import com.hisilicon.android.hidisplaymanager.HiDisplayManager;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -22,6 +23,7 @@ public class MyStandbyReceiver extends BroadcastReceiver {
 
     private static final String TAG = "qll_standby";
     private static final String AUTO_SLEEP = "com.cbox.action.autosleep";
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -40,6 +42,19 @@ public class MyStandbyReceiver extends BroadcastReceiver {
             context.startActivity(callIntent);
             Log.i(TAG, "onReceive: 弹框成功");
 
+        } else if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+            Log.i(TAG, "onReceive: 收到开机广播，准备启动服务");
+            HiDisplayManager hdm = new HiDisplayManager();
+            int hdmiSuspendState = hdm.getHDMISuspendEnable();
+            Log.i(TAG, "onReceive: 是否开启了待机功能----" + hdmiSuspendState);
+            
+
+            if (hdmiSuspendState == AdvancedFragment2.HDMI_SUSPEND_TRUE) {
+                // 启动服务
+                Log.i(TAG, "onReceive: 开启待机功能，准备启动服务");
+                Intent serviceIntent = new Intent(context, MonitorTvStateService.class);
+                context.startService(serviceIntent);
+            }
         }
     }
 }

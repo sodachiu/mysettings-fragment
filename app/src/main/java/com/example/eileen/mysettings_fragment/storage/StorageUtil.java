@@ -21,10 +21,12 @@ public class StorageUtil {
         StorageManager storageManager = (StorageManager) context
                 .getSystemService(Context.STORAGE_SERVICE);
         try {
+            Class<?>[] types = {};
+            Object[] value = {};
             Method getVolumePathsMethod = StorageManager.class
-                    .getMethod("getVolumePaths", null);
+                    .getMethod("getVolumePaths", types);
             getVolumePathsMethod.setAccessible(true);
-            paths = (String[]) getVolumePathsMethod.invoke(storageManager, null);
+            paths = (String[]) getVolumePathsMethod.invoke(storageManager, value);
 
         } catch (Exception e) {
             Log.e(TAG, "getVolumePaths: " + e.toString());
@@ -45,12 +47,7 @@ public class StorageUtil {
         }
     }
 
-    public static long getFolderSize(File file) {
-        long size = 0;
 
-        return size;
-
-    }
 
     public static long getTotalSize(String path) {
         StatFs statFs = new StatFs(path);

@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 
 import com.example.eileen.mysettings_fragment.AboutFragment;
+import com.example.eileen.mysettings_fragment.AdvancedClearAllFragment;
 import com.example.eileen.mysettings_fragment.AdvancedFragment;
 import com.example.eileen.mysettings_fragment.AdvancedFragment2;
 import com.example.eileen.mysettings_fragment.DateFormatFragment;
@@ -23,8 +24,10 @@ import com.example.eileen.mysettings_fragment.EthTypeFragment;
 import com.example.eileen.mysettings_fragment.MainActivity;
 import com.example.eileen.mysettings_fragment.NetInfoFragment;
 import com.example.eileen.mysettings_fragment.R;
+import com.example.eileen.mysettings_fragment.ResetFragment;
 import com.example.eileen.mysettings_fragment.StorageFragment;
 
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +46,11 @@ public class FragmentUtil {
     public static final String DISPLAY_FRAGMENT = "display_fragment";
     public static final String STORAGE_FRAGMENT = "storage_fragment";
     public static final String ADVANCED_FRAGMENT = "advanced_fragment";
-    public static final String RECOVERY_FRAGMENT = "recovery_fragment";
+    public static final String RESET_FRAGMENT = "recovery_fragment";
     public static final String ETH_BLUETOOTH_FRAGMENT = "eth_bluetooth_fragment";
     public static final String DISPLAY_RESOLUTION_FRAGMENT = "display_resolution_fragment";
     public static final String ADVANCED_FRAGMENT_2 = "advanced_fragment_2";
+    public static final String ADVANCED_CLEAT_ALL = "advanced_clear_all_fragment";
     private static String previousFragmentTag = ABOUT_FRAGMENT;
 
 
@@ -98,6 +102,12 @@ public class FragmentUtil {
                 break;
             case ADVANCED_FRAGMENT_2:
                 fragment = new AdvancedFragment2();
+                break;
+            case ADVANCED_CLEAT_ALL:
+                fragment = new AdvancedClearAllFragment();
+                break;
+            case RESET_FRAGMENT:
+                fragment = new ResetFragment();
                 break;
             default:
                 Log.i(TAG, "startFragment: 传入tag有误，请检查");
