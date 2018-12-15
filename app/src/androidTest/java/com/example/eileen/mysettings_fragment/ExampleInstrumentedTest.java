@@ -1,4 +1,4 @@
-package com.example.eileen.mysettings_fragment;
+package com.android.settings;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.eileen.mysettings_fragment", appContext.getPackageName());
+        assertEquals("com.android.settings", appContext.getPackageName());
     }
 }

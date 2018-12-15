@@ -1,4 +1,4 @@
-package com.example.eileen.mysettings_fragment;
+package com.android.settings;
 
 import org.junit.Test;
 
